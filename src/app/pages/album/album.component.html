@@ -1,0 +1,95 @@
+<br><br>
+<div class="form-container">
+    <div class="form-content">
+        <mat-card class="example-card">
+            <mat-card-header style="justify-content: center;">
+                <mat-card-title class="title">Agregar album</mat-card-title>
+                <!--<mat-card-subtitle>Dog Breed</mat-card-subtitle>-->
+            </mat-card-header>
+            <br>
+            <mat-divider></mat-divider>
+            <mat-card-content style="padding: 5%;">
+                <div class="container-general">
+                    <div class="profile-image">
+                        <img src="assets/images/AL1.jpg" width="350px" height="350px" style="border-radius: 3px;">
+                    </div>
+                    <div class="container-info">
+                        <form [formGroup]="form">
+                            <div class="example-container">
+                                <div class="topics">Nombre del album</div>
+                                <div>
+                                    <mat-form-field appearance="outline" class="inputForms">
+                                        <mat-label>Nombre</mat-label>
+                                        <input matInput placeholder="ej: Shakira">
+                                        <mat-error *ngIf="Albums.invalid">{{getErrorMessage()}}</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="topics">Fecha de lanzamiento</div>
+                            <div class="example-container">
+                                <div class="container-date">
+                                    <div > 
+                                        <mat-form-field appearance="outline" class="inputForms2"> 
+                                            <mat-label>Dia</mat-label>
+                                            <input matInput placeholder="2">
+                                            <mat-error *ngIf="Albums.invalid">{{getErrorMessage()}}</mat-error>
+                                        </mat-form-field>
+                                    </div>
+            
+                                    <div>
+                                        <mat-form-field appearance="outline" class="inputForms2">
+                                            <mat-label>Mes</mat-label>
+                                            <mat-select [formControl]="monthControl" name="month" panelClass="panel">
+                                                <mat-option *ngFor="let month of months" [value]="month.value" class="panel">
+                                                    {{month.value}}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+            
+                                    <div>
+                                        <mat-form-field appearance="outline" class="inputForms2">
+                                            <mat-label>Año</mat-label>
+                                            <input matInput placeholder="2000">
+                                            <mat-error *ngIf="Albums.invalid">{{getErrorMessage()}}</mat-error>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="example-container">
+                                <div class="topics">Descripción</div>
+                                <div>
+                                    <mat-form-field appearance="outline" class="inputForms">
+                                        <mat-label>Descripción</mat-label>
+                                        <input matInput placeholder="ej: Colombia">
+                                        <mat-error *ngIf="Albums.invalid">{{getErrorMessage()}}</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div class="example-container">
+                                <div class="topics">Precio</div>
+                                <div>
+                                    <mat-form-field appearance="outline" class="inputForms">
+                                        <mat-label>Precio</mat-label>
+                                        <input matInput placeholder="ej: Colombia">
+                                        <mat-error *ngIf="Albums.invalid">{{getErrorMessage()}}</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </form>
+                        <br>
+                        <div style="text-align: center; ">
+                            <button mat-flat-button color="warn"
+                                style="width: 45%; margin-right:15px ;">Cancelar</button>
+                            <button mat-flat-button color="primary" style="width: 45%;">Guardar</button>
+                        </div>
+                    </div>
+                </div>
+            </mat-card-content>
+
+        </mat-card>
+    </div>
+
+</div>

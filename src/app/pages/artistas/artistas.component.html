@@ -1,0 +1,104 @@
+<br><br>
+<div class="form-container">
+    <div class="form-content">
+        <mat-card class="example-card">
+            <mat-card-header style="justify-content: center;">
+                <mat-card-title class="title">Agregar artista</mat-card-title>
+                <!--<mat-card-subtitle>Dog Breed</mat-card-subtitle>-->
+            </mat-card-header>
+            <br>
+            <mat-divider></mat-divider>
+            <mat-card-content style="padding: 5%;">
+                <div class="profile-image">
+                    <img src="assets/images/P2.jpg" width="150px" height="150px" style="border-radius: 150px;">
+                </div>
+                <form [formGroup]="form">
+                    <div class="example-container">
+                        <div class="topics">Nombre del artista</div>
+                        <div>
+                            <mat-form-field appearance="outline" class="inputForms">
+                                <mat-label>Nombre</mat-label>
+                                <input matInput placeholder="ej: Shakira">
+                                <mat-error *ngIf="ArtistForm.invalid">{{getErrorMessage()}}</mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="example-container">
+                        <div class="topics">Genero músical</div>
+                        <div>
+                            <mat-form-field appearance="outline" class="inputForms">
+                                <mat-label>Genero</mat-label>
+                                <mat-select [formControl]="genderControl" name="gender" panelClass="panel">
+                                    <mat-option *ngFor="let gender of genders" [value]="gender.value" class="panel">
+                                        {{gender.value}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                    </div>
+                    <div class="topics">Fecha de nacimiento</div>
+                    <div class="container-date">
+                        <div>
+                            <mat-form-field appearance="outline" class="inputForms2"> 
+                                <mat-label>Dia</mat-label>
+                                <input matInput placeholder="2">
+                                <mat-error *ngIf="ArtistForm.invalid">{{getErrorMessage()}}</mat-error>
+                            </mat-form-field>
+                        </div>
+
+                        <div>
+                            <mat-form-field appearance="outline" class="inputForms2">
+                                <mat-label>Mes</mat-label>
+                                <mat-select [formControl]="monthControl" name="month" panelClass="panel">
+                                    <mat-option *ngFor="let month of months" [value]="month.value" class="panel">
+                                        {{month.value}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                        <div>
+                            <mat-form-field appearance="outline" class="inputForms2">
+                                <mat-label>Año</mat-label>
+                                <input matInput placeholder="2000">
+                                <mat-error *ngIf="ArtistForm.invalid">{{getErrorMessage()}}</mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <div class="example-container">
+                        <div class="topics">Nacionalidad</div>
+                        <div>
+                            <mat-form-field appearance="outline" class="inputForms">
+                                <mat-label>Nacionalidad</mat-label>
+                                <input matInput placeholder="ej: Colombia">
+                                <mat-error *ngIf="ArtistForm.invalid">{{getErrorMessage()}}</mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <div class="example-container">
+                        <div class="topics">Descripción</div>
+                        <div>
+                            <mat-form-field appearance="outline" class="inputForms">
+                                <p></p>
+                                <mat-label>Descripción</mat-label>
+                                <input matInput placeholder="ej: Colombia">
+                                <mat-error *ngIf="ArtistForm.invalid">{{getErrorMessage()}}</mat-error>
+                                <p></p>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </form>
+                <br>
+                <div style="text-align: center; ">
+                    <button mat-flat-button color="warn" style="width: 45%; margin-right:15px ;">Cancelar</button>
+                    <button mat-flat-button color="primary" style="width: 45%;">Guardar</button>
+                </div>
+            </mat-card-content>
+
+        </mat-card>
+    </div>
+
+</div>
