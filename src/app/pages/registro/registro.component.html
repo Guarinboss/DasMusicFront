@@ -1,0 +1,71 @@
+<div class="page">
+    <div class="container">
+        <mat-card class="left">
+            <br/>          
+            <p class="textlogin"> DasMusic </p>
+            <div class="eula">
+                El mejor servicio de musica listo para ti, registrate para disfrutar de la mejor musica
+            </div> 
+            <div class="divLogin">
+                <button mat-stroked-button color="primary" class="botonlogin" routerLink="/registro">Login</button>
+            </div>           
+        </mat-card>
+        <mat-card class="right">
+            <p class="textCrear"> Registro </p>
+
+            <form [formGroup]="registroForm" (ngSubmit)="onFormSubmit()">
+                
+                <mat-form-field appearance="fill" class="formField">
+                    <mat-label>Digite su nombre</mat-label>
+                    <input matInput placeholder="Nombre" formControlName="Name">
+                    <mat-icon matSuffix class="icono">account_box</mat-icon>
+                </mat-form-field>
+                <br />                
+                <mat-form-field appearance="fill" class="formField">
+                    <mat-label>Digite su apellido</mat-label>
+                    <input matInput placeholder="Apellido" formControlName="LastName">
+                    <mat-icon matSuffix class="icono">account_box</mat-icon>
+                </mat-form-field>
+                <br />
+                <mat-form-field appearance="fill" class="formField">
+                    <mat-label>Digite su cedula</mat-label>
+                    <input matInput placeholder="Cedula" formControlName="Identification">
+                    <mat-icon matSuffix class="icono">account_box</mat-icon>
+                </mat-form-field>
+                <br />
+                <mat-form-field appearance="fill" class="formField">
+                    <mat-label>Digite su usuario</mat-label>
+                    <input matInput placeholder="Usuario" formControlName="User">
+                    <mat-icon matSuffix class="icono">account_box</mat-icon>
+                </mat-form-field>
+                <br />
+                <mat-form-field appearance="fill" class="formField">
+                    <mat-label>Digite su correo</mat-label>
+                    <input matInput placeholder="Correo" formControlName="Email">
+                    <mat-icon matSuffix class="icono">email</mat-icon>
+                </mat-form-field>
+                <br />
+                <mat-form-field appearance="fill" class="formField">
+                    <mat-label>Digite su contraseña</mat-label>
+                    <input matInput [type]="hide ? 'password' : 'text'" formControlName="Password">
+                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                        [attr.aria-pressed]="hide" type="button">
+                        <mat-icon class="icono">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                </mat-form-field>
+                <br />
+                <mat-form-field appearance="fill" class="formField">
+                    <mat-label>Confirme su contraseña</mat-label>
+                    <input matInput [type]="hide2 ? 'password' : 'text'" formControlName="Password2">
+                    <button mat-icon-button matSuffix (click)="hide2 = !hide2" [attr.aria-label]="'Hide password'"
+                        [attr.aria-pressed]="hide2" type="button">
+                        <mat-icon class="icono">{{hide2 ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                </mat-form-field>
+                <br />
+                <br />
+                <button mat-raised-button color="primary" class="boton" type="submit">Registrarse</button>
+            </form>
+        </mat-card>
+    </div>
+</div>

@@ -24,6 +24,10 @@ import {MatTableModule} from '@angular/material/table';
 import { DialogContentArtistComponent } from './dialogs/dialog-content-artist/dialog-content-artist.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import { SongsComponent } from './pages/songs/songs.component';
+import { LoginComponent } from './pages/login/login.component';
+import { RegistroComponent } from './pages/registro/registro.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -33,6 +37,8 @@ import { SongsComponent } from './pages/songs/songs.component';
     AlbumComponent,
     DialogContentArtistComponent,
     SongsComponent,
+    LoginComponent,
+    RegistroComponent,
   ],
   imports: [
     BrowserModule,
@@ -53,7 +59,10 @@ import { SongsComponent } from './pages/songs/songs.component';
     ReactiveFormsModule,
     MatGridListModule,
     MatTableModule,
-    MatDialogModule
+    MatDialogModule,
+    MatSnackBarModule,
+    HttpClientModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]
