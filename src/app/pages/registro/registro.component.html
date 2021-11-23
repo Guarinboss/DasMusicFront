@@ -17,37 +17,37 @@
                 
                 <mat-form-field appearance="fill" class="formField">
                     <mat-label>Digite su nombre</mat-label>
-                    <input matInput placeholder="Nombre" formControlName="Name">
+                    <input matInput placeholder="Nombre" formControlName="nombre">
                     <mat-icon matSuffix class="icono">account_box</mat-icon>
                 </mat-form-field>
                 <br />                
                 <mat-form-field appearance="fill" class="formField">
                     <mat-label>Digite su apellido</mat-label>
-                    <input matInput placeholder="Apellido" formControlName="LastName">
+                    <input matInput placeholder="Apellido" formControlName="apellido">
                     <mat-icon matSuffix class="icono">account_box</mat-icon>
                 </mat-form-field>
                 <br />
                 <mat-form-field appearance="fill" class="formField">
                     <mat-label>Digite su cedula</mat-label>
-                    <input matInput placeholder="Cedula" formControlName="Identification">
+                    <input matInput placeholder="Cedula" formControlName="cedula">
                     <mat-icon matSuffix class="icono">account_box</mat-icon>
                 </mat-form-field>
                 <br />
                 <mat-form-field appearance="fill" class="formField">
                     <mat-label>Digite su usuario</mat-label>
-                    <input matInput placeholder="Usuario" formControlName="User">
+                    <input matInput placeholder="Usuario" formControlName="nickname">
                     <mat-icon matSuffix class="icono">account_box</mat-icon>
                 </mat-form-field>
                 <br />
                 <mat-form-field appearance="fill" class="formField">
                     <mat-label>Digite su correo</mat-label>
-                    <input matInput placeholder="Correo" formControlName="Email">
+                    <input matInput placeholder="Correo" formControlName="correo">
                     <mat-icon matSuffix class="icono">email</mat-icon>
                 </mat-form-field>
                 <br />
                 <mat-form-field appearance="fill" class="formField">
                     <mat-label>Digite su contraseña</mat-label>
-                    <input matInput [type]="hide ? 'password' : 'text'" formControlName="Password">
+                    <input matInput [type]="hide ? 'password' : 'text'" formControlName="contrasena">
                     <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
                         [attr.aria-pressed]="hide" type="button">
                         <mat-icon class="icono">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
@@ -56,7 +56,7 @@
                 <br />
                 <mat-form-field appearance="fill" class="formField">
                     <mat-label>Confirme su contraseña</mat-label>
-                    <input matInput [type]="hide2 ? 'password' : 'text'" formControlName="Password2">
+                    <input matInput [type]="hide2 ? 'password' : 'text'" formControlName="contrasena2">
                     <button mat-icon-button matSuffix (click)="hide2 = !hide2" [attr.aria-label]="'Hide password'"
                         [attr.aria-pressed]="hide2" type="button">
                         <mat-icon class="icono">{{hide2 ? 'visibility_off' : 'visibility'}}</mat-icon>

@@ -4,7 +4,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Registro } from 'src/app/_model/Registro';
 import { RegistroLoginService } from 'src/app/_service/registro-login.service';
-import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-registro',
@@ -21,13 +20,13 @@ export class RegistroComponent implements OnInit {
               private _snackBar: MatSnackBar,
               private registroService: RegistroLoginService) {
     this.registroForm = new FormGroup({
-      Name: new FormControl('', [Validators.required, Validators.maxLength(20)]),
-      LastName: new FormControl('', [Validators.required, Validators.maxLength(20)]),
-      Identification: new FormControl('', [Validators.required]),
-      User: new FormControl('', [Validators.required, Validators.maxLength(20)]),
-      Email: new FormControl('', [Validators.required, Validators.maxLength(20)]),
-      Password: new FormControl('', Validators.required),
-      Password2: new FormControl('', Validators.required)
+      nombre: new FormControl('', [Validators.required, Validators.maxLength(20)]),
+      apellido: new FormControl('', [Validators.required, Validators.maxLength(20)]),
+      cedula: new FormControl('', [Validators.required]),
+      nickname: new FormControl('', [Validators.required, Validators.maxLength(20)]),
+      correo: new FormControl('', [Validators.required, Validators.maxLength(20)]),
+      contrasena: new FormControl('', Validators.required),
+      contrasena2: new FormControl('', Validators.required)
     })    
   }
 
@@ -41,11 +40,11 @@ export class RegistroComponent implements OnInit {
 
   postRegistro(registro: Registro) {
     console.log(registro);
-    this.openSnackBar("Registro exitoso","Aceptar")
-    this.router.navigate(['/login']);    
+    //this.router.navigate(['/login']);    
 
-    /*this.registroService.postRegistro(registro).subscribe(data =>{
-      sessionStorage.setItem(environment.TOKEN, data);
+    this.registroService.postRegistro(registro).subscribe(data =>{
+      console.log(data);
+      this.openSnackBar("Registro exitoso","Aceptar");
       this.router.navigate(['/login']);
     }, err =>{
       //console.log(err);
@@ -55,7 +54,7 @@ export class RegistroComponent implements OnInit {
       } else {
         //this.router.navigate([`/error/${err.status}/${err.statusText}`]);
       }
-    })*/
+    })
   }
 
   openSnackBar(message: string, action: string) {

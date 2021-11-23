@@ -18,8 +18,8 @@ export class LoginComponent implements OnInit {
   constructor(private router:Router, private loginService: RegistroLoginService) {
 
     this.loginForm = new FormGroup({
-      User: new FormControl('', [Validators.required, Validators.maxLength(20)]),
-      Password: new FormControl('', Validators.required)
+      nickname: new FormControl('', [Validators.required, Validators.maxLength(20)]),
+      contrasena: new FormControl('', Validators.required)
     })
   }
 
@@ -34,12 +34,14 @@ export class LoginComponent implements OnInit {
 
   postIngresoLogin(login: Login){    
     console.log(login);
-    sessionStorage.setItem("usuario", "1");
-    this.router.navigate(['/songs']);
+    //sessionStorage.setItem("usuario", "1");
+    //this.router.navigate(['/songs']);
 
-    /*this.loginService.postLogin(login).subscribe(data =>{
-      sessionStorage.setItem(environment.TOKEN, data);
-      this.router.navigate(['/songs']);
+    this.loginService.postLogin(login).subscribe(data =>{
+      console.log(data);
+      localStorage.setItem(environment.TOKEN, data);
+      //sessionStorage.setItem("usuario", "1");      
+      this.router.navigateByUrl('/artistas');
     }, err =>{
       //console.log(err);
       if(err.status == 400) {
@@ -48,7 +50,7 @@ export class LoginComponent implements OnInit {
       } else {
         //this.router.navigate([`/error/${err.status}/${err.statusText}`]);
       }
-    })*/
+    })
   }
 
 }

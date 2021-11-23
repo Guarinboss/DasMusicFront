@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  HOST: 'http://localhost:8080/api',
+  HOST: 'http://localhost:8080/DasMusic/api',
 
   /**
    * Variable que indica el token.
