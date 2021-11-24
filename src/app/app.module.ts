@@ -31,6 +31,10 @@ import { PerfilArtistaComponent } from './pages/perfil-artista/perfil-artista.co
 import { PerfilAlbumComponent } from './pages/perfil-album/perfil-album.component';
 import { CarritoComponent } from './pages/carrito/carrito.component';
 import { DialogContentCarritoComponent } from './dialogs/dialog-content-carrito/dialog-content-carrito.component';
+import { LoginComponent } from './pages/login/login.component';
+import { RegistroComponent } from './pages/registro/registro.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -46,6 +50,8 @@ import { DialogContentCarritoComponent } from './dialogs/dialog-content-carrito/
     PerfilAlbumComponent,
     CarritoComponent,
     DialogContentCarritoComponent,
+    LoginComponent,
+    RegistroComponent,
   ],
   imports: [
     BrowserModule,
@@ -67,7 +73,10 @@ import { DialogContentCarritoComponent } from './dialogs/dialog-content-carrito/
     MatGridListModule,
     MatTableModule,
     MatDialogModule,
-    MatTabsModule
+    MatTabsModule,
+    MatSnackBarModule,
+    HttpClientModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]

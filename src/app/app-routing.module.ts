@@ -6,6 +6,8 @@ import { BibliotecaComponent } from './pages/biblioteca/biblioteca.component';
 import { CarritoComponent } from './pages/carrito/carrito.component';
 import { PerfilAlbumComponent } from './pages/perfil-album/perfil-album.component';
 import { PerfilArtistaComponent } from './pages/perfil-artista/perfil-artista.component';
+import { LoginComponent } from './pages/login/login.component';
+import { RegistroComponent } from './pages/registro/registro.component';
 import { SongsComponent } from './pages/songs/songs.component';
 
 const routes: Routes = [
@@ -15,7 +17,9 @@ const routes: Routes = [
   {path : 'biblioteca', component:BibliotecaComponent},
   {path : 'perfilArtista', component:PerfilArtistaComponent},
   {path : 'perfilAlbum', component:PerfilAlbumComponent},
-  {path : 'carrito', component:CarritoComponent}
+  {path : 'carrito', component:CarritoComponent},
+  {path : 'login', component:LoginComponent},
+  {path : 'registro', component:RegistroComponent},
 ];
 
 @NgModule({

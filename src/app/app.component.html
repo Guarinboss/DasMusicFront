@@ -21,7 +21,7 @@
   </div>
 
   <mat-sidenav #sidenav mode="side" class="example-sidenav" [ngStyle]="{ 'width.em': sidenavWidth }" opened="true"
-     class="background-sidenav">
+     class="background-sidenav" *ngIf="usuario == prueba">
 
     <mat-nav-list>
       <div class="logo-text" fxFlex="15">
