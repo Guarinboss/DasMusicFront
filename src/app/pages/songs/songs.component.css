@@ -4,8 +4,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 20px;
-    
+    background: rgba(0, 0, 0, 0.2);
 }
 .panel{
   background: rgba(0, 0, 0, 0.5);
@@ -21,8 +20,15 @@
   
   .demo-button-container {
     padding-bottom: 16px;
+    width: 100%;
   }
   
-  .demo-button + .demo-button {
-    margin-left: 8px;
+  .demo-button  {
+    border-radius: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.8);
   }
+
+ .demo-table {
+  background: rgba(0, 0, 0, 0.3);
+}

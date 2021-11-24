@@ -24,6 +24,13 @@ import {MatTableModule} from '@angular/material/table';
 import { DialogContentArtistComponent } from './dialogs/dialog-content-artist/dialog-content-artist.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import { SongsComponent } from './pages/songs/songs.component';
+import { DialogContentAlbumComponent } from './dialogs/dialog-content-album/dialog-content-album.component';
+import { BibliotecaComponent } from './pages/biblioteca/biblioteca.component';
+import {MatTabsModule} from '@angular/material/tabs';
+import { PerfilArtistaComponent } from './pages/perfil-artista/perfil-artista.component';
+import { PerfilAlbumComponent } from './pages/perfil-album/perfil-album.component';
+import { CarritoComponent } from './pages/carrito/carrito.component';
+import { DialogContentCarritoComponent } from './dialogs/dialog-content-carrito/dialog-content-carrito.component';
 
 
 @NgModule({
@@ -33,6 +40,12 @@ import { SongsComponent } from './pages/songs/songs.component';
     AlbumComponent,
     DialogContentArtistComponent,
     SongsComponent,
+    DialogContentAlbumComponent,
+    BibliotecaComponent,
+    PerfilArtistaComponent,
+    PerfilAlbumComponent,
+    CarritoComponent,
+    DialogContentCarritoComponent,
   ],
   imports: [
     BrowserModule,
@@ -53,7 +66,8 @@ import { SongsComponent } from './pages/songs/songs.component';
     ReactiveFormsModule,
     MatGridListModule,
     MatTableModule,
-    MatDialogModule
+    MatDialogModule,
+    MatTabsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

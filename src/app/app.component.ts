@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
+import { DialogContentAlbumComponent } from './dialogs/dialog-content-album/dialog-content-album.component';
 import { DialogContentArtistComponent } from './dialogs/dialog-content-artist/dialog-content-artist.component';
 
 @Component({
@@ -15,13 +16,10 @@ export class AppComponent {
 
   title = 'MusicStore';
 
-  sidenavWidth = 5;
+  sidenavWidth = 18;
   ngStyle: string | undefined;
   
-  increase() {
-    this.sidenavWidth = 18;
 
-  }
   decrease() {
     this.sidenavWidth = 5;
 
@@ -29,6 +27,18 @@ export class AppComponent {
 
   openDialog() {
     const dialogRef = this.dialog.open(DialogContentArtistComponent, {
+      width: '550px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+
+    
+  }
+
+  openDialogAlbum() {
+    const dialogRef = this.dialog.open(DialogContentAlbumComponent, {
       width: '550px'
     });
 

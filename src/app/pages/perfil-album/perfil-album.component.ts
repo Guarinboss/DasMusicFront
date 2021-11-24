@@ -1,12 +1,19 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { MatMenuTrigger } from '@angular/material/menu';
 import { MatTable } from '@angular/material/table';
-
+import { DialogContentCarritoComponent } from 'src/app/dialogs/dialog-content-carrito/dialog-content-carrito.component';
 
 export interface PeriodicElement {
   name: string;
   position: string;
   weight: number;
   symbol: string;
+}
+
+export interface Album {
+  name: string;
+  image: string;
 }
 
 const ELEMENT_DATA: PeriodicElement[] = [
@@ -22,15 +29,30 @@ const ELEMENT_DATA: PeriodicElement[] = [
   {position: '3:02', name: 'Dua lipa', weight: 20.179, symbol: 'Break my heart'},
 ];
 
-
 @Component({
-  selector: 'app-songs',
-  templateUrl: './songs.component.html',
-  styleUrls: ['./songs.component.css']
+  selector: 'app-perfil-album',
+  templateUrl: './perfil-album.component.html',
+  styleUrls: ['./perfil-album.component.css']
 })
-export class SongsComponent implements OnInit {
+export class PerfilAlbumComponent implements OnInit {
 
   editField!: string;
+
+  public albums: Album[] = [
+
+    { name: 'Shakira', image: 'assets/images/A1.jpg'},
+    { name: 'Twenty one pilots', image: 'assets/images/A2.jpg'},
+    { name: 'Ramsteim', image: 'assets/images/A3.jpg'},
+    { name: 'Lil peep', image: 'assets/images/A4.jpg'},
+    { name: 'XTentacion', image: 'assets/images/A5.jpg'},
+    { name: 'Juice wlrd', image: 'assets/images/A6.jpg'},
+    { name: 'Dua lipa', image: 'assets/images/A7.jpg'},
+    { name: 'Michael jackson', image: 'assets/images/A8.jpg'},
+    { name: 'Joji', image: 'assets/images/A9.jpg'},
+    { name: 'Cuco', image: 'assets/images/A10.jpg'},
+    { name: 'Julito', image: 'assets/images/A11.jpg'},
+
+];
 
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   dataSource = [...ELEMENT_DATA];
@@ -38,7 +60,17 @@ export class SongsComponent implements OnInit {
   @ViewChild(MatTable)
   table!: MatTable<PeriodicElement>;
 
-  constructor() { }
+  @ViewChild('menuTrigger')
+  menuTrigger!: MatMenuTrigger;
+
+  constructor(public dialog: MatDialog) {}
+
+  openDialog() {
+    this.dialog.open(DialogContentCarritoComponent, {
+      height: '300px',
+      width: '450px',
+    });
+  }
 
   addData() {
     const randomElementIndex = Math.floor(Math.random() * ELEMENT_DATA.length);
@@ -63,5 +95,4 @@ export class SongsComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
 }

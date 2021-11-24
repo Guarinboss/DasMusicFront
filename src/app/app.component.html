@@ -2,15 +2,7 @@
 
 
   <div class="background">
-    <div class="background-toolbar">
-      <mat-toolbar class="background-toolbar">
-        <p class="example-spacer"></p>
-        <p class="name-user">Fernel Moreno</p>
-        <div mat-button class="btn-Menu">
-          <img src="assets/images/P2.jpg">
-        </div>
-      </mat-toolbar>
-    </div>
+    
     <span></span>
     <span></span>
     <span></span>
@@ -29,7 +21,7 @@
   </div>
 
   <mat-sidenav #sidenav mode="side" class="example-sidenav" [ngStyle]="{ 'width.em': sidenavWidth }" opened="true"
-    (mouseenter)="increase()" (mouseleave)="decrease()" class="background-sidenav">
+     class="background-sidenav">
 
     <mat-nav-list>
       <div class="logo-text" fxFlex="15">
@@ -64,7 +56,7 @@
         </div>
       </mat-list-item>
 
-      <mat-list-item routerLink="3" routerLinkActive="active">
+      <mat-list-item routerLink="biblioteca" routerLinkActive="active">
         <mat-icon mat-list-icon>library_books</mat-icon>
         <div fxFlex="10"></div>
         <div *ngIf="sidenavWidth > 5" class="sidenav-item">
@@ -93,7 +85,7 @@
           <h5 class="lead">Agregar Artista</h5>
         </div>
       </mat-list-item>
-      <mat-list-item routerLink="6" routerLinkActive="active">
+      <mat-list-item routerLink="" routerLinkActive="active" (click)="openDialogAlbum()">
         <mat-icon mat-list-icon>add_circle_outline</mat-icon>
         <div fxFlex="10"></div>
         <div *ngIf="sidenavWidth > 5" class="sidenav-item">
@@ -132,5 +124,15 @@
     </mat-nav-list>
   </mat-sidenav>
 
+  
+  <div class="background-toolbar">
+    <mat-toolbar class="background-toolbar">
+      <p class="example-spacer"></p>
+      <p class="name-user">Fernel Moreno</p>
+      <div mat-button class="btn-Menu">
+        <img src="assets/images/P1.jpg">
+      </div>
+    </mat-toolbar>
+  </div>
   <router-outlet></router-outlet>
 </mat-sidenav-container>

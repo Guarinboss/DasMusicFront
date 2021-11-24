@@ -1,0 +1,44 @@
+.example-card {
+    font-size: 15px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    width: 180px;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+
+  
+  .example-card img{
+    margin-top: 10px;
+    width: 160px;
+    height: 160px;
+    border-radius: 150px;
+    object-fit: cover;
+  }
+
+  .example-card2 {
+    font-size: 15px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    width: 180px;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+
+  
+  .example-card2 img{
+    margin-top: 10px;
+    width: 180px;
+    height: 180px;
+    border-radius: 5px;
+    object-fit: cover;
+  }
+
+  .containerCard{
+    padding-top: 30px;
+    padding-left: 30px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  
