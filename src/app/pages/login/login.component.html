@@ -1,0 +1,37 @@
+<div class="page">
+    <div class="container">
+        <mat-card class="left">
+            <br/>          
+            <p class="textlogin"> DasMusic </p>
+            <div class="eula">
+                El mejor servicio de musica listo para ti, registrate para disfrutar de la mejor musica
+            </div> 
+            <div class="divLogin">
+                <button mat-stroked-button color="primary" class="botonlogin" routerLink="/registro">Registrarse</button>
+            </div>           
+        </mat-card>
+        <mat-card class="right">
+            <p class="textCrear"> Login </p>
+
+            <form [formGroup]="loginForm" (ngSubmit)="onFormSubmit()">
+                <mat-form-field appearance="fill" class="formField">
+                    <mat-label>Digite su usuario</mat-label>
+                    <input matInput placeholder="Usuario" formControlName="nickname">
+                    <mat-icon matSuffix class="icono">account_box</mat-icon>
+                </mat-form-field>
+                <br />
+                <mat-form-field appearance="fill" class="formField">
+                    <mat-label>Digite su contraseña</mat-label>
+                    <input matInput [type]="hide ? 'password' : 'text'" formControlName="contrasena">
+                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                        [attr.aria-pressed]="hide" type="button">
+                        <mat-icon class="icono">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                </mat-form-field>
+                <br />
+                <br />
+                <button mat-raised-button color="primary" class="boton" type="submit">Login</button>
+            </form>
+        </mat-card>
+    </div>
+</div>

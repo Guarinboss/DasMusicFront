@@ -18,11 +18,11 @@ import { Artista } from '../_model/Artista';
 })
 export class MusicaService {
 
-  private url: string = `${environment.HOST}/api/artistas/`;
+  private url: string = `${environment.HOST}/artistas/`;
 
-  private url2: string = `${environment.HOST}/api/canciones/`;
+  private url2: string = `${environment.HOST}/canciones/`;
 
-  private url3: string = `${environment.HOST}/api/albumes/`;
+  private url3: string = `${environment.HOST}/albumes/`;
 
   constructor(private http: HttpClient) { }
 

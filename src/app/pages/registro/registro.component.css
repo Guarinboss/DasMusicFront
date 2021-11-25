@@ -1,0 +1,118 @@
+.page {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    position: absolute;
+    place-content: center;
+    width: 100%;
+    margin-left: -20px;
+}
+@media (max-width: 767px) {
+    .page {
+      height: auto;
+      margin-bottom: 20px;
+      padding-bottom: 20px;
+    }
+}
+.container{        
+    box-shadow: 0px 0px 40px 16px rgba(0,0,0,0.22);
+    border-radius: 10px;
+    display: flex;
+    height: 680px;
+    margin: 0 auto;
+    width: 760px;
+}
+@media (max-width: 767px) {
+    .container {
+      flex-direction: column;
+      height: 630px;
+      width: 320px;
+    }
+}
+
+.left {
+    background: rgba(0, 0, 0, 0.35);    
+    position: relative;
+    width: 60%;
+    border-bottom-right-radius: 0%;
+    border-top-right-radius: 0%;
+    padding-top: 20%;
+  }
+  @media (max-width: 767px) {
+    .left {
+      height: 100%;
+      width: 100%;
+      max-height: 270px;
+    }
+}
+
+.textlogin {
+    font-size: 50px;
+    font-weight: 900;
+    margin: 60px 40px 40px;
+}
+
+.textCrear {
+    font-size: 40px;
+    font-weight: 900;  
+    margin: 30px 0px 30px;
+}
+.eula {
+    color: #999;
+    font-size: 14px;
+    line-height: 1.5;
+    margin: 40px;
+}
+
+.right {    
+    background: rgba(0, 0, 0, 0.35);    
+    position: relative;
+    width: 60%;
+    padding: 5%;
+    padding-top: 50px;
+    border-bottom-left-radius: 0%;
+    border-top-left-radius: 0%;
+}
+@media (max-width: 767px) {
+    .right {
+      flex-shrink: 0;
+      height: 100%;
+      width: 100%;
+      max-height: 400px;
+    }
+}
+
+.formField{
+    width: 100%;
+}
+.boton{
+    width: 100%;
+}
+.boton2{
+    width: 100%;
+}
+
+.icono{
+    color: rgb(83, 82, 82);
+}
+
+.linkboton{
+    width: 100%;
+    margin-top: 3%;
+    text-align: center;
+}
+
+.botonlogin{
+    width: 70%;
+}
+
+.divLogin{
+    text-align: center;
+}
+
+.linea{
+    width: 100%;
+    background:rgba(0, 0, 0, 0.199);
+    height: 2px;
+    margin-bottom: 3%;
+}

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, DoCheck } from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import { DialogContentArtistComponent } from './dialogs/dialog-content-artist/dialog-content-artist.component';
 
@@ -7,13 +7,21 @@ import { DialogContentArtistComponent } from './dialogs/dialog-content-artist/di
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent {
-  
-  constructor(public dialog: MatDialog){
+export class AppComponent implements DoCheck{
 
+  usuario: any;
+  prueba: any;
+
+  constructor(public dialog: MatDialog){
+    this.prueba = 1;
   } 
+  ngDoCheck(): void {
+    this.usuario = sessionStorage.getItem("usuario")
+  }
 
   title = 'MusicStore';
+
+  
 
   sidenavWidth = 5;
   ngStyle: string | undefined;

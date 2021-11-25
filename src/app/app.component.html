@@ -3,7 +3,7 @@
 
   <div class="background">
     <div class="background-toolbar">
-      <mat-toolbar class="background-toolbar">
+      <mat-toolbar class="background-toolbar" *ngIf="usuario == prueba">
         <p class="example-spacer"></p>
         <p class="name-user">Fernel Moreno</p>
         <div mat-button class="btn-Menu">
@@ -29,7 +29,7 @@
   </div>
 
   <mat-sidenav #sidenav mode="side" class="example-sidenav" [ngStyle]="{ 'width.em': sidenavWidth }" opened="true"
-    (mouseenter)="increase()" (mouseleave)="decrease()" class="background-sidenav">
+    (mouseenter)="increase()" (mouseleave)="decrease()" class="background-sidenav" *ngIf="usuario == prueba">
 
     <mat-nav-list>
       <div class="logo-text" fxFlex="15">
