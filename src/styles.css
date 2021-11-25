@@ -9,3 +9,7 @@ mat-dialog-container {
     padding: 0px 0px 0px 0px !important;
     overflow: hidden !important;
   }
+
+  mat-table {
+    background-color: transparent !important;
+}

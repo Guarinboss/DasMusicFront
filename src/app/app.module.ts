@@ -24,10 +24,18 @@ import {MatTableModule} from '@angular/material/table';
 import { DialogContentArtistComponent } from './dialogs/dialog-content-artist/dialog-content-artist.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import { SongsComponent } from './pages/songs/songs.component';
+import { DialogContentAlbumComponent } from './dialogs/dialog-content-album/dialog-content-album.component';
+import { BibliotecaComponent } from './pages/biblioteca/biblioteca.component';
+import {MatTabsModule} from '@angular/material/tabs';
+import { PerfilArtistaComponent } from './pages/perfil-artista/perfil-artista.component';
+import { PerfilAlbumComponent } from './pages/perfil-album/perfil-album.component';
+import { CarritoComponent } from './pages/carrito/carrito.component';
+import { DialogContentCarritoComponent } from './dialogs/dialog-content-carrito/dialog-content-carrito.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegistroComponent } from './pages/registro/registro.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './_service/Interceptor';
 
 
 @NgModule({
@@ -37,6 +45,12 @@ import { HttpClientModule } from '@angular/common/http';
     AlbumComponent,
     DialogContentArtistComponent,
     SongsComponent,
+    DialogContentAlbumComponent,
+    BibliotecaComponent,
+    PerfilArtistaComponent,
+    PerfilAlbumComponent,
+    CarritoComponent,
+    DialogContentCarritoComponent,
     LoginComponent,
     RegistroComponent,
   ],
@@ -60,11 +74,12 @@ import { HttpClientModule } from '@angular/common/http';
     MatGridListModule,
     MatTableModule,
     MatDialogModule,
+    MatTabsModule,
     MatSnackBarModule,
     HttpClientModule,
 
   ],
-  providers: [],
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true} ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

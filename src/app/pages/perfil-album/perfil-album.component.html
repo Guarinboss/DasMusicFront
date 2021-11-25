@@ -1,0 +1,109 @@
+<div class="background">
+    <div class="imagen">
+        <img src="assets/images/AL2.jpg" height="190px" width="190px" style="object-fit: cover; border-radius: 5px;">
+    </div>
+    <div class="name">
+        <div style="margin-bottom: 12px; margin-top: 12px;">
+            CRYBABy
+        </div>
+        <div style="font-size: 15px; font-weight: 400; text-transform: initial; padding: 5px;">
+            20/04/2015
+        </div>
+        <div
+            style="font-size: 18px; font-weight: 500; text-transform: uppercase; background-color: rgb(43, 101, 226); width: 100%; border-radius: 5px; padding: 5px; text-align: center; flex-grow: 2; max-width: 200px;">
+            25.000 $
+        </div>
+        <p></p>
+        <mat-divider></mat-divider>
+    </div>
+    <p class="example-spacer"></p>
+    <div class="boton">
+        <button mat-fab aria-label="Example icon button with a delete icon" style="background-color: rgb(43, 101, 226); color: white;" (click)="openDialog()">
+            <mat-icon>add_shopping_cart</mat-icon>
+        </button>
+    </div>
+
+</div>
+
+<div class="background2">
+
+    <div class="form-container">
+        <p class="subtitles">
+            Canciones
+        </p>
+        <div class="form-content">
+
+            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table">
+
+                <ng-container matColumnDef="position">
+                    <th mat-header-cell *matHeaderCellDef>Canción</th>
+                    <td mat-cell *matCellDef="let element">
+                        {{element.symbol}}
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef>Duración</th>
+                    <td mat-cell *matCellDef="let element"> {{element.position}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="weight">
+                    <th mat-header-cell *matHeaderCellDef>Precio</th>
+                    <td mat-cell *matCellDef="let element">
+                        {{element.weight}} $
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="symbol">
+                    <th mat-header-cell *matHeaderCellDef></th>
+                    <td mat-cell *matCellDef="let element"> 
+                        <button mat-icon-button color="primary" (click)="openDialog()" >
+                            <mat-icon >add_shopping_cart</mat-icon>
+                        </button></td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+
+        </div>
+    </div>
+    <div class="albumPrincipal">
+        <p>
+            Acerca de
+        </p>
+        <mat-card class="example-card">
+            <mat-card-header>
+                <mat-card-title style="text-transform: capitalize;">CRYBABY</mat-card-title>
+                <mat-card-subtitle>
+                    <p style="text-align: start; text-transform: uppercase;">lil peep</p>
+                </mat-card-subtitle>
+            </mat-card-header>
+            <img mat-card-image src="/assets/images/AL2.jpg" alt="Photo of a Shiba Inu"
+                style="width: 90%; height: 90%;object-fit: cover;border-radius: 10px;">
+            <mat-card-content>
+                <p style="text-align: justify; padding: 10px;">
+                    Crybaby es el tercer mixtape del rapero estadounidense Lil Peep.​ Fue lanzado el 10 de junio de 2016
+                    de forma independiente
+                    ​ y luego re-lanzado póstumamente a las plataformas de transmisión el 10 de junio de 2020 con 10 de
+                    las 11 pistas originales.
+                </p>
+            </mat-card-content>
+        </mat-card>
+    </div>
+
+</div>
+<div class="subtitles2"> Más de lil peep</div>
+<div class="containerCard">
+    <mat-card *ngFor="let card of albums" class="example-card2">
+        <div>
+            <img mat-card-image class="tamanoImagen" src="{{card.image}}" fallimg="picture1">
+        </div>
+
+        <mat-card-content>
+            <div class="hoteltitle"> {{card.name}} </div>
+
+        </mat-card-content>
+    </mat-card>
+
+</div>

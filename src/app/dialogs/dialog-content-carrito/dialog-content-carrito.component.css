@@ -1,0 +1,28 @@
+.content{
+    display: flex; 
+    align-items: center; 
+    text-align: center; 
+    justify-content: center; 
+    flex-direction: column; 
+    background-color:  #ECEFF1;
+    color: rgb(49, 49, 49);
+    font-size: 25px;
+    height: 100%;
+    font-weight: 600;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.content2{
+    margin-top: 10px;
+    color: rgb(66, 66, 66);
+    font-size: 18px;
+    font-weight: 500;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.content3{
+    color: rgb(49, 49, 49);
+    font-size: 25px;
+    font-weight: 600;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}

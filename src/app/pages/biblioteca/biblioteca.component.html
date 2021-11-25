@@ -1,0 +1,36 @@
+<mat-tab-group mat-align-tabs="center">
+    <mat-tab label="Artistas">
+        <div class="containerCard" >
+            <mat-card *ngFor="let card of albums" class="example-card">
+                <img mat-card-image class="tamanoImagen" src="{{card.image}}" fallimg="picture1">
+                <mat-card-content>
+                    <div class="hoteltitle"> {{card.name}} </div>
+
+                </mat-card-content>
+            </mat-card>
+        </div>
+            
+    </mat-tab>
+    <mat-tab label="Canciones">
+        <div class="containerCard" >
+            <mat-card *ngFor="let card of albums" class="example-card2">
+                <img mat-card-image class="tamanoImagen" src="{{card.image}}" fallimg="picture1">
+                <mat-card-content>
+                    <div class="hoteltitle"> {{card.name}} </div>
+
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </mat-tab>
+    <mat-tab label="Albums">
+        <div class="containerCard" >
+            <mat-card *ngFor="let card of albums" class="example-card2">
+                <img mat-card-image class="tamanoImagen" src="{{card.image}}" fallimg="picture1">
+                <mat-card-content>
+                    <div class="hoteltitle"> {{card.name}} </div>
+
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </mat-tab>
+</mat-tab-group>
