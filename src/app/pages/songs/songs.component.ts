@@ -41,8 +41,6 @@ export class SongsComponent implements OnInit {
   constructor() { }
 
   addData() {
-    const randomElementIndex = Math.floor(Math.random() * ELEMENT_DATA.length);
-    this.dataSource.push(ELEMENT_DATA[randomElementIndex]);
     this.table.renderRows();
   }
 

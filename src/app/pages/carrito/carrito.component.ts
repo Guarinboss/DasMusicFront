@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 
 export interface Album {
@@ -13,6 +14,8 @@ export interface Album {
   styleUrls: ['./carrito.component.css']
 })
 export class CarritoComponent implements OnInit {
+
+  toppings: FormGroup;
 
   public albums: Album[] = [
 
@@ -30,7 +33,12 @@ export class CarritoComponent implements OnInit {
 
 ];
 
-  constructor() { }
+  constructor(fb: FormBuilder) { 
+    this.toppings = fb.group({
+      pepperoni: false,
+    });
+
+  }
 
   ngOnInit(): void {
   }

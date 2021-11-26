@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Artistas } from 'src/app/_model/Artistas';
+import { ListasService } from 'src/app/_service/listas.service';
 
 export interface Album {
   name: string;
@@ -14,6 +16,8 @@ export interface Album {
 
 
 export class BibliotecaComponent implements OnInit {
+
+  public artistas : Artistas[];
 
   public albums: Album[] = [
 
@@ -31,9 +35,13 @@ export class BibliotecaComponent implements OnInit {
 
   ];
 
-  constructor() { }
+  constructor(private listasService: ListasService) { }
 
   ngOnInit(): void {
+    this.listasService.getArtistas().subscribe(data => {
+      this.artistas = data;
+      console.log(this.artistas);
+    });
   }
 
 }
