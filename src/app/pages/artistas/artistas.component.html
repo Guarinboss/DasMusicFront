@@ -35,7 +35,7 @@
                         <div>
                             <mat-form-field appearance="outline" class="inputForms">
                                 <mat-label>Genero</mat-label>
-                                <mat-select [formControl]="genderControl" name="gender" panelClass="panel">
+                                <mat-select name="gender" panelClass="panel" formControlName="generoMusical">
                                     <mat-option *ngFor="let gender of genders" [value]="gender.value" class="panel">
                                         {{gender.value}}
                                     </mat-option>
@@ -58,7 +58,7 @@
                             <mat-form-field appearance="outline" class="inputForms2">
                                 <mat-label>Mes</mat-label>
                                 <mat-select [formControl]="monthControl" name="month" panelClass="panel"
-                                    [(ngModel)]="mes" formControlName="mes">
+                                    [(ngModel)]="mes">
                                     <mat-option *ngFor="let month of months" [value]="month.value" class="panel">
                                         {{month.value}}
                                     </mat-option>
@@ -112,22 +112,4 @@
 
     </div>
 
-</div>
-<br>
-<br>
-<div class="form-container2">
-    <div class="form-content">
-        <mat-card class="example-card">
-            <mat-card-header style="justify-content: center;">
-                <mat-card-title class="title">Ver artistas</mat-card-title>
-                <!--<mat-card-subtitle>Dog Breed</mat-card-subtitle>-->
-            </mat-card-header>
-            <br>
-            <mat-divider></mat-divider>
-            <mat-card-content style="padding: 5%;">
-                
-            </mat-card-content>
-
-        </mat-card>
-    </div>
 </div>

@@ -1,5 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTable } from '@angular/material/table';
+import { DomSanitizer } from '@angular/platform-browser';
+import { Artista } from 'src/app/_model/Artista';
+import { MusicaService } from 'src/app/_service/musica.service';
 
 export interface PeriodicElement {
   name: string;
@@ -51,13 +54,16 @@ export class PerfilArtistaComponent implements OnInit {
 
 ];
 
+public datosArtistas: Artista;
+
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   dataSource = [...ELEMENT_DATA];
 
   @ViewChild(MatTable)
   table!: MatTable<PeriodicElement>;
 
-  constructor() { }
+  constructor(private musicaService: MusicaService,
+              private sanitizer: DomSanitizer) { }
 
   addData() {
     const randomElementIndex = Math.floor(Math.random() * ELEMENT_DATA.length);
@@ -81,5 +87,31 @@ export class PerfilArtistaComponent implements OnInit {
 
 
   ngOnInit(): void {
+    sessionStorage.setItem("idArtista", "1");
+    setTimeout(() => {
+      this.getObtenerArtista(sessionStorage.getItem("idArtista"));
+    }, 3000);
+  }
+
+  /*onFormSubmit() {
+    this.getObtenerArtista(sessionStorage.getItem("idArtista"));
+  }*/
+  imageurl : any;
+  getObtenerArtista(id: any) {
+    console.log(id);
+    this.musicaService.getObtenerArtista(id).subscribe(data => {
+      console.log(data);
+      this.datosArtistas = data;
+      
+      //this.router.navigate(['/login']);
+    }, err => {
+      //console.log(err);
+      if (err.status == 400) {
+        //this.error = 'Usuario y/o cotrasena incorrecta';
+        //this.progressbarService.barraProgreso.next("2");
+      } else {
+        //this.router.navigate([`/error/${err.status}/${err.statusText}`]);
+      }
+    })
   }
 }

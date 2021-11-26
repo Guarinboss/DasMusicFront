@@ -29,7 +29,7 @@ export class MusicaService {
   postGuardarArtista(artista: Artista): Observable<any>{
     return this.http.post<any>(this.url + 'guardar', artista, httpOptions);
   }
-  getListarArtista(): Observable<any>{
-    return this.http.post<any>(this.url + 'obtener', httpOptions);
+  getObtenerArtista(id: number){
+    return this.http.get<Artista>(this.url + 'obtenerPorId/'+id);
   }
 }

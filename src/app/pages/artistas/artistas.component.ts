@@ -109,10 +109,7 @@ export class ArtistasComponent implements OnInit {
 
     return this.ArtistForm.hasError('email') ? 'Not a valid email' : '';
   }
-
-
-
-  genderControl = new FormControl(this.genders[0].value);
+  
   monthControl = new FormControl(this.months[0].value);
 
   constructor(private router: Router,
@@ -121,12 +118,11 @@ export class ArtistasComponent implements OnInit {
 
     this.formularioArtista = new FormGroup({
       dia: new FormControl(''),
-      mes: new FormControl(''),
       anio: new FormControl(''),
       imagen: new FormControl(''),
+      generoMusical: new FormControl(''),
       fechaNacimiento: new FormControl(this.anio+"-"+this.mes+"-"+this.dia),
       nombre: new FormControl('', [Validators.required, Validators.maxLength(30)]),
-      generoMusical: new FormControl(this.genders[0].value, [Validators.required, Validators.maxLength(20)]),
       nacionalidad: new FormControl('', [Validators.required]),
       descripcion: new FormControl('', [Validators.required, Validators.maxLength(20)]),
     })
@@ -150,7 +146,7 @@ export class ArtistasComponent implements OnInit {
     this.musicaService.postGuardarArtista(artista).subscribe(data => {
       console.log(data);
       this.openSnackBar("¡Artista registrado!", "Aceptar");
-      //this.router.navigate(['/login']);
+      this.router.navigate(['/biblioteca']);
     }, err => {
       //console.log(err);
       if (err.status == 400) {
