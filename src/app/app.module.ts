@@ -35,9 +35,32 @@ import { LoginComponent } from './pages/login/login.component';
 import { RegistroComponent } from './pages/registro/registro.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { AuthInterceptor } from './_service/Interceptor';
+import { AuthInterceptor } from './_service/AuthInterceptor';
+import { environment } from 'src/environments/environment';
+import { RegistroLoginService } from './_service/registro-login.service';
+import { Login } from './_model/Login';
+import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 
+/**
+ * Modulo donde se realizan importaciones de funcionalidad.
+ * 
+ * @module NgModule
+ */
+ export function jwtOptionsFactory() {
+  return {
+    tokenGetter: async () => {
+      let tk = sessionStorage.getItem(environment.TOKEN);
+      return tk;
+      //return tk != null ? tk : '';
+    },
+    allowedDomains: ["localhost:8080"], ///TAMBIEN CAMBIAR IP AQUI
+    disallowedRoutes: ["http://localhost:8080/DasMusic/api/auth/token",
+      "http://localhost:8080/DasMusic/api/usuario/guardar"
+    ],
+  }
+}
 @NgModule({
   declarations: [
     AppComponent,
@@ -77,9 +100,18 @@ import { AuthInterceptor } from './_service/Interceptor';
     MatTabsModule,
     MatSnackBarModule,
     HttpClientModule,
+    /*JwtModule.forRoot({
+      jwtOptionsProvider: {
+        provide: JWT_OPTIONS,
+        useFactory: jwtOptionsFactory,
+        deps: []
+      }
+    }),*/
 
   ],
-  providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true} ],
+  providers: [
+    {provide: LocationStrategy, useClass: HashLocationStrategy},
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true} ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
