@@ -118,10 +118,10 @@ export class SongsComponent implements OnInit {
   onFromSubmit() {
     this.formCancion.controls['fechaLanzamiento'].setValue(new Date(this.dia1 + "-" + this.mes1 + "-" + this.anio1));
     let formularioCancion = this.formCancion.value;
-    this.postIngresoLogin(formularioCancion);
+    this.postGuardar(formularioCancion);
   }
 
-  postIngresoLogin(cancion: Cancion) {
+  postGuardar(cancion: Cancion) {
     console.log(cancion);
     //sessionStorage.setItem("usuario", "1");
     //this.router.navigate(['/songs']);
