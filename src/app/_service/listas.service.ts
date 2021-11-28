@@ -9,7 +9,7 @@ import { Registro } from '../_model/Registro';
 
 const httpOptions = {
   headers: new HttpHeaders({
-    'Content-Type':  'application/json'
+    'Content-Type':  'application/json',
   })
 };
 
@@ -27,6 +27,6 @@ export class ListasService {
   constructor(private http: HttpClient) { }
 
   getArtistas(){
-    return this.http.post<Artistas[]>(this.url + 'obtener', httpOptions);
+    return this.http.get<Artistas[]>(this.url + 'obtener');
   }
 }

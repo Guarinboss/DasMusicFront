@@ -54,20 +54,17 @@ export class PerfilArtistaComponent implements OnInit {
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   dataSource = [...ELEMENT_DATA];
 
-  @ViewChild(MatTable)
-  table!: MatTable<PeriodicElement>;
+
 
   constructor() { }
 
   addData() {
     const randomElementIndex = Math.floor(Math.random() * ELEMENT_DATA.length);
     this.dataSource.push(ELEMENT_DATA[randomElementIndex]);
-    this.table.renderRows();
   }
 
   removeData() {
     this.dataSource.pop();
-    this.table.renderRows();
   }
 
   changeValue(id: number, property: string, event: any) {

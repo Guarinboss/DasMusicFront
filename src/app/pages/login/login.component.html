@@ -4,14 +4,22 @@
             <br/>          
             <p class="textlogin"> DasMusic </p>
             <div class="eula">
-                El mejor servicio de musica listo para ti, registrate para disfrutar de la mejor musica
+                El mejor servicio de musica listo para ti, registrate para disfrutar de la mejor musica. Obtén la mejor y más fácil
+                experiencia para comprar tu musica.
             </div> 
             <div class="divLogin">
-                <button mat-stroked-button color="primary" class="botonlogin" routerLink="/registro">Registrarse</button>
+                <button mat-flat-button  class="botonlogin" routerLink="/registro">Registrarse</button>
+                <p style="color: rgb(219, 219, 219); margin-top: 15px;">
+                    <br>!Bienvenido!
+                </p>
+
+
             </div>           
         </mat-card>
         <mat-card class="right">
-            <p class="textCrear"> Login </p>
+            <p class="textCrear"> Ingreso </p>
+            <br>
+            <br>
 
             <form [formGroup]="loginForm" (ngSubmit)="onFormSubmit()">
                 <mat-form-field appearance="fill" class="formField">
@@ -31,6 +39,12 @@
                 <br />
                 <br />
                 <button mat-raised-button color="primary" class="boton" type="submit">Login</button>
+                
+                <p>
+                    <br>¿No tienes una cuenta? 
+                    <a routerLink="/registro">Registrate</a>
+                </p>
+
             </form>
         </mat-card>
     </div>

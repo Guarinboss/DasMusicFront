@@ -1,6 +1,6 @@
-<div class="form-container">
+<div class="form-container" *ngIf="mostrar != mostrar2">
     <div class="form-content">
-       
+
         <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table">
 
             <ng-container matColumnDef="position">
@@ -13,19 +13,26 @@
             <ng-container matColumnDef="name">
                 <th mat-header-cell *matHeaderCellDef>Duración</th>
                 <td mat-cell *matCellDef="let element">
-                    <span (keyup)="changeValue(element.id, 'position', $event)" (blur)="updateList(element.id, 'position', $event)" contenteditable="true">{{element.position}}</span></td>
+                    <span (keyup)="changeValue(element.id, 'position', $event)"
+                        (blur)="updateList(element.id, 'position', $event)"
+                        contenteditable="true">{{element.position}}</span>
+                </td>
             </ng-container>
 
             <ng-container matColumnDef="weight">
                 <th mat-header-cell *matHeaderCellDef>Nombre de la canción</th>
                 <td mat-cell *matCellDef="let element">
-                    <span (keyup)="changeValue(element.id, 'symbol', $event)" (blur)="updateList(element.id, 'symbol', $event)" contenteditable="true">{{element.symbol}}</span>
+                    <span (keyup)="changeValue(element.id, 'symbol', $event)"
+                        (blur)="updateList(element.id, 'symbol', $event)"
+                        contenteditable="true">{{element.symbol}}</span>
                 </td>
             </ng-container>
 
             <ng-container matColumnDef="symbol">
                 <th mat-header-cell *matHeaderCellDef>Precio</th>
-                <td mat-cell *matCellDef="let element"> <span (keyup)="changeValue(element.id, 'weight', $event)" (blur)="updateList(element.id, 'weight', $event)" contenteditable="true">{{element.weight}}</span></td>
+                <td mat-cell *matCellDef="let element"> <span (keyup)="changeValue(element.id, 'weight', $event)"
+                        (blur)="updateList(element.id, 'weight', $event)"
+                        contenteditable="true">{{element.weight}}</span></td>
             </ng-container>
 
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -38,4 +45,111 @@
         </div>
 
     </div>
+</div>
+
+
+<div class="form-container" *ngIf="mostrar == mostrar2">
+    <div class="form-content">
+        <mat-card class="example-card">
+            <mat-card-header style="justify-content: center;">
+                <mat-card-title class="title">Agregar canción</mat-card-title>
+                <!--<mat-card-subtitle>Dog Breed</mat-card-subtitle>-->
+            </mat-card-header>
+            <br>
+            <mat-divider></mat-divider>
+            <mat-card-content style="padding: 5%;">
+                <div class="container-general">
+                    <div class="profile-image">
+                        <!--<img src="assets/images/AL1.jpg" width="350px" height="350px" style="border-radius: 3px;">-->
+                        <img [src]="imgURL" height="200" *ngIf="imgURL" fallimg>
+                        <div class="file-select">
+                            <input #file type="file" accept='image/*' (change)="preview($event)" />
+                        </div>
+                    </div>
+                    <div class="container-info">
+                        <form [formGroup]="formCancion" (ngSubmit)="onFromSubmit()">
+                            <div class="example-container">
+                                <div class="topics">Nombre del la canción</div>
+                                <div>
+                                    <mat-form-field appearance="outline" class="inputForms">
+                                        <mat-label>Nombre</mat-label>
+                                        <input matInput placeholder="ej: Shakira" formControlName="nombre">
+                                        <mat-error *ngIf="Canciones.invalid">{{getErrorMessage()}}</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <form [formGroup]="formFecha">
+
+                                <div class="topics">Fecha de lanzamiento</div>
+                                <div class="example-container">
+                                    <div class="container-date">
+                                        <div>
+                                            <mat-form-field appearance="outline" class="inputForms2">
+                                                <mat-label>Dia</mat-label>
+                                                <input matInput placeholder="2" formControlName="dia"
+                                                    [(ngModel)]="dia1">
+                                                <mat-error *ngIf="Canciones.invalid">{{getErrorMessage()}}</mat-error>
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div>
+                                            <mat-form-field appearance="outline" class="inputForms2">
+                                                <mat-label>Mes</mat-label>
+                                                <mat-select [formControl]="monthControl" name="month" panelClass="panel" formControlName="mes" [(ngModel)]="mes1">
+                                                    <mat-option *ngFor="let month of months" [value]="month.value"
+                                                        class="panel">
+                                                        {{month.value}}
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div>
+                                            <mat-form-field appearance="outline" class="inputForms2">
+                                                <mat-label>Año</mat-label>
+                                                <input matInput placeholder="2000" formControlName="anio"
+                                                    [(ngModel)]="anio1">
+                                                <mat-error *ngIf="Canciones.invalid">{{getErrorMessage()}}</mat-error>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+
+                            <div class="example-container">
+                                <div class="topics">Duración</div>
+                                <div>
+                                    <mat-form-field appearance="outline" class="inputForms">
+                                        <mat-label>Duración</mat-label>
+                                        <input matInput placeholder="ej: Colombia" formControlName="duracion">
+                                        <mat-error *ngIf="Canciones.invalid">{{getErrorMessage()}}</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div class="example-container">
+                                <div class="topics">Precio</div>
+                                <div>
+                                    <mat-form-field appearance="outline" class="inputForms">
+                                        <mat-label>Precio</mat-label>
+                                        <input matInput placeholder="ej: Colombia" formControlName="precio">
+                                        <mat-error *ngIf="Canciones.invalid">{{getErrorMessage()}}</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <br>
+                            <div style="text-align: center; ">
+                                <button mat-flat-button color="warn" style="width: 45%; margin-right:15px ;"
+                                    type="button" (click)="cancelar()">Cancelar</button>
+                                <button mat-flat-button color="primary" style="width: 45%;"
+                                    type="submit">Guardar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </mat-card-content>
+
+        </mat-card>
+    </div>
+
 </div>

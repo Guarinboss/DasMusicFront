@@ -2,7 +2,7 @@
 
 
   <div class="background">
-    
+
     <span></span>
     <span></span>
     <span></span>
@@ -21,7 +21,7 @@
   </div>
 
   <mat-sidenav #sidenav mode="side" class="example-sidenav" [ngStyle]="{ 'width.em': sidenavWidth }" opened="true"
-     class="background-sidenav" *ngIf="usuario == prueba">
+    class="background-sidenav" *ngIf="usuario == prueba">
 
     <mat-nav-list>
       <div class="logo-text" fxFlex="15">
@@ -39,7 +39,7 @@
       <br>
 
 
-      
+
       <mat-list-item routerLink="/" routerLinkActive="active">
         <mat-icon mat-list-icon>home</mat-icon>
         <div fxFlex="10"></div>
@@ -78,7 +78,7 @@
           <h5 class="lead">Agregar Álbum</h5>
         </div>
       </mat-list-item>
-      <mat-list-item routerLink="/artistas" routerLinkActive="active" >
+      <mat-list-item routerLink="/artistas" routerLinkActive="active">
         <mat-icon mat-list-icon>add_circle</mat-icon>
         <div fxFlex="10"></div>
         <div *ngIf="sidenavWidth > 5" class="sidenav-item">
@@ -100,7 +100,7 @@
         <mat-divider></mat-divider>
       </div>
 
-      <mat-list-item routerLink="7" routerLinkActive="active" >
+      <mat-list-item routerLink="7" routerLinkActive="active">
         <mat-icon mat-list-icon>person</mat-icon>
         <div fxFlex="10"></div>
         <div *ngIf="sidenavWidth > 5" class="sidenav-item">
@@ -124,9 +124,9 @@
     </mat-nav-list>
   </mat-sidenav>
 
-  
+
   <div class="background-toolbar">
-    <mat-toolbar class="background-toolbar">
+    <mat-toolbar class="background-toolbar" *ngIf="usuario == prueba">
       <p class="example-spacer"></p>
       <p class="name-user">Fernel Moreno</p>
       <div mat-button class="btn-Menu">
