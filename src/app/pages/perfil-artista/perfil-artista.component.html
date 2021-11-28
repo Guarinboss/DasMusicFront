@@ -33,24 +33,24 @@
         </p>
         <div class="form-content">
 
-            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table">
+            <table mat-table [dataSource]="dataSourceCan" class="mat-elevation-z8 demo-table">
 
                 <ng-container matColumnDef="position">
                     <th mat-header-cell *matHeaderCellDef>Canción</th>
                     <td mat-cell *matCellDef="let element">
-                        {{element.symbol}}
+                        {{element.precio}}
                     </td>
                 </ng-container>
 
                 <ng-container matColumnDef="name">
                     <th mat-header-cell *matHeaderCellDef>Duración</th>
-                    <td mat-cell *matCellDef="let element"> {{element.position}}</td>
+                    <td mat-cell *matCellDef="let element"> {{element.duracion}}</td>
                 </ng-container>
 
                 <ng-container matColumnDef="weight">
                     <th mat-header-cell *matHeaderCellDef>Precio</th>
                     <td mat-cell *matCellDef="let element">
-                        {{element.weight}}
+                        {{element.precio}}
                     </td>
                 </ng-container>
 

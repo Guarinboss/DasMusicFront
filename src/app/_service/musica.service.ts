@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Artista } from '../_model/Artista';
+import { Cancion } from '../_model/Cancion';
 
 /**
  * Variable constante que especifica el tipo de archivo que se quiere enviar.
@@ -31,5 +32,8 @@ export class MusicaService {
   }
   getObtenerArtista(id: number){
     return this.http.get<Artista>(this.url + 'obtenerPorId/'+id);
+  }
+  getObtenerCancion(id: number) : Observable<any>{
+    return this.http.get<Cancion>(this.url2 + 'obtenerPorId/'+id);
   }
 }
