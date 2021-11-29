@@ -6,13 +6,13 @@
                 <input matInput (keyup)="applyFilter($event)" placeholder="Joji" #input>
             </mat-form-field>
 
-            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+            <table mat-table [dataSource]="artistas" class="mat-elevation-z8">
 
                 <!-- Name Column -->
                 <ng-container matColumnDef="name">
-                    <th mat-header-cell *matHeaderCellDef> Artista </th>
+                    <th mat-header-cell *matHeaderCellDef> Albums </th>
                     <td mat-cell *matCellDef="let element"> <img src="{{element.image}}" width="35px" height="35px"
-                            style="border-radius: 150px; object-fit: cover;"> {{element.name}} </td>
+                            style="border-radius: 150px; object-fit: cover;" src-fallback="assets/images/df.svg" (loaded)="onLoaded($event)"> {{element.nombre}} </td>
                 </ng-container>
 
                 <!-- button Column -->

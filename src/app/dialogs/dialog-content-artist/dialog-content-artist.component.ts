@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { Artistas } from 'src/app/_model/Artistas';
+import { ListasService } from 'src/app/_service/listas.service';
 export interface Album {
   name: string;
   image: string;
@@ -25,11 +27,23 @@ const ELEMENT_DATA: Album[] = [
 })
 export class DialogContentArtistComponent implements OnInit {
 
-  constructor(private router:Router) { }
+  constructor(private router:Router, public listasService: ListasService) { }
 
-  ngOnInit(): void {
+  public artistas: Artistas[];
+  
+  onLoaded(isFallback: boolean) {
+    // make somthing based on 'isFallback'
   }
 
+  ngOnInit(): void {
+    console.log("sapa hp");
+    setTimeout(() => {
+      this.listasService.getArtistas().subscribe(data => {
+        this.artistas = data;
+        console.log(this.artistas);
+      });
+    }, 0.000);
+  }
   displayedColumns: string[] = ['name', 'image'];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
 

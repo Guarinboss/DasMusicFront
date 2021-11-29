@@ -3,6 +3,8 @@ import { FormControl, Validators, FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Artista } from 'src/app/_model/Artista';
+import { Artistas } from 'src/app/_model/Artistas';
+import { ListasService } from 'src/app/_service/listas.service';
 import { MusicaService } from 'src/app/_service/musica.service';
 
 interface gender {
@@ -22,7 +24,10 @@ export class ArtistasComponent implements OnInit {
 
   formFecha: FormGroup;
 
+  listaArtistas: Artistas[];
+
   formularioArtista: FormGroup;
+  formularioEditarArtista: FormGroup;
 
   ArtistForm = new FormControl('', [Validators.required, Validators.email]);
 
@@ -40,6 +45,10 @@ export class ArtistasComponent implements OnInit {
   public extension: any;
 
   sellersPermitFile: any;
+
+  dia1: any; mes1: any; anio1: any;
+
+  idArtista: any;
 
   //base64s
   sellersPermitString: string;
@@ -109,28 +118,60 @@ export class ArtistasComponent implements OnInit {
 
     return this.ArtistForm.hasError('email') ? 'Not a valid email' : '';
   }
-  
+
   monthControl = new FormControl(this.months[0].value);
 
   constructor(private router: Router,
-              private _snackBar: MatSnackBar,
-              private musicaService: MusicaService) {
+    private _snackBar: MatSnackBar,
+    private musicaService: MusicaService,
+    private listasService: ListasService) {
 
     this.formularioArtista = new FormGroup({
       dia: new FormControl(''),
       anio: new FormControl(''),
       imagen: new FormControl(''),
       generoMusical: new FormControl(''),
-      fechaNacimiento: new FormControl(this.anio+"-"+this.mes+"-"+this.dia),
+      fechaNacimiento: new FormControl(this.anio + "-" + this.mes + "-" + this.dia),
       nombre: new FormControl('', [Validators.required, Validators.maxLength(30)]),
       nacionalidad: new FormControl('', [Validators.required]),
       descripcion: new FormControl('', [Validators.required, Validators.maxLength(20)]),
     })
 
+    this.formularioEditarArtista = new FormGroup({
+      id: new FormControl('1'),
+      imagen: new FormControl(''),
+      generoMusical: new FormControl(''),
+      fechaNacimiento: new FormControl(this.anio + "-" + this.mes + "-" + this.dia),
+      nombre: new FormControl('', [Validators.required, Validators.maxLength(30)]),
+      nacionalidad: new FormControl('', [Validators.required]),
+      descripcion: new FormControl('', [Validators.required, Validators.maxLength(20)]),
+    })
+
+    this.formFecha = new FormGroup({
+      dia: new FormControl('', Validators.required),
+      mes: new FormControl('', Validators.required),
+      anio: new FormControl('', Validators.required),
+    });
+
+
 
   }
 
+ 
+
+  onLoaded(isFallback: boolean) {
+    // make somthing based on 'isFallback'
+  }
+
   ngOnInit(): void {
+    this.obtenerArtistas();
+  }
+
+  eliminarArtista(id: number){
+    this.listasService.deleteArtistas(id).subscribe(data => {
+      console.log(data);
+      this.openSnackBar("¡Artista eliminado!", "Aceptar");
+    });
   }
 
   onFormSubmit() {
@@ -138,11 +179,15 @@ export class ArtistasComponent implements OnInit {
     this.postGuardarArtista(formularioArtista);
   }
 
+  onFormSubmit2() {
+    let formularioArtista = this.formularioEditarArtista.value;
+    this.formularioArtista.controls['fechaNacimiento'].setValue(new Date(this.dia1 + "-" + this.mes1 + "-" + this.anio1));
+    this.editarArtista(formularioArtista);
+    console.log(formularioArtista);
+  }
+
   postGuardarArtista(artista: Artista) {
-    console.log(artista);
-    let date: Date = new Date(this.anio+"-"+this.mes+"-"+this.dia); 
-    //let date: Date = new Date(date);  
-    artista.fechaNacimiento = date;
+
     this.musicaService.postGuardarArtista(artista).subscribe(data => {
       console.log(data);
       this.openSnackBar("¡Artista registrado!", "Aceptar");
@@ -157,6 +202,35 @@ export class ArtistasComponent implements OnInit {
       }
     })
   }
+
+  editarArtista(artista: Artistas) {
+    let date: Date = new Date(this.anio + "-" + this.mes + "-" + this.dia);
+    //let date: Date = new Date(date);  
+    artista.fechaNacimiento = date;
+    this.listasService.putArtistas(artista).subscribe(data => {
+      console.log(data);
+      this.openSnackBar("¡Artista Modificado!", "Aceptar");
+      this.router.navigate(['/biblioteca']);
+    }, err => {
+      //console.log(err);
+      if (err.status == 400) {
+        //this.error = 'Usuario y/o cotrasena incorrecta';
+        //this.progressbarService.barraProgreso.next("2");
+      } else {
+        //this.router.navigate([`/error/${err.status}/${err.statusText}`]);
+      }
+    })
+
+  }
+
+  obtenerArtistas() {
+    setTimeout(() => {
+      this.listasService.getArtistas().subscribe(data => {
+        this.listaArtistas = data;
+        console.log(this.listaArtistas);
+      });
+    }, 0.000);
+  };
 
   openSnackBar(message: string, action: string) {
     this._snackBar.open(message, action);

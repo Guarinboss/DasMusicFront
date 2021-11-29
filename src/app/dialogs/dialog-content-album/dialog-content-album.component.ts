@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { Artistas } from 'src/app/_model/Artistas';
+import { ListasService } from 'src/app/_service/listas.service';
 
 export interface Album {
   name: string;
@@ -27,9 +29,21 @@ const ELEMENT_DATA: Album[] = [
 })
 export class DialogContentAlbumComponent implements OnInit {
   
-  constructor(private router:Router) { }
+  constructor(private router:Router, public listasService: ListasService) { }
+
+  public artistas: Artistas[];
+  
+  onLoaded(isFallback: boolean) {
+    // make somthing based on 'isFallback'
+  }
 
   ngOnInit(): void {
+    setTimeout(() => {
+      this.listasService.getArtistas().subscribe(data => {
+        this.artistas = data;
+        console.log(this.artistas);
+      });
+    }, 0.000);
   }
 
   displayedColumns: string[] = ['name', 'image'];
@@ -43,5 +57,7 @@ export class DialogContentAlbumComponent implements OnInit {
   dirigirAlmbum(){
     this.router.navigate(['songs']);
   }
+
+  
 
 }

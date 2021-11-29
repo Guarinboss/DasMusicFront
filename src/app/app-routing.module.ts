@@ -9,6 +9,7 @@ import { PerfilArtistaComponent } from './pages/perfil-artista/perfil-artista.co
 import { LoginComponent } from './pages/login/login.component';
 import { RegistroComponent } from './pages/registro/registro.component';
 import { SongsComponent } from './pages/songs/songs.component';
+import { InicioComponent } from './pages/inicio/inicio.component';
 
 const routes: Routes = [
   {path : 'artistas', component:ArtistasComponent},
@@ -20,6 +21,7 @@ const routes: Routes = [
   {path : 'carrito', component:CarritoComponent},
   {path : 'login', component:LoginComponent},
   {path : 'registro', component:RegistroComponent},
+  {path : 'inicio', component:InicioComponent},
 ];
 
 @NgModule({
