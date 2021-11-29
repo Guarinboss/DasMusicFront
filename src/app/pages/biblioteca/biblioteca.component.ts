@@ -7,6 +7,8 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { Albums } from 'src/app/_model/Albums';
 import { MusicaService } from 'src/app/_service/musica.service';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogContentArtistComponent } from 'src/app/dialogs/dialog-content-artist/dialog-content-artist.component';
 
 export interface Album {
   name: string;
@@ -50,13 +52,17 @@ export class BibliotecaComponent implements OnInit {
   constructor(private listasService: ListasService, 
               private cancionService: CancionService, 
               private router: Router,
-              private musicaService: MusicaService) { }
+              private musicaService: MusicaService,
+              public dialog: MatDialog) { }
 
   onLoaded(isFallback: boolean) {
     // make somthing based on 'isFallback'
   }
 
+ 
+
   ngOnInit(): void {
+    
 
     setTimeout(() => {
       this.getCancion();

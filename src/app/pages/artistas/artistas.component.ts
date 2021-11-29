@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { DialogContentArtistComponent } from 'src/app/dialogs/dialog-content-artist/dialog-content-artist.component';
 import { Artista } from 'src/app/_model/Artista';
 import { Artistas } from 'src/app/_model/Artistas';
 import { ListasService } from 'src/app/_service/listas.service';
@@ -119,21 +121,21 @@ export class ArtistasComponent implements OnInit {
   }
 
   monthControl = new FormControl(this.months[0].value);
+  selectedValue: string;
 
   constructor(private router: Router,
     private _snackBar: MatSnackBar,
     private musicaService: MusicaService,
-    private listasService: ListasService) {
+    private listasService: ListasService,
+    public dialog: MatDialog) {
 
     this.formularioArtista = new FormGroup({
-      dia: new FormControl(''),
-      anio: new FormControl(''),
       imagen: new FormControl(''),
       generoMusical: new FormControl(''),
       fechaNacimiento: new FormControl(this.anio + "-" + this.mes + "-" + this.dia),
       nombre: new FormControl('', [Validators.required, Validators.maxLength(30)]),
       nacionalidad: new FormControl('', [Validators.required]),
-      descripcion: new FormControl('', [Validators.required, Validators.maxLength(20)]),
+      descripcion: new FormControl('', [Validators.required, Validators.maxLength(60)]),
     })
 
     this.formularioEditarArtista = new FormGroup({
@@ -143,7 +145,7 @@ export class ArtistasComponent implements OnInit {
       fechaNacimiento: new FormControl(this.anio + "-" + this.mes + "-" + this.dia),
       nombre: new FormControl('', [Validators.required, Validators.maxLength(30)]),
       nacionalidad: new FormControl('', [Validators.required]),
-      descripcion: new FormControl('', [Validators.required, Validators.maxLength(20)]),
+      descripcion: new FormControl('', [Validators.required, Validators.maxLength(60)]),
     })
 
     this.formFecha = new FormGroup({
@@ -175,18 +177,25 @@ export class ArtistasComponent implements OnInit {
 
   onFormSubmit() {
     let formularioArtista = this.formularioArtista.value;
+    this.formularioArtista.controls['fechaNacimiento'].setValue(new Date(this.dia1 + "-" + this.mes1 + "-" + this.anio1));
     this.postGuardarArtista(formularioArtista);
+    console.log(formularioArtista);
   }
 
   onFormSubmit2() {
     let formularioArtista = this.formularioEditarArtista.value;
     this.formularioArtista.controls['fechaNacimiento'].setValue(new Date(this.dia1 + "-" + this.mes1 + "-" + this.anio1));
     this.editarArtista(formularioArtista);
-    console.log(formularioArtista);
+    //console.log(formularioArtista);
   }
+
+
 
   postGuardarArtista(artista: Artista) {
 
+    let date: Date = new Date(this.anio + "-" + this.mes + "-" + this.dia);
+    //let date: Date = new Date(date);  
+    artista.fechaNacimiento = date;
     this.musicaService.postGuardarArtista(artista).subscribe(data => {
       console.log(data);
       this.openSnackBar("¡Artista registrado!", "Aceptar");
