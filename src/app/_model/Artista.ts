@@ -1,4 +1,5 @@
 import { Byte } from "@angular/compiler/src/util";
+import { Album } from "./Album";
 
 /**
  * Clase que mapea el servicio de artista 
@@ -11,4 +12,5 @@ export class Artista{
     fechaNacimiento: Date;
     nacionalidad: string;
     descripcion: string;
+    album: Album[];
 }

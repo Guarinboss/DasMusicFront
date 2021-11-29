@@ -36,10 +36,13 @@ export class AlbumComponent implements OnInit {
   idArtista: any;
 
   formularioAlbum: FormGroup;
+  formularioAlbumEdit: FormGroup;
 
   imgURL: any;
 
   artista: Artista;
+
+  albumsArray: Album[];
 
   public message: string;
 
@@ -47,8 +50,21 @@ export class AlbumComponent implements OnInit {
 
   sellersPermitFile: any;
 
-    //base64s
-    sellersPermitString: string;
+  editField!: string;
+
+  displayedColumns: string[] = ['position', 'weight', 'symbol', 'edit'];
+
+  editAlbum: Album;
+
+  mostrar = true;
+
+  mostrar2 = false;
+
+  mostrarEdit = true;
+  mostrarEdit2 = false;
+
+  //base64s
+  sellersPermitString: string;
 
   Albums = new FormControl('', [Validators.required, Validators.email]);
 
@@ -96,11 +112,22 @@ export class AlbumComponent implements OnInit {
       //gender: this.albumControl,
       //month: this.monthControl
     });
+    this.formularioAlbumEdit = new FormGroup({
+      id: new FormControl('', Validators.required),
+      dia: new FormControl(''),
+      anio: new FormControl(''),
+      nombre: new FormControl('', [Validators.required, Validators.maxLength(30)]),
+      fechaLanzamiento: new FormControl(this.anio+"-"+this.mes+"-"+this.dia),
+      precio: new FormControl('', [Validators.required, Validators.maxLength(20)]),
+      imagen: new FormControl('', Validators.required),
+    });
 
     this.idArtista = localStorage.getItem("idArtista");
    }
 
   ngOnInit(): void {
+    this.mostrar2 = false;
+    this.getObtenerArtista(this.idArtista);
   }
 
   onFormSubmit() {
@@ -113,10 +140,21 @@ export class AlbumComponent implements OnInit {
     }, 1000);
   }
 
+  onFormSubmit2() {
+    this.getObtenerArtista(this.idArtista);
+    let formularioAlbumEdit = this.formularioAlbumEdit.value;
+    this.putEditarAlbum(formularioAlbumEdit);
+    console.log(this.formularioAlbumEdit);
+    setTimeout(() => {
+      this.putEditarAlbum(formularioAlbumEdit);
+    }, 1000);
+  }
+
   postGuardarAlbum(album: Album) {
     let date: Date = new Date(this.anio+"-"+this.mes+"-"+this.dia); 
     album.artista = this.artista;
     album.fechaLanzamiento = date;
+    album.numeroCanciones = 0;
     this.musicaService.postGuardarAlbum(album).subscribe(data => {
       console.log(data);
       this.openSnackBar("Album registrado!", "Aceptar");
@@ -127,6 +165,40 @@ export class AlbumComponent implements OnInit {
     this.listaUsuario.getArtistasPorId(id).subscribe(data => {
       this.artista = data;
     })
+  }
+
+  getObtenerArtistaPorId() {
+    this.listaUsuario.getArtistas
+  }
+
+  putEditarAlbum(album: Album) {
+    this.musicaService.putEditarAlbum(album).subscribe(data => {
+      console.log(data);
+      this.getObtenerArtista(this.idArtista);
+      this.mostrar2 = false;
+    }, err => {
+      if (err.status == 400) {
+        //this.error = 'Usuario y/o cotrasena incorrecta';
+        //this.progressbarService.barraProgreso.next("2");
+      } else {
+        //this.router.navigate([`/error/${err.status}/${err.statusText}`]);
+      }
+    })
+  }
+
+  changeValue(id: number, property: string, event: any) {
+    this.editField = event.target.textContent;
+  }
+
+  updateList(id: number, property: string, event: any) {
+    const editField = event.target.textContent;
+    //this.personList[id][property] = editField;
+  }
+
+  editarAlbum(album: Album) {
+    this.mostrarEdit2 = true;
+    this.editAlbum = album;
+    //this.putEditarCancion(cancion);
   }
 
   openSnackBar(message: string, action: string) {

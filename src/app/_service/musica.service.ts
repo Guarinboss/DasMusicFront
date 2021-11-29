@@ -44,6 +44,10 @@ export class MusicaService {
   postGuardarAlbum(album: Album): Observable<any> {
     return this.http.post<any>(this.url3 + 'guardar', album, httpOptions);
   }
+
+  putEditarAlbum(album: Album) {
+    return this.http.put<Album>(this.url3 + 'editar', album);
+  }
   
   getObtenerAlbums(){
     return this.http.get<Albums[]>(this.url3 + 'obtener');
