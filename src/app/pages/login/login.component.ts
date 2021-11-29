@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Login } from 'src/app/_model/Login';
+import { Usuarios } from 'src/app/_model/Usuarios';
 import { RegistroLoginService } from 'src/app/_service/registro-login.service';
 import { environment } from 'src/environments/environment';
 
@@ -12,8 +13,13 @@ import { environment } from 'src/environments/environment';
 })
 export class LoginComponent implements OnInit {
 
+  error: string;
+
   hide = true;
   loginForm: FormGroup;
+  public loginContent : Usuarios[];
+
+
 
   constructor(private router:Router, public loginService: RegistroLoginService) {
 
@@ -24,6 +30,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.error = "null"; 
     sessionStorage.setItem("usuario", "0") 
   }
 
@@ -37,9 +44,14 @@ export class LoginComponent implements OnInit {
 
     this.loginService.postLogin(login).subscribe(data => {
       console.log(data);
-      sessionStorage.setItem(environment.TOKEN, data.token);
-      sessionStorage.setItem("usuario", "1");      
+      sessionStorage.setItem(environment.TOKEN, data.token);   
+      sessionStorage.setItem("id",data.usuario);
+      sessionStorage.setItem("usuario","1");
       this.router.navigateByUrl('/artistas')
+    }, err => {
+      if(err.status == 400){
+        this.error = 'Usuario y/o cotrasena incorrecta';
+      }
     })
   }
 

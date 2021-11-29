@@ -6,6 +6,7 @@ import { ArtistasComponent } from '../pages/artistas/artistas.component';
 import { Artistas } from '../_model/Artistas';
 import { Login } from '../_model/Login';
 import { Registro } from '../_model/Registro';
+import { Usuarios } from '../_model/Usuarios';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -28,5 +29,9 @@ export class ListasService {
 
   getArtistas(){
     return this.http.get<Artistas[]>(this.url + 'obtener');
+  }
+
+  getUsuarios(id: number){
+    return this.http.get<Usuarios>(this.url2 + 'obtenerPorId/'+id+'');
   }
 }

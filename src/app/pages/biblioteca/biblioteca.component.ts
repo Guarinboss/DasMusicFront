@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Artistas } from 'src/app/_model/Artistas';
 import { ListasService } from 'src/app/_service/listas.service';
+import { Cancion } from 'src/app/_model/Cancion';
+import { CancionService } from 'src/app/_service/cancion.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 export interface Album {
   name: string;
@@ -19,6 +22,10 @@ export class BibliotecaComponent implements OnInit {
 
   public artistas: Artistas[];
 
+  public canciones: Cancion[];
+
+  placeholder = 'assets/images/P1.jpg';
+
   public albums: Album[] = [
 
     { name: 'Shakira', image: 'assets/images/A1.jpg' },
@@ -31,21 +38,46 @@ export class BibliotecaComponent implements OnInit {
     { name: 'Michael jackson', image: 'assets/images/A8.jpg' },
     { name: 'Joji', image: 'assets/images/A9.jpg' },
     { name: 'Cuco', image: 'assets/images/A10.jpg' },
-    { name: 'Julito', image: 'assets/images/A11.jpg' },
+    { name: 'Julito', image: 'assets/images/A110.jpg' },
 
   ];
 
-  constructor(private listasService: ListasService) { }
+  constructor(private listasService: ListasService, public cancionService: CancionService) { }
+
+  onLoaded(isFallback: boolean) {
+    // make somthing based on 'isFallback'
+  }
 
   ngOnInit(): void {
 
     setTimeout(() => {
+      this.getCancion();
       this.listasService.getArtistas().subscribe(data => {
         this.artistas = data;
         console.log(this.artistas);
       });
-    }, 1000);
+    }, 0.000);
 
   }
 
+  getCancion() {
+    this.cancionService.getObtener().subscribe(data => {
+      console.log(data);
+      console.log("hp");
+      this.canciones = data;
+      /*this.canciones.forEach(element => {
+        let objectURL = 'data:image/jpg;base64,' + element.imagen;
+        element.imagen = this.sanitizer.bypassSecurityTrustUrl(objectURL);
+      });
+      console.log(this.canciones);*/
+    }, err => {
+      //console.log(err);
+      if (err.status == 400) {
+        //this.error = 'Usuario y/o cotrasena incorrecta';
+        //this.progressbarService.barraProgreso.next("2");
+      } else {
+        //this.router.navigate([`/error/${err.status}/${err.statusText}`]);
+      }
+    });
+  }
 }

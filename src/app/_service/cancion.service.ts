@@ -15,7 +15,7 @@ const httpOptions = {
     "Access-Control-Allow-Headers": "Origin,Content-Type,Accept,Authorization,content-type",
     "Access-Control-Allow-Methods": "GET,POST,PUT,DELETE,OPTIONS,HEAD",
     "Access-Control-Max-Age": "1209500",*/
-    //Authorization: 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0aWJpb24iLCJpYXQiOjE2Mzc4MDU3MDYsImV4cCI6MTYzNzgwNjYwNiwicGVybWlzb3MiOnsiMSI6IkFkbWluaXN0cmFkb3IifX0.Dl31D6PZjTHDKoHcsyHVdtj2fpuUFCXBCjr6qz9FEj9h4-cxOf80UYPhiqRB40YEmsZl_95TWgcRC5z-SdjhCg'
+    Authorization: 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0aWJpb24iLCJpYXQiOjE2Mzc4ODY1MzcsImV4cCI6MTYzNzg5ODQzNywicGVybWlzb3MiOnsiMSI6IkFkbWluaXN0cmFkb3IifX0.sF_DqNVq0SxW7BI6fpUc2D2-p_sDQG9yc5yHdw4mteRimsy2qTUN9WMmsz5SCwFw6rXmpRnVfQkhF7vR02KW0g'
   })
 };
 @Injectable({
@@ -32,5 +32,9 @@ export class CancionService {
 
   postGuardar(cancion: Cancion): Observable<any> {
     return this.http.post<any>(this.url + 'guardar', cancion);
+  }  
+
+  getObtener() {
+    return this.http.get<Cancion[]>(this.url + 'obtener');
   }
 }

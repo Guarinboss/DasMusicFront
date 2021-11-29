@@ -9,7 +9,7 @@
             </div> 
             <div class="divLogin">
                 <button mat-flat-button  class="botonlogin" routerLink="/registro">Registrarse</button>
-                <p style="color: rgb(219, 219, 219); margin-top: 15px;">
+                <p style="color: rgb(219, 219, 219); margin-top: 15px; font-weight: 500; font-size: 16px;">
                     <br>!Bienvenido!
                 </p>
 
@@ -38,6 +38,10 @@
                 </mat-form-field>
                 <br />
                 <br />
+
+                <p>
+                    <mat-error *ngIf="error != 'null'">Usuario o Contraseña incorrectas</mat-error>
+                </p>
                 <button mat-raised-button color="primary" class="boton" type="submit">Login</button>
                 
                 <p>

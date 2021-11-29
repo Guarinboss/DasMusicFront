@@ -2,6 +2,8 @@ import { Component, DoCheck } from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import { DialogContentAlbumComponent } from './dialogs/dialog-content-album/dialog-content-album.component';
 import { DialogContentArtistComponent } from './dialogs/dialog-content-artist/dialog-content-artist.component';
+import { ListasService } from 'src/app/_service/listas.service';
+import { Usuarios } from './_model/Usuarios';
 
 @Component({
   selector: 'app-root',
@@ -10,14 +12,21 @@ import { DialogContentArtistComponent } from './dialogs/dialog-content-artist/di
 })
 export class AppComponent implements DoCheck{
 
+  
   usuario: any;
   prueba: any;
+  public loginContent : Usuarios;
 
-  constructor(public dialog: MatDialog){
+  constructor(public dialog: MatDialog,
+              public listaservice: ListasService ){
     this.prueba = 1;
   } 
   ngDoCheck(): void {
-    this.usuario = sessionStorage.getItem("usuario")
+    this.usuario = sessionStorage.getItem("usuario");
+  }
+
+  ngOnInit(): void{
+    this.obtenerUsuarios();
   }
 
   title = 'MusicStore';
@@ -53,6 +62,15 @@ export class AppComponent implements DoCheck{
     });
 
     
+  }
+
+  obtenerUsuarios(){
+    
+    let currentUser = Number(sessionStorage.getItem('id'));
+    this.listaservice.getUsuarios(currentUser).subscribe(async data => {
+      this.loginContent = data;
+      console.log(this.loginContent);
+    });
   }
 
   

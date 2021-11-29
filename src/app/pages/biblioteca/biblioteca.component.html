@@ -1,10 +1,10 @@
 <mat-tab-group mat-align-tabs="center">
     <mat-tab label="Artistas">
         <div class="containerCard" >
-            <mat-card *ngFor="let card of albums" class="example-card">
-                <img mat-card-image class="tamanoImagen" src="{{card.image}}" fallimg="picture1">
+            <mat-card *ngFor="let card of artistas" class="example-card">
+                <img mat-card-image class="tamanoImagen" src="{{card.nombre}}" src-fallback="assets/images/df.svg" (loaded)="onLoaded($event)">
                 <mat-card-content>
-                    <div class="hoteltitle"> {{card.name}} </div>
+                    <div class="hoteltitle"> {{card.nombre}} </div>
 
                 </mat-card-content>
             </mat-card>
@@ -13,10 +13,10 @@
     </mat-tab>
     <mat-tab label="Canciones">
         <div class="containerCard" >
-            <mat-card *ngFor="let card of albums" class="example-card2">
-                <img mat-card-image class="tamanoImagen" src="{{card.image}}" fallimg="picture1">
+            <mat-card *ngFor="let canciones of canciones" class="example-card2">
+                <img mat-card-image class="tamanoImagen" src="data:image/jpg;base64,{{canciones.imagen}}" src-fallback="assets/images/df2.svg" (loaded)="onLoaded($event)">
                 <mat-card-content>
-                    <div class="hoteltitle"> {{card.name}} </div>
+                    <div class="hoteltitle"> {{canciones.nombre}} </div>
 
                 </mat-card-content>
             </mat-card>
@@ -25,7 +25,7 @@
     <mat-tab label="Albums">
         <div class="containerCard" >
             <mat-card *ngFor="let card of albums" class="example-card2">
-                <img mat-card-image class="tamanoImagen" src="{{card.image}}" fallimg="picture1">
+                <img mat-card-image class="tamanoImagen" src="{{card.image}}" src-fallback="assets/images/df3.svg" (loaded)="onLoaded($event)">
                 <mat-card-content>
                     <div class="hoteltitle"> {{card.name}} </div>
 
