@@ -1,5 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatTable } from '@angular/material/table';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
+import { DomSanitizer } from '@angular/platform-browser';
+import { Artista } from 'src/app/_model/Artista';
+import { Cancion } from 'src/app/_model/Cancion';
+import { MusicaService } from 'src/app/_service/musica.service';
 
 export interface PeriodicElement {
   name: string;
@@ -34,6 +38,12 @@ const ELEMENT_DATA: PeriodicElement[] = [
 export class PerfilArtistaComponent implements OnInit {
 
   editField!: string;
+  dataSourceCan = new MatTableDataSource<Cancion>();
+  dataSourceCan2 : any = [];
+  dataSource1: any[] = [];
+
+  public datosArtistas: Artista;
+  public cancionesArtista: Cancion[];
 
   public albums: Album[] = [
 
@@ -51,12 +61,15 @@ export class PerfilArtistaComponent implements OnInit {
 
 ];
 
+
+
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   dataSource = [...ELEMENT_DATA];
 
 
 
-  constructor() { }
+  constructor(private musicaService: MusicaService,
+              private sanitizer: DomSanitizer) { }
 
   addData() {
     const randomElementIndex = Math.floor(Math.random() * ELEMENT_DATA.length);
@@ -78,5 +91,51 @@ export class PerfilArtistaComponent implements OnInit {
 
 
   ngOnInit(): void {
+    sessionStorage.setItem("idArtista", "1");
+    sessionStorage.setItem("idCancion", "1");
+    this.getObtenerCanciones(sessionStorage.getItem("idCancion"));
+    setTimeout(() => {
+      this.getObtenerArtista(sessionStorage.getItem("idArtista"));
+      
+      
+    }, 3000);
+  }
+
+  /*onFormSubmit() {
+    this.getObtenerArtista(sessionStorage.getItem("idArtista"));
+  }*/
+  imageurl : any;
+  getObtenerArtista(id: any) {
+    console.log(id);
+    this.musicaService.getObtenerArtista(id).subscribe(data => {
+      console.log(data);
+      this.datosArtistas = data;
+      
+      //this.router.navigate(['/login']);
+    }, err => {
+      //console.log(err);
+      if (err.status == 400) {
+        //this.error = 'Usuario y/o cotrasena incorrecta';
+        //this.progressbarService.barraProgreso.next("2");
+      } else {
+        //this.router.navigate([`/error/${err.status}/${err.statusText}`]);
+      }
+    })
+  }
+
+  getObtenerCanciones(id: any){
+    console.log(id);
+    this.musicaService.getObtenerCancion(id).subscribe(data => {
+      this.dataSource1 = data;
+      //this.dataSourceCan = new MatTableDataSource(data);
+      //console.log(this.dataSourceCan.filteredData);
+
+    }, err => {
+      //console.log(err);
+      if (err.status == 400) {
+      } else {
+        //this.router.navigate([`/error/${err.status}/${err.statusText}`]);
+      }
+    })
   }
 }

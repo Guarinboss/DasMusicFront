@@ -4,6 +4,7 @@
 
 export const environment = {
   production: false,
+  //HOST: 'http://localhost:8080/DasMusic/api',
   HOST: 'http://localhost:8080/DasMusicWeb/api',
 
   /**
