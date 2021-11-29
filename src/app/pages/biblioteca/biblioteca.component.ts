@@ -4,6 +4,9 @@ import { ListasService } from 'src/app/_service/listas.service';
 import { Cancion } from 'src/app/_model/Cancion';
 import { CancionService } from 'src/app/_service/cancion.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Router } from '@angular/router';
+import { Albums } from 'src/app/_model/Albums';
+import { MusicaService } from 'src/app/_service/musica.service';
 
 export interface Album {
   name: string;
@@ -24,6 +27,8 @@ export class BibliotecaComponent implements OnInit {
 
   public canciones: Cancion[];
 
+  public album: Albums[];
+
   placeholder = 'assets/images/P1.jpg';
 
   public albums: Album[] = [
@@ -42,7 +47,10 @@ export class BibliotecaComponent implements OnInit {
 
   ];
 
-  constructor(private listasService: ListasService, public cancionService: CancionService) { }
+  constructor(private listasService: ListasService, 
+              private cancionService: CancionService, 
+              private router: Router,
+              private musicaService: MusicaService) { }
 
   onLoaded(isFallback: boolean) {
     // make somthing based on 'isFallback'
@@ -52,6 +60,7 @@ export class BibliotecaComponent implements OnInit {
 
     setTimeout(() => {
       this.getCancion();
+      this.getAlbum();
       this.listasService.getArtistas().subscribe(data => {
         this.artistas = data;
         console.log(this.artistas);
@@ -64,11 +73,6 @@ export class BibliotecaComponent implements OnInit {
     this.cancionService.getObtener().subscribe(data => {
       console.log(data);
       this.canciones = data;
-      /*this.canciones.forEach(element => {
-        let objectURL = 'data:image/jpg;base64,' + element.imagen;
-        element.imagen = this.sanitizer.bypassSecurityTrustUrl(objectURL);
-      });
-      console.log(this.canciones);*/
     }, err => {
       //console.log(err);
       if (err.status == 400) {
@@ -78,5 +82,30 @@ export class BibliotecaComponent implements OnInit {
         //this.router.navigate([`/error/${err.status}/${err.statusText}`]);
       }
     });
+  }
+
+  getAlbum() {
+    this.musicaService.getObtenerAlbums().subscribe(data => {
+      console.log(data);
+      this.album = data;
+    }, err => {
+      //console.log(err);
+      if (err.status == 400) {
+        //this.error = 'Usuario y/o cotrasena incorrecta';
+        //this.progressbarService.barraProgreso.next("2");
+      } else {
+        //this.router.navigate([`/error/${err.status}/${err.statusText}`]);
+      }
+    });
+  }
+
+  perfilArtista(id: any){
+    localStorage.setItem("idArtistaPerfil", id)
+    this.router.navigate(['/perfilArtista'])
+  }
+
+  perfilAlbum(id: any){
+    localStorage.setItem("idAlbumPerfil", id)
+    this.router.navigate(['/perfilAlbum'])
   }
 }

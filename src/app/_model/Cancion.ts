@@ -4,7 +4,8 @@ import { Artista } from "./Artista";
 /**
  * Clase que mapea el servicio PostRegistroLogin
  */
- export class Cancion{
+export class Cancion {
+    id: number;
     nombre: string;
     fechaLanzamiento: Date;
     precio: number;
