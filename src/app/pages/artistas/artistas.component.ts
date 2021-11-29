@@ -26,7 +26,6 @@ export class ArtistasComponent implements OnInit {
 
   ArtistForm = new FormControl('', [Validators.required, Validators.email]);
 
-
   dia: string;
   mes: string;
   anio: string;
