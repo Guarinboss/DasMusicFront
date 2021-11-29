@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { Albums } from 'src/app/_model/Albums';
+import { MusicaService } from 'src/app/_service/musica.service';
 
 export interface Album {
   name: string;
@@ -26,10 +28,13 @@ const ELEMENT_DATA: Album[] = [
   styleUrls: ['./dialog-content-album.component.css']
 })
 export class DialogContentAlbumComponent implements OnInit {
+
+  public albums: Albums[];
   
-  constructor(private router:Router) { }
+  constructor(private router:Router, private musicaService: MusicaService) { }
 
   ngOnInit(): void {
+    this.getObtenerAlbums();
   }
 
   displayedColumns: string[] = ['name', 'image'];
@@ -40,8 +45,30 @@ export class DialogContentAlbumComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  dirigirAlmbum(){
+  dirigirAlmbum(id: any){
+    //localStorage.setItem("idArtista", idArtista);
+    localStorage.setItem("idAlbum", id);
     this.router.navigate(['songs']);
+  }
+
+  getObtenerAlbums(){
+    this.musicaService.getObtenerAlbums().subscribe(data => {
+      console.log(data);
+      this.albums = data;
+      /*this.canciones.forEach(element => {
+        let objectURL = 'data:image/jpg;base64,' + element.imagen;
+        element.imagen = this.sanitizer.bypassSecurityTrustUrl(objectURL);
+      });
+      console.log(this.canciones);*/
+    }, err => {
+      //console.log(err);
+      if (err.status == 400) {
+        //this.error = 'Usuario y/o cotrasena incorrecta';
+        //this.progressbarService.barraProgreso.next("2");
+      } else {
+        //this.router.navigate([`/error/${err.status}/${err.statusText}`]);
+      }
+    });
   }
 
 }

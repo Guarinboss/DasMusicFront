@@ -63,7 +63,6 @@ export class BibliotecaComponent implements OnInit {
   getCancion() {
     this.cancionService.getObtener().subscribe(data => {
       console.log(data);
-      console.log("hp");
       this.canciones = data;
       /*this.canciones.forEach(element => {
         let objectURL = 'data:image/jpg;base64,' + element.imagen;

@@ -1,9 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatTable } from '@angular/material/table';
+import { Albums } from 'src/app/_model/Albums';
 import { Cancion } from 'src/app/_model/Cancion';
 import { CancionService } from 'src/app/_service/cancion.service';
-import { environment } from 'src/environments/environment';
+import { MusicaService } from 'src/app/_service/musica.service';
 
 
 export interface PeriodicElement {
@@ -88,13 +89,19 @@ export class SongsComponent implements OnInit {
 
   dia1: any; mes1: any; anio1: any;
 
+  cancionesArray: Cancion[];
+
+  idAlbum: any;
+
+  album: Albums;
+
   @ViewChild(MatTable)
   table!: MatTable<PeriodicElement>;
 
   albumControl = new FormControl(this.Canciones.value);
   monthControl = new FormControl(this.months[0].value);
 
-  constructor(private cancionService: CancionService) {
+  constructor(private cancionService: CancionService, private musicaService: MusicaService) {
 
     this.formCancion = new FormGroup({
       nombre: new FormControl('', Validators.required),
@@ -109,29 +116,61 @@ export class SongsComponent implements OnInit {
       mes: new FormControl('', Validators.required),
       anio: new FormControl('', Validators.required),
     });
+
+    this.idAlbum = localStorage.getItem("idAlbum");
   }
 
   ngOnInit(): void {
     this.mostrar2 = false;
+    this.getObtenerPorAlbum(this.idAlbum);
+    this.getObtenerAlbumPorId();
   }
 
   onFromSubmit() {
     this.formCancion.controls['fechaLanzamiento'].setValue(new Date(this.dia1 + "-" + this.mes1 + "-" + this.anio1));
     let formularioCancion = this.formCancion.value;
-    this.postGuardar(formularioCancion);
+    setTimeout(() => {
+      this.postGuardar(formularioCancion);
+    }, 1000);
   }
 
   postGuardar(cancion: Cancion) {
+    cancion.album=this.album;
+    cancion.artista=this.album.artista;
     console.log(cancion);
-    //sessionStorage.setItem("usuario", "1");
-    //this.router.navigate(['/songs']);
-
     this.cancionService.postGuardar(cancion).subscribe(data => {
-      console.log(data);
-      //sessionStorage.setItem("usuario", "1");      
-      this.mostrar2 = false;
+      console.log(data);  
+      this.getObtenerPorAlbum(this.idAlbum);
+      this.mostrar2 = false;      
+      //window.location.reload();
     }, err => {
-      //console.log(err);
+      if (err.status == 400) {
+        //this.error = 'Usuario y/o cotrasena incorrecta';
+        //this.progressbarService.barraProgreso.next("2");
+      } else {
+        //this.router.navigate([`/error/${err.status}/${err.statusText}`]);
+      }
+    })
+  }
+
+  getObtenerPorAlbum(id: number) {
+    this.cancionService.getObtenerPorAlbum(id).subscribe(data => {
+      console.log(data);  
+      this.cancionesArray = data;
+    }, err => {
+      if (err.status == 400) {
+        //this.error = 'Usuario y/o cotrasena incorrecta';
+        //this.progressbarService.barraProgreso.next("2");
+      } else {
+        //this.router.navigate([`/error/${err.status}/${err.statusText}`]);
+      }
+    })
+  }
+  getObtenerAlbumPorId() {
+    this.musicaService.getObtenerAlbumPorId(this.idAlbum).subscribe(data => {
+      console.log(data);  
+      this.album = data;
+    }, err => {
       if (err.status == 400) {
         //this.error = 'Usuario y/o cotrasena incorrecta';
         //this.progressbarService.barraProgreso.next("2");

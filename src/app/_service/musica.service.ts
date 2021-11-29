@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Album } from '../_model/Album';
+import { Albums } from '../_model/Albums';
 import { Artista } from '../_model/Artista';
 import { Cancion } from '../_model/Cancion';
 
@@ -42,6 +43,14 @@ export class MusicaService {
 
   postGuardarAlbum(album: Album): Observable<any> {
     return this.http.post<any>(this.url3 + 'guardar', album, httpOptions);
+  }
+  
+  getObtenerAlbums(){
+    return this.http.get<Albums[]>(this.url3 + 'obtener');
+  }
+
+  getObtenerAlbumPorId(id: number){
+    return this.http.get<Albums>(this.url3 + 'obtenerPorId/'+id);
   }
 
 }
