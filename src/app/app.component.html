@@ -21,7 +21,7 @@
   </div>
 
   <mat-sidenav #sidenav mode="side" class="example-sidenav" [ngStyle]="{ 'width.em': sidenavWidth }" opened="true"
-    class="background-sidenav" *ngIf="usuario == prueba">
+    class="background-sidenav" *ngIf="usuario != null">
 
     <mat-nav-list>
       <div class="logo-text" fxFlex="15">
@@ -65,33 +65,35 @@
       </mat-list-item>
       <br>
       <br>
-      <div *ngIf="sidenavWidth > 5" class="sidenav-item">
-        <mat-divider></mat-divider>
-        <h5 class="subtitle">Gestiona tu música</h5>
-        <mat-divider></mat-divider>
-      </div>
+      <div *ngIf="validarRol()">
+        <div *ngIf="sidenavWidth > 5" class="sidenav-item">
+          <mat-divider></mat-divider>
+          <h5 class="subtitle">Gestiona tu música</h5>
+          <mat-divider></mat-divider>
+        </div>
 
-      <mat-list-item routerLink="" routerLinkActive="active" (click)="openDialog()">
-        <mat-icon mat-list-icon>add</mat-icon>
-        <div fxFlex="10"></div>
-        <div *ngIf="sidenavWidth > 5" class="sidenav-item">
-          <h5 class="lead">Gestionar Álbum</h5>
-        </div>
-      </mat-list-item>
-      <mat-list-item routerLink="/artistas" routerLinkActive="active">
-        <mat-icon mat-list-icon>add_circle</mat-icon>
-        <div fxFlex="10"></div>
-        <div *ngIf="sidenavWidth > 5" class="sidenav-item">
-          <h5 class="lead">Gestionar Artista</h5>
-        </div>
-      </mat-list-item>
-      <mat-list-item routerLink="" routerLinkActive="active" (click)="openDialogAlbum()">
-        <mat-icon mat-list-icon>add_circle_outline</mat-icon>
-        <div fxFlex="10"></div>
-        <div *ngIf="sidenavWidth > 5" class="sidenav-item">
-          <h5 class="lead">Gestionar Canción</h5>
-        </div>
-      </mat-list-item>
+        <mat-list-item routerLink="" routerLinkActive="active" (click)="openDialog()">
+          <mat-icon mat-list-icon>add</mat-icon>
+          <div fxFlex="10"></div>
+          <div *ngIf="sidenavWidth > 5" class="sidenav-item">
+            <h5 class="lead">Gestionar Álbum</h5>
+          </div>
+        </mat-list-item>
+        <mat-list-item routerLink="/artistas" routerLinkActive="active">
+          <mat-icon mat-list-icon>add_circle</mat-icon>
+          <div fxFlex="10"></div>
+          <div *ngIf="sidenavWidth > 5" class="sidenav-item">
+            <h5 class="lead">Gestionar Artista</h5>
+          </div>
+        </mat-list-item>
+        <mat-list-item routerLink="" routerLinkActive="active" (click)="openDialogAlbum()">
+          <mat-icon mat-list-icon>add_circle_outline</mat-icon>
+          <div fxFlex="10"></div>
+          <div *ngIf="sidenavWidth > 5" class="sidenav-item">
+            <h5 class="lead">Gestionar Canción</h5>
+          </div>
+        </mat-list-item>
+      </div>
       <br>
       <br>
       <div *ngIf="sidenavWidth > 5" class="sidenav-item">
@@ -126,7 +128,7 @@
 
 
   <div class="background-toolbar">
-    <mat-toolbar class="background-toolbar" *ngIf="usuario == prueba">
+    <mat-toolbar class="background-toolbar" *ngIf="usuario != null">
       <p class="example-spacer"></p>
       <p class="name-user">{{loginContent.nickname}}</p>
       <div mat-button class="btn-Menu">
