@@ -4,6 +4,12 @@ import { DialogContentAlbumComponent } from './dialogs/dialog-content-album/dial
 import { DialogContentArtistComponent } from './dialogs/dialog-content-artist/dialog-content-artist.component';
 import { ListasService } from 'src/app/_service/listas.service';
 import { Usuarios } from './_model/Usuarios';
+import { environment } from 'src/environments/environment';
+import { JwtHelperService } from '@auth0/angular-jwt';
+
+const permisos ={
+  1: "Administrador"
+};
 
 @Component({
   selector: 'app-root',
@@ -22,7 +28,7 @@ export class AppComponent implements DoCheck{
     this.prueba = 1;
   } 
   ngDoCheck(): void {
-    this.usuario = sessionStorage.getItem("usuario");
+    this.usuario = sessionStorage.getItem(environment.TOKEN);
   }
 
   ngOnInit(): void{
@@ -73,6 +79,18 @@ export class AppComponent implements DoCheck{
     });
   }
 
+  validarRol(){
+    const helper = new JwtHelperService();
+    const decodedToken = helper.decodeToken(this.usuario);
+    let rol = decodedToken.permisos;
+    if (this.usuario == null){
+      return false;
+    }else if (rol[1] == permisos[1] ){
+      return true;
+    }else {
+      return false;
+    }
+  }
   
 }
 

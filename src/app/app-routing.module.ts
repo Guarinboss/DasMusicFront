@@ -13,8 +13,8 @@ import { InicioComponent } from './pages/inicio/inicio.component';
 import { GuardianService } from './_service/guardian.service';
 
 const routes: Routes = [
-  {path : 'artistas', component:ArtistasComponent},
-  {path : 'album', component:AlbumComponent},
+  {path : 'artistas', component:ArtistasComponent, canActivate: [GuardianService]},
+  {path : 'album', component:AlbumComponent, canActivate: [GuardianService]},
   {path : 'songs', component:SongsComponent, canActivate: [GuardianService]},
   {path : 'biblioteca', component:BibliotecaComponent},
   {path : 'perfilArtista', component:PerfilArtistaComponent},

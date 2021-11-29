@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.error = "null"; 
-    sessionStorage.setItem("usuario", "0") 
+    sessionStorage.removeItem(environment.TOKEN);
   }
 
   onFormSubmit(){

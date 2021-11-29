@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { FlexAlignStyleBuilder } from '@angular/flex-layout';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatTable } from '@angular/material/table';
 import { Albums } from 'src/app/_model/Albums';
@@ -77,19 +78,26 @@ export class SongsComponent implements OnInit {
   editField!: string;
 
   formCancion: FormGroup;
+  formCancionEdit: FormGroup;
   formFecha: FormGroup;
 
   Canciones = new FormControl('', [Validators.required, Validators.email]);
 
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
+  displayedColumns2: string[] = ['position', 'name', 'weight', 'symbol', 'edit'];
   dataSource = [...ELEMENT_DATA];
 
   mostrar = true;
   mostrar2 = false;
 
+  mostrarEdit = true;
+  mostrarEdit2 = false;
+
   dia1: any; mes1: any; anio1: any;
 
   cancionesArray: Cancion[];
+
+  editCancion: Cancion;
 
   idAlbum: any;
 
@@ -111,6 +119,15 @@ export class SongsComponent implements OnInit {
       imagen: new FormControl('', Validators.required),
     });
 
+    this.formCancionEdit = new FormGroup({
+      id: new FormControl('', Validators.required),
+      nombre: new FormControl('', Validators.required),
+      fechaLanzamiento: new FormControl('', Validators.required),
+      precio: new FormControl('', Validators.required),
+      duracion: new FormControl('', Validators.required),
+      imagen: new FormControl('', Validators.required),
+    });
+
     this.formFecha = new FormGroup({
       dia: new FormControl('', Validators.required),
       mes: new FormControl('', Validators.required),
@@ -122,6 +139,7 @@ export class SongsComponent implements OnInit {
 
   ngOnInit(): void {
     this.mostrar2 = false;
+    this.mostrarEdit2 = false;
     this.getObtenerPorAlbum(this.idAlbum);
     this.getObtenerAlbumPorId();
   }
@@ -131,6 +149,15 @@ export class SongsComponent implements OnInit {
     let formularioCancion = this.formCancion.value;
     setTimeout(() => {
       this.postGuardar(formularioCancion);
+    }, 1000);
+  }
+
+  onFromSubmit2() {
+    this.formCancionEdit.controls['fechaLanzamiento'].setValue(new Date(this.dia1 + "-" + this.mes1 + "-" + this.anio1));
+    this.formCancionEdit.controls['id'].setValue(this.editCancion.id);
+    let formularioCancionEdit = this.formCancionEdit.value;
+    setTimeout(() => {
+      this.putEditarCancion(formularioCancionEdit);
     }, 1000);
   }
 
@@ -179,9 +206,48 @@ export class SongsComponent implements OnInit {
       }
     })
   }
+  putEditarCancion(cancion: Cancion) {
+    console.log("editar");
+    console.log(cancion);
+    this.cancionService.putEditar(cancion).subscribe(data => {
+      console.log(data);  
+      this.getObtenerPorAlbum(this.idAlbum);
+      this.mostrarEdit2 = false;
+    }, err => {
+      if (err.status == 400) {
+        //this.error = 'Usuario y/o cotrasena incorrecta';
+        //this.progressbarService.barraProgreso.next("2");
+      } else {
+        //this.router.navigate([`/error/${err.status}/${err.statusText}`]);
+      }
+    })
+  }
+  deleteCancion(cancion: Cancion) {
+    this.cancionService.delete(cancion.id).subscribe(data => {
+      this.getObtenerPorAlbum(this.idAlbum);
+    }, err => {
+      if (err.status == 400) {
+        //this.error = 'Usuario y/o cotrasena incorrecta';
+        //this.progressbarService.barraProgreso.next("2");
+      } else {
+        //this.router.navigate([`/error/${err.status}/${err.statusText}`]);
+      }
+    })
+  }
+
+  editarCancion(cancion: Cancion){
+    this.mostrarEdit2 = true;
+    this.editCancion = cancion;
+    //this.putEditarCancion(cancion);
+  }
+
+  eliminarCancion(cancion: Cancion){
+    this.deleteCancion(cancion);
+  }
 
   cancelar() {
     this.mostrar2 = false;
+    this.mostrarEdit2 = false;
   }
 
   addData() {
@@ -260,5 +326,6 @@ export class SongsComponent implements OnInit {
 
   log() {
     this.formCancion.controls['imagen'].setValue(this.sellersPermitString);
+    this.formCancionEdit.controls['imagen'].setValue(this.sellersPermitString);
   }
 }
