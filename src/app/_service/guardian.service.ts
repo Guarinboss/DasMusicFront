@@ -27,6 +27,10 @@ export class GuardianService implements CanActivate {
     let url = state.url;
     if (url.includes('/songs') && (rol[1] == permisos[1] )){
       return true;
+    }else if (url.includes('/artistas') && (rol[1] == permisos[1] )){
+      return true;
+    }else if (url.includes('/album') && (rol[1] == permisos[1] )){
+      return true;
     }else {
       this.router.navigate(['/biblioteca']);
     }
