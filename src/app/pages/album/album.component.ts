@@ -3,6 +3,9 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
 import { Album } from 'src/app/_model/Album';
+import { Artista } from 'src/app/_model/Artista';
+import { Artistas } from 'src/app/_model/Artistas';
+import { ListasService } from 'src/app/_service/listas.service';
 import { MusicaService } from 'src/app/_service/musica.service';
 
 interface album {
@@ -25,12 +28,18 @@ interface month {
 export class AlbumComponent implements OnInit {
 
   dia: string;
+
   mes: string;
+
   anio: string;
+
+  idArtista: any;
 
   formularioAlbum: FormGroup;
 
   imgURL: any;
+
+  artista: Artista;
 
   public message: string;
 
@@ -74,7 +83,8 @@ export class AlbumComponent implements OnInit {
   monthControl = new FormControl(this.months[0].value);
 
   constructor(private _snackBar: MatSnackBar,
-              private musicaService: MusicaService) {
+              private musicaService: MusicaService,
+              private listaUsuario: ListasService) {
 
     this.formularioAlbum = new FormGroup({
       dia: new FormControl(''),
@@ -86,24 +96,36 @@ export class AlbumComponent implements OnInit {
       //gender: this.albumControl,
       //month: this.monthControl
     });
+
+    this.idArtista = localStorage.getItem("idArtista");
    }
 
   ngOnInit(): void {
   }
 
   onFormSubmit() {
+    this.getObtenerArtista(this.idArtista);
     let formularioAlbum = this.formularioAlbum.value;
     this.postGuardarAlbum(formularioAlbum);
     console.log(formularioAlbum);
-    console.log("HIFSDOIHGSB");
+    setTimeout(() => {
+      this.postGuardarAlbum(formularioAlbum);
+    }, 1000);
   }
 
   postGuardarAlbum(album: Album) {
     let date: Date = new Date(this.anio+"-"+this.mes+"-"+this.dia); 
+    album.artista = this.artista;
     album.fechaLanzamiento = date;
     this.musicaService.postGuardarAlbum(album).subscribe(data => {
       console.log(data);
       this.openSnackBar("Album registrado!", "Aceptar");
+    })
+  }
+
+  getObtenerArtista(id: any) {
+    this.listaUsuario.getArtistasPorId(id).subscribe(data => {
+      this.artista = data;
     })
   }
 

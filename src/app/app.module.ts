@@ -42,6 +42,7 @@ import { Login } from './_model/Login';
 import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { ImgFallbackModule } from 'ngx-img-fallback';
+import { InicioComponent } from './pages/inicio/inicio.component';
 
 /**
  * Modulo donde se realizan importaciones de funcionalidad.
@@ -76,6 +77,7 @@ import { ImgFallbackModule } from 'ngx-img-fallback';
     DialogContentCarritoComponent,
     LoginComponent,
     RegistroComponent,
+    InicioComponent,
   ],
   imports: [
     BrowserModule,

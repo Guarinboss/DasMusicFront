@@ -26,6 +26,20 @@
   border-bottom-left-radius: 20px;      
   cursor: pointer;  
 }
+
+
+.subtitles2{
+  margin-left: 10pz;
+  text-transform: uppercase;
+  text-align: initial;
+  background-color: rgba(0, 0, 0, 0.3);
+  padding: 30px;
+  font-size: 30px;
+  font-weight: 700;
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; 
+  position: relative;
+}
+
   
 .file-select input[type="file"] {
   opacity: 0;
@@ -51,13 +65,14 @@
   }
 
   .form-container{
-      height: 100%;
       position: relative;
       display: flex;
       align-items: center;
       justify-content: center;
       background: rgba(0, 0, 0, 0.2);
       padding: 20px;
+      height: max-content;
+
       
   }
   .form-container2{
@@ -117,4 +132,47 @@
     display: flex;
     flex-wrap: wrap;
     gap: 12px;
+  }
+
+
+
+  .example-card2 {
+    font-size: 15px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    width: 95%;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .fullcontent{
+    display: flex;
+  }
+  
+  
+  .example-card2 img{
+    margin-top: 10px;
+    width: 180px;
+    height: 180px;
+    border-radius: 5px;
+    object-fit: cover;
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+  
+  .containerCard2{
+    position: relative;
+    background-color: rgba(0, 0, 0, 0.3);
+    padding-top: 30px;
+    padding-left: 30px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding-bottom: 30px;
+  }
+  
+  .example-spacer {
+    flex: 1 1 auto;
   }
