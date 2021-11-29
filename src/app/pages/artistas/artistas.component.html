@@ -13,8 +13,8 @@
                         <form [formGroup]="formularioArtista" (ngSubmit)="onFormSubmit()">
                             <div class="profile-image">
                                 <!--<img src="assets/images/P2.jpg" width="150px" height="150px" style="border-radius: 150px;">-->
-                                <img [src]="imgURL" width="150px" height="150px" style="border-radius: 150px;"
-                                    *ngIf="imgURL" fallimg>
+                                <img [src]="imgURL" width="150px" height="150px"
+                                    style="border-radius: 150px; object-fit: cover;" *ngIf="imgURL" fallimg>
                             </div>
                             <div class="file-select">
                                 <input #file type="file" accept='image/*' (change)="preview($event)" />
@@ -45,37 +45,40 @@
                                 </div>
 
                             </div>
-                            <div class="topics">Fecha de nacimiento</div>
-                            <div class="container-date">
-                                <div>
-                                    <mat-form-field appearance="outline" class="inputForms2">
-                                        <mat-label>Dia</mat-label>
-                                        <input matInput placeholder="2" [(ngModel)]="dia" formControlName="dia">
-                                        <mat-error *ngIf="ArtistForm.invalid">{{getErrorMessage()}}</mat-error>
-                                    </mat-form-field>
+                            <form [formGroup]="formFecha">
+                                <div class="topics">Fecha de nacimiento</div>
+                                <div class="container-date">
+                                    <div>
+                                        <mat-form-field appearance="outline" class="inputForms2">
+                                            <mat-label>Dia</mat-label>
+                                            <input matInput placeholder="2" [(ngModel)]="dia" formControlName="dia">
+                                            <mat-error *ngIf="ArtistForm.invalid">{{getErrorMessage()}}</mat-error>
+                                        </mat-form-field>
+                                    </div>
+    
+                                    <div>
+                                        <mat-form-field appearance="outline" class="inputForms2">
+                                            <mat-label>Mes</mat-label>
+                                            <mat-select [formControl]="monthControl" name="month" panelClass="panel"
+                                                [(ngModel)]="mes">
+                                                <mat-option *ngFor="let month of months" [value]="month.value"
+                                                    class="panel">
+                                                    {{month.value}}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+    
+                                    <div>
+                                        <mat-form-field appearance="outline" class="inputForms2">
+                                            <mat-label>Año</mat-label>
+                                            <input matInput placeholder="2000" [(ngModel)]="anio" formControlName="anio">
+                                            <mat-error *ngIf="ArtistForm.invalid">{{getErrorMessage()}}</mat-error>
+                                        </mat-form-field>
+                                    </div>
                                 </div>
-
-                                <div>
-                                    <mat-form-field appearance="outline" class="inputForms2">
-                                        <mat-label>Mes</mat-label>
-                                        <mat-select [formControl]="monthControl" name="month" panelClass="panel"
-                                            [(ngModel)]="mes">
-                                            <mat-option *ngFor="let month of months" [value]="month.value"
-                                                class="panel">
-                                                {{month.value}}
-                                            </mat-option>
-                                        </mat-select>
-                                    </mat-form-field>
-                                </div>
-
-                                <div>
-                                    <mat-form-field appearance="outline" class="inputForms2">
-                                        <mat-label>Año</mat-label>
-                                        <input matInput placeholder="2000" [(ngModel)]="anio" formControlName="anio">
-                                        <mat-error *ngIf="ArtistForm.invalid">{{getErrorMessage()}}</mat-error>
-                                    </mat-form-field>
-                                </div>
-                            </div>
+                            </form>
+                            
 
                             <div class="example-container">
                                 <div class="topics">Nacionalidad</div>
@@ -212,6 +215,19 @@
                             </div>
 
                             <div class="example-container">
+                                <form>
+                                    <mat-form-field appearance="outline" class="inputForms">
+                                      <mat-label>Artista</mat-label>
+                                      <mat-select [(ngModel)]="selectedValue" name="food" >
+                                        <mat-option *ngFor="let food of listaArtistas" [value]="food.id">
+                                          {{food.nombre}}
+                                        </mat-option>
+                                      </mat-select>
+                                    </mat-form-field>
+                                  </form>
+                            </div>
+
+                            <div class="example-container">
                                 <div class="topics">Descripción</div>
                                 <div>
                                     <mat-form-field appearance="outline" class="inputForms">
@@ -233,6 +249,7 @@
                                     style="width: 45%;">Guardar</button>
                             </div>
                         </form>
+                        
                     </mat-card-content>
 
                 </mat-card>
@@ -249,11 +266,13 @@
                 <mat-card *ngFor="let card of listaArtistas" class="example-card2">
 
                     <div>
-                        <img mat-card-image class="tamanoImagen" src="{{card.imagen}}" src-fallback="assets/images/df.svg" (loaded)="onLoaded($event)">
+                        <img mat-card-image class="tamanoImagen" src="{{card.imagen}}"
+                            src-fallback="assets/images/df.svg" (loaded)="onLoaded($event)">
                     </div>
 
                     <mat-card-content style="align-self: flex-end;">
-                        <div class="hoteltitle" style="font-size: 20px; font-weight: 400; text-transform: uppercase;"> {{card.nombre}} </div>
+                        <div class="hoteltitle" style="font-size: 20px; font-weight: 400; text-transform: uppercase;">
+                            {{card.nombre}} </div>
                         <div style="font-size: 18px; font-weight: 400; text-transform: uppercase;">
                             {{card.nacionalidad}}
                         </div>

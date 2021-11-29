@@ -31,9 +31,10 @@
 }
 
 .left {
-    background: rgba(0, 0, 0, 0.35);    
+    background: rgb(197,68,213);
+background: linear-gradient(180deg, rgba(197,68,213,0.7) 29%, rgba(123,31,162,0.7) 78%); 
     position: relative;
-    width: 60%;
+    width: 65%;
     border-bottom-right-radius: 0%;
     border-top-right-radius: 0%;
     padding-top: 20%;
@@ -67,11 +68,12 @@
 .right {    
     background: rgba(0, 0, 0, 0.35);    
     position: relative;
-    width: 60%;
+    width: 70%;
     padding: 5%;
     padding-top: 50px;
     border-bottom-left-radius: 0%;
     border-top-left-radius: 0%;
+    text-align: center;
 }
 @media (max-width: 767px) {
     .right {
@@ -83,13 +85,15 @@
 }
 
 .formField{
-    width: 100%;
+    width: 90%;
 }
 .boton{
-    width: 100%;
+    
+    width: 80%;
 }
 .boton2{
-    width: 100%;
+    
+    width: 80%;
 }
 
 .icono{
@@ -103,6 +107,9 @@
 }
 
 .botonlogin{
+    border-radius: 150px;
+    color: white;
+    background-color: rgba(10, 10, 10, 0.733);
     width: 70%;
 }
 

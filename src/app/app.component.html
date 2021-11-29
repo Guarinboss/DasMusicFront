@@ -63,8 +63,6 @@
           <h5 class="lead">Biblioteca</h5>
         </div>
       </mat-list-item>
-      <br>
-      <br>
       <div *ngIf="validarRol()">
         <div *ngIf="sidenavWidth > 5" class="sidenav-item">
           <mat-divider></mat-divider>
@@ -93,34 +91,17 @@
             <h5 class="lead">Gestionar Canción</h5>
           </div>
         </mat-list-item>
-      </div>
-      <br>
-      <br>
-      <div *ngIf="sidenavWidth > 5" class="sidenav-item">
-        <mat-divider></mat-divider>
-        <h5 class="subtitle">Gestiona tu app</h5>
-        <mat-divider></mat-divider>
-      </div>
-
-      <mat-list-item routerLink="7" routerLinkActive="active">
-        <mat-icon mat-list-icon>person</mat-icon>
-        <div fxFlex="10"></div>
         <div *ngIf="sidenavWidth > 5" class="sidenav-item">
-          <h5 class="lead">Lista de compradores</h5>
+          <mat-divider></mat-divider>
+          <h5 class="subtitle">Gestiona tu app</h5>
+          <mat-divider></mat-divider>
         </div>
-      </mat-list-item>
-      <mat-list-item routerLink="8" routerLinkActive="active">
-        <mat-icon mat-list-icon>local_offer</mat-icon>
+      </div>
+      <mat-list-item routerLink="carrito" routerLinkActive="carrito">
+        <mat-icon mat-list-icon>shopping_cart</mat-icon>
         <div fxFlex="10"></div>
         <div *ngIf="sidenavWidth > 5" class="sidenav-item">
-          <h5 class="lead">Lista de compras</h5>
-        </div>
-      </mat-list-item>
-      <mat-list-item routerLink="9" routerLinkActive="active">
-        <mat-icon mat-list-icon>article</mat-icon>
-        <div fxFlex="10"></div>
-        <div *ngIf="sidenavWidth > 5" class="sidenav-item">
-          <h5 class="lead">Lista de facturas</h5>
+          <h5 class="lead">Carrito</h5>
         </div>
       </mat-list-item>
     </mat-nav-list>
