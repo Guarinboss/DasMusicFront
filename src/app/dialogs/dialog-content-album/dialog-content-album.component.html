@@ -6,20 +6,20 @@
                 <input matInput (keyup)="applyFilter($event)" placeholder="Joji" #input>
             </mat-form-field>
 
-            <table mat-table [dataSource]="artistas" class="mat-elevation-z8">
+            <table mat-table [dataSource]="albums" class="mat-elevation-z8">
 
                 <!-- Name Column -->
                 <ng-container matColumnDef="name">
                     <th mat-header-cell *matHeaderCellDef> Albums </th>
-                    <td mat-cell *matCellDef="let element"> <img src="{{element.image}}" width="35px" height="35px"
-                            style="border-radius: 150px; object-fit: cover;" src-fallback="assets/images/df.svg" (loaded)="onLoaded($event)"> {{element.nombre}} </td>
+                    <td mat-cell *matCellDef="let albums"> <img src="data:image/jpg;base64,{{albums.imagen}}" width="35px" height="35px"
+                            style="border-radius: 150px; object-fit: cover;"> {{albums.nombre}} </td>
                 </ng-container>
 
                 <!-- button Column -->
                 <ng-container matColumnDef="image">
                     <th mat-header-cell *matHeaderCellDef> </th>
-                    <td mat-cell *matCellDef="let element">
-                        <mat-icon mat-list-icon mat-dialog-close class="add-button" (click)="dirigirAlmbum()">add_circle_outline</mat-icon>
+                    <td mat-cell *matCellDef="let albums">
+                        <mat-icon mat-list-icon mat-dialog-close class="add-button" (click)="dirigirAlmbum(albums.id)">add_circle_outline</mat-icon>
                     </td>
                 </ng-container>
 

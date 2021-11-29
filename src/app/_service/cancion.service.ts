@@ -36,5 +36,9 @@ export class CancionService {
 
   getObtener() {
     return this.http.get<Cancion[]>(this.url + 'obtener');
+  } 
+
+  getObtenerPorAlbum(id: number) {
+    return this.http.get<Cancion[]>(this.url + 'obtenerPorIdAlbum/'+id);
   }
 }
