@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { Albums } from '../_model/Albums';
 import { Artista } from '../_model/Artista';
 import { Cancion } from '../_model/Cancion';
 
@@ -23,7 +24,7 @@ export class MusicaService {
 
   private url2: string = `${environment.HOST}/canciones/`;
 
-  private url3: string = `${environment.HOST}/albumes/`;
+  private url3: string = `${environment.HOST}/album/`;
 
   constructor(private http: HttpClient) { }
 
@@ -36,4 +37,13 @@ export class MusicaService {
   getObtenerCancion(id: number) : Observable<any>{
     return this.http.get<Cancion>(this.url2 + 'obtenerPorId/'+id);
   }
+
+  getObtenerAlbums(){
+    return this.http.get<Albums[]>(this.url3 + 'obtener');
+  }
+
+  getObtenerAlbumPorId(id: number){
+    return this.http.get<Albums>(this.url3 + 'obtenerPorId/'+id);
+  }
+
 }

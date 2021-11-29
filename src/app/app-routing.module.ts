@@ -9,11 +9,12 @@ import { PerfilArtistaComponent } from './pages/perfil-artista/perfil-artista.co
 import { LoginComponent } from './pages/login/login.component';
 import { RegistroComponent } from './pages/registro/registro.component';
 import { SongsComponent } from './pages/songs/songs.component';
+import { GuardianService } from './_service/guardian.service';
 
 const routes: Routes = [
   {path : 'artistas', component:ArtistasComponent},
   {path : 'album', component:AlbumComponent},
-  {path : 'songs', component:SongsComponent},
+  {path : 'songs', component:SongsComponent, canActivate: [GuardianService]},
   {path : 'biblioteca', component:BibliotecaComponent},
   {path : 'perfilArtista', component:PerfilArtistaComponent},
   {path : 'perfilAlbum', component:PerfilAlbumComponent},
