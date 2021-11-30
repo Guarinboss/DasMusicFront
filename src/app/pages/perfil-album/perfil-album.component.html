@@ -1,7 +1,7 @@
 <div class="background">
     <div class="imagen">
         <img src="data:image/jpg;base64,{{album.imagen}}" height="190px" width="190px"
-            style="object-fit: cover; border-radius: 5px;">
+            style="object-fit: cover; border-radius: 5px;" src-fallback="assets/images/df3.svg" (loaded)="onLoaded($event)">
     </div>
     <div class="name">
         <div style="margin-bottom: 12px; margin-top: 12px;">
@@ -19,8 +19,7 @@
     </div>
     <p class="example-spacer"></p>
     <div class="boton">
-        <button mat-fab aria-label="Example icon button with a delete icon"
-            style="background-color: rgb(43, 101, 226); color: white;" (click)="openDialog()">
+        <button mat-fab aria-label="Example icon button with a delete icon" style="background-color: rgb(43, 101, 226); color: white;" (click)="openDialogAlbum(album.id)">
             <mat-icon>add_shopping_cart</mat-icon>
         </button>
     </div>
@@ -58,11 +57,10 @@
 
                 <ng-container matColumnDef="symbol">
                     <th mat-header-cell *matHeaderCellDef></th>
-                    <td mat-cell *matCellDef="let element">
-                        <button mat-icon-button color="primary" (click)="openDialog()">
-                            <mat-icon>add_shopping_cart</mat-icon>
-                        </button>
-                    </td>
+                    <td mat-cell *matCellDef="let element"> 
+                        <button mat-icon-button color="primary" (click)="openDialogCancion()" >
+                            <mat-icon >add_shopping_cart</mat-icon>
+                        </button></td>
                 </ng-container>
 
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -85,10 +83,10 @@
                 </mat-card-subtitle>
             </mat-card-header>
             <img mat-card-image src="data:image/jpg;base64,{{album.imagen}}" alt="Photo of a Shiba Inu"
-                style="width: 90%; height: 90%;object-fit: cover;border-radius: 10px;">
+                style="width: 90%; height: 90%;object-fit: cover;border-radius: 10px;" src-fallback="assets/images/df3.svg" (loaded)="onLoaded($event)">
             <mat-card-content>
                 <p style="text-align: justify; padding: 10px;">
-                    Crybaby es el tercer mixtape del rapero estadounidense Lil Peep.​ Fue lanzado el 10 de junio de 2016
+                    {{album.nombre}} es el tercer mixtape del rapero estadounidense {{album.artista.nombre}}.​ Fue lanzado el 10 de junio de 2016
                     de forma independiente
                     ​ y luego re-lanzado póstumamente a las plataformas de transmisión el 10 de junio de 2020 con 10 de
                     las 11 pistas originales.
@@ -98,11 +96,11 @@
     </div>
 
 </div>
-<div class="subtitles2"> Más de {{album.artista.nombre}}</div>
+<div class="subtitles2"> Tambien te podría interesar</div>
 <div class="containerCard">
     <mat-card *ngFor="let card of albums" class="example-card2">
         <div>
-            <img mat-card-image class="tamanoImagen" src="data:image/jpg;base64,{{card.imagen}}" fallimg="picture1">
+            <img mat-card-image class="tamanoImagen" src="data:image/jpg;base64,{{card.imagen}}" fallimg="picture1" src-fallback="assets/images/df3.svg" (loaded)="onLoaded($event)">
         </div>
 
         <mat-card-content>

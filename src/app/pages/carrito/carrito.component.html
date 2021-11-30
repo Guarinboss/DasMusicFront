@@ -2,32 +2,27 @@
 
 <div class="fullcontent">
     <div class="containerCard">
-        <mat-card *ngFor="let card of albums" class="example-card2">
-
-            <div>
-                <img mat-card-image class="tamanoImagen" src="{{card.image}}" fallimg="picture1">
-            </div>
-
-            <mat-card-content style="align-self: flex-end;">
-                <div class="hoteltitle"> {{card.name}} </div>
+        <mat-card class="example-card2" *ngFor="let card of carrito">
                 <div>
-                    primo hermano
+                    <img mat-card-image class="tamanoImagen" src="data:image/jpg;base64,{{card.album.imagen}}">
                 </div>
-                <div>
-                    sapo Hijueputa ome
-                </div>
-                <div
-                    style="font-size: 18px; font-weight: 400; text-transform: uppercase; background-color: rgb(255, 52, 103); width: 100%; border-radius: 100px; padding: 5px; text-align: center; flex-grow: 2; max-width: 200px;">
-                    15.000$
-                </div>
-            </mat-card-content>
-            <p class="example-spacer"></p>
-            <div style="padding: 20px; align-self: flex-end;">
-                <button mat-icon-button color="warn">
-                    <mat-icon style="font-size: 30px;">delete</mat-icon>
-                </button>
-            </div>
 
+                <mat-card-content style="align-self: flex-end;">
+                    <div class="hoteltitle"> {{card.album.nombre}} </div>
+                    <div>
+                        {{card.album.fechaLanzamiento}}
+                    </div>
+                    <div
+                        style="font-size: 18px; font-weight: 400; text-transform: uppercase; background-color: rgb(255, 52, 103); width: 100%; border-radius: 100px; padding: 5px; text-align: center; flex-grow: 2; max-width: 200px;">
+                        {{card.album.precio}}$
+                    </div>
+                </mat-card-content>
+                <p class="example-spacer"></p>
+                <div style="padding: 20px; align-self: flex-end;">
+                    <button mat-icon-button color="warn">
+                        <mat-icon style="font-size: 30px;">delete</mat-icon>
+                    </button>
+                </div>
         </mat-card>
 
     </div>
@@ -43,7 +38,7 @@
                     </div>
                     <p class="example-spacer"></p>
                     <div style="margin-right: 30px;">
-                        15.000 $
+                        {{total}}$
                     </div>
                 </div>
                 <div style="display: flex;">
@@ -52,7 +47,7 @@
                     </div>
                     <p class="example-spacer"></p>
                     <div style="margin-right: 30px;">
-                        3.000 $ 
+                        {{iva}}$
                     </div>
                 </div>
             </mat-card-content>
@@ -64,11 +59,12 @@
                 </div>
                 <p class="example-spacer"></p>
                 <div style="margin-right: 30px;">
-                    18.000 $
+                    {{sumaTotal}} $
                 </div>
-            </div>          
+            </div>
             <mat-card-actions style="padding: 10px; text-align: center; margin-top: 25px;">
-                <button mat-flat-button style="background-color: rgb(255, 52, 103); width: 90%;" (click)="comprarCarrito()">Pagar</button>
+                <button mat-flat-button style="background-color: rgb(255, 52, 103); width: 90%;"
+                    (click)="comprarCarrito()">Pagar</button>
             </mat-card-actions>
         </mat-card>
     </div>

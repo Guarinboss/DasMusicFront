@@ -6,6 +6,7 @@ import { Album } from '../_model/Album';
 import { Albums } from '../_model/Albums';
 import { Artista } from '../_model/Artista';
 import { Cancion } from '../_model/Cancion';
+import { Carrito } from '../_model/Carrito';
 import { View_Artista } from '../_model/View_Artista';
 
 /**
@@ -27,6 +28,8 @@ export class MusicaService {
   private url2: string = `${environment.HOST}/canciones/`;
 
   private url3: string = `${environment.HOST}/album/`;
+
+  private url4: string = `${environment.HOST}/carrito/`;
 
   constructor(private http: HttpClient) { }
 
@@ -75,6 +78,14 @@ export class MusicaService {
     return this.http.delete(this.url3 + 'eliminarPorId/'+id);
   }
   
+  postGuardarCarrito(carrito: Carrito){
+    return this.http.post<any>(this.url4 + 'guardar', carrito);
+  }
+  
+
+  getCarritoPorIdUser(id: any){
+    return this.http.get<any>(this.url4 + 'obtenerPorIdUsuario/'+id);
+  }
   
 
 }

@@ -1,7 +1,7 @@
 <mat-tab-group mat-align-tabs="center">
     <mat-tab label="Artistas">
         <div class="containerCard" >
-            <mat-card *ngFor="let card of artistas" class="example-card" style="cursor:pointer" (click)="perfilArtista(card.id)">
+            <mat-card *ngFor="let card of artista" class="example-card" style="cursor:pointer" (click)="perfilArtista(card.id)">
                 <img mat-card-image class="tamanoImagen" src="data:image/jpg;base64,{{card.imagen}}" src-fallback="assets/images/df.svg" (loaded)="onLoaded($event)">
                 <mat-card-content>
                     <div class="hoteltitle"> {{card.nombre}} </div>

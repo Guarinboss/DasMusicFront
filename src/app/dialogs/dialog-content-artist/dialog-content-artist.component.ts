@@ -36,7 +36,8 @@ export class DialogContentArtistComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log("sapa hp");
+    console.log("aqui");
+    console.log(this.artistas);
     setTimeout(() => {
       this.listasService.getArtistas().subscribe(data => {
         this.artistas = data;

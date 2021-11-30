@@ -5,7 +5,11 @@ import { MatTable } from '@angular/material/table';
 import { DialogContentCarritoComponent } from 'src/app/dialogs/dialog-content-carrito/dialog-content-carrito.component';
 import { Albums } from 'src/app/_model/Albums';
 import { Cancion } from 'src/app/_model/Cancion';
+import { Carrito } from 'src/app/_model/Carrito';
 import { MusicaService } from 'src/app/_service/musica.service';
+import { ListasService } from 'src/app/_service/listas.service';
+import { Usuarios } from 'src/app/_model/Usuarios';
+import { CancionService } from 'src/app/_service/cancion.service';
 
 export interface PeriodicElement {
   name: string;
@@ -18,6 +22,7 @@ export interface Album {
   name: string;
   image: string;
 }
+
 
 const ELEMENT_DATA: PeriodicElement[] = [
   {position: '2:30', name: 'Joji', weight: 1.007, symbol: 'Run'},
@@ -62,6 +67,7 @@ export class PerfilAlbumComponent implements OnInit {
 
   idAlbum: any;
   album: Albums;
+  usuario : Usuarios;
   canciones: Cancion[];
 
   @ViewChild(MatTable)
@@ -71,21 +77,46 @@ export class PerfilAlbumComponent implements OnInit {
   menuTrigger!: MatMenuTrigger;
 
   constructor(public dialog: MatDialog,
-              private musicaService: MusicaService) {
+              private musicaService: MusicaService,
+              private listas : ListasService,
+              public cancionService: CancionService) {
     this.idAlbum = localStorage.getItem("idAlbumPerfil");
   }
 
-  openDialog() {
+  onLoaded(isFallback: boolean) {
+    // make somthing based on 'isFallback'
+  }
+
+
+  openDialogCancion() {
     this.dialog.open(DialogContentCarritoComponent, {
       height: '300px',
       width: '450px',
     });
   }
 
+  openDialogAlbum(id: any) {
+    this.dialog.open(DialogContentCarritoComponent, {
+      height: '300px',
+      width: '450px',
+    });
+    this.guardarCarrito();
+  }
+
   addData() {
     const randomElementIndex = Math.floor(Math.random() * ELEMENT_DATA.length);
     this.dataSource.push(ELEMENT_DATA[randomElementIndex]);
     this.table.renderRows();
+  }
+
+  guardarCarrito(){
+    let carrito = new Carrito;
+    carrito.album = this.album;
+    carrito.usuario = this.usuario;
+    //carrito.cancion = this.canciones
+    this.musicaService.postGuardarCarrito(carrito).subscribe(data => {
+      console.log(data);
+    })
   }
 
   removeData() {
@@ -106,6 +137,7 @@ export class PerfilAlbumComponent implements OnInit {
   ngOnInit(): void {
     this.getAlbumPorId(this.idAlbum);
     this.getAlbum();
+    this.getUsuario();
   }
 
 
@@ -113,8 +145,23 @@ export class PerfilAlbumComponent implements OnInit {
     this.musicaService.getObtenerAlbumPorId(id).subscribe(data =>{
       console.log(data);
       this.album = data;
-      this.canciones = this.album.cancions;
+     // this.canciones = this.album.cancions;
       console.log(this.canciones);
+      this.getObtenerPorAlbum(this.album.id);
+    })
+  }
+
+  getObtenerPorAlbum(id: number) {
+    this.cancionService.getObtenerPorAlbum(id).subscribe(data => {
+      console.log(data);  
+      this.canciones = data;
+    }, err => {
+      if (err.status == 400) {
+        //this.error = 'Usuario y/o cotrasena incorrecta';
+        //this.progressbarService.barraProgreso.next("2");
+      } else {
+        //this.router.navigate([`/error/${err.status}/${err.statusText}`]);
+      }
     })
   }
 
@@ -124,4 +171,14 @@ export class PerfilAlbumComponent implements OnInit {
       this.albums = data;
     })
   }
+
+  getUsuario(){
+    let id = Number(sessionStorage.getItem("id"));
+    this.listas.getUsuarios(id).subscribe(data =>{
+      this.usuario = data; 
+      console.log(data);
+    })
+  }
+
+
 }

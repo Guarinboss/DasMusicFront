@@ -93,20 +93,21 @@
         </mat-list-item>
         <div *ngIf="sidenavWidth > 5" class="sidenav-item">
           <mat-divider></mat-divider>
-          <h5 class="subtitle">Gestiona tu app</h5>
+          <h5 class="subtitle">Compras</h5>
           <mat-divider></mat-divider>
         </div>
       </div>
-      <mat-list-item routerLink="carrito" routerLinkActive="carrito">
+      <mat-list-item routerLink="carrito" routerLinkActive="carrito" style="margin-bottom: 300px;">
         <mat-icon mat-list-icon>shopping_cart</mat-icon>
         <div fxFlex="10"></div>
         <div *ngIf="sidenavWidth > 5" class="sidenav-item">
           <h5 class="lead">Carrito</h5>
         </div>
       </mat-list-item>
-      <mat-list-item (click)="cerrarSesion()">
+      <mat-divider></mat-divider>
+      <mat-list-item (click)="cerrarSesion()" >
         <mat-icon mat-list-icon>logout</mat-icon>
-        <div fxFlex="10"></div>
+        
         <div *ngIf="sidenavWidth > 5" class="sidenav-item">
           <h5 class="lead">Cerrar sesión</h5>
         </div>

@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FlexAlignStyleBuilder } from '@angular/flex-layout';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTable } from '@angular/material/table';
 import { Albums } from 'src/app/_model/Albums';
 import { Cancion } from 'src/app/_model/Cancion';
@@ -109,7 +110,7 @@ export class SongsComponent implements OnInit {
   albumControl = new FormControl(this.Canciones.value);
   monthControl = new FormControl(this.months[0].value);
 
-  constructor(private cancionService: CancionService, private musicaService: MusicaService) {
+  constructor(private cancionService: CancionService, private musicaService: MusicaService, private _snackBar: MatSnackBar,) {
 
     this.formCancion = new FormGroup({
       nombre: new FormControl('', Validators.required),
@@ -150,6 +151,7 @@ export class SongsComponent implements OnInit {
     setTimeout(() => {
       this.postGuardar(formularioCancion);
     }, 1000);
+    //this.openSnackBar('¡Canción agregada!','Aceptar');
   }
 
   onFromSubmit2() {
@@ -329,5 +331,9 @@ export class SongsComponent implements OnInit {
   log() {
     this.formCancion.controls['imagen'].setValue(this.sellersPermitString);
     this.formCancionEdit.controls['imagen'].setValue(this.sellersPermitString);
+  }
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action);
   }
 }

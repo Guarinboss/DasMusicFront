@@ -40,6 +40,7 @@ export class PerfilArtistaComponent implements OnInit {
 
   editField!: string;
   dataSource : any[] = [];
+  idArtista: any;
 
   public datosArtistas: Artista;
   public cancionesArtista: Cancion[];
@@ -70,7 +71,9 @@ export class PerfilArtistaComponent implements OnInit {
 
   constructor(private musicaService: MusicaService,
               private sanitizer: DomSanitizer,
-              private cancionService: CancionService) { }
+              private cancionService: CancionService,) {
+                this.idArtista = localStorage.getItem("idArtistaPerfil");
+               }
 
   /*addData() {
     const randomElementIndex = Math.floor(Math.random() * ELEMENT_DATA.length);
@@ -92,12 +95,13 @@ export class PerfilArtistaComponent implements OnInit {
 
 
   ngOnInit(): void {
-    sessionStorage.setItem("idArtista", "4");
-    sessionStorage.setItem("idCancion", "4");
+    //sessionStorage.setItem("idArtista", "4");
+    //sessionStorage.setItem("idCancion", "4");
     
     setTimeout(() => {
-      this.getObtenerArtista(sessionStorage.getItem("idArtista"));
-      this.getObtenerCanciones(1);
+      this.getObtenerArtista(this.idArtista);
+      this.getObtenerCanciones(this.idArtista);
+      //this.getObtenerCanciones(sessionStorage.getItem("idCancion"));
       
     }, 1000);
   }
