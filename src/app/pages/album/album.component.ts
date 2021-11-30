@@ -203,6 +203,20 @@ export class AlbumComponent implements OnInit {
     })
   }
 
+  deleteAlbum(id: any){    
+    this.musicaService.deleteAlbum(id).subscribe(data => {
+      console.log(data);
+      this.getObtenerPorArtista(this.idArtista);
+    }, err => {
+      if (err.status == 400) {
+        //this.error = 'Usuario y/o cotrasena incorrecta';
+        //this.progressbarService.barraProgreso.next("2");
+      } else {
+        //this.router.navigate([`/error/${err.status}/${err.statusText}`]);
+      }
+    })
+  }
+
   changeValue(id: number, property: string, event: any) {
     this.editField = event.target.textContent;
   }
@@ -219,9 +233,7 @@ export class AlbumComponent implements OnInit {
   }
 
   eliminarAlbum(album: Album) {
-    this.mostrarEdit2 = true;
-    this.editAlbum = album;
-    //this.putEditarCancion(cancion);
+    this.deleteAlbum(album.id);
   }
 
   openSnackBar(message: string, action: string) {

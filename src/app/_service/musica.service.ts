@@ -70,6 +70,10 @@ export class MusicaService {
   getObtenerAlbumPorIdArtista(id: number){
     return this.http.get<Albums[]>(this.url3 + 'obtenerPorIdArtista/'+id);
   }
+
+  deleteAlbum(id: number){
+    return this.http.delete(this.url3 + 'eliminarPorId/'+id);
+  }
   
   
 
