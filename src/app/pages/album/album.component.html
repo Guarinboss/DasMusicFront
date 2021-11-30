@@ -1,94 +1,321 @@
-<div class="form-container">
-    <div class="form-content">
-        <mat-card class="example-card">
-            <mat-card-header style="justify-content: center;">
-                <mat-card-title class="title">Agregar album</mat-card-title>
-                <!--<mat-card-subtitle>Dog Breed</mat-card-subtitle>-->
-            </mat-card-header>
-            <br>
-            <mat-divider></mat-divider>
-            <mat-card-content style="padding: 5%;">
-                <div class="container-general">
-                    <div class="profile-image">
-                        <img src="assets/images/AL1.jpg" width="350px" height="350px" style="border-radius: 3px;">
-                    </div>
-                    <div class="container-info">
-                        <form [formGroup]="form">
-                            <div class="example-container">
-                                <div class="topics">Nombre del album</div>
-                                <div>
-                                    <mat-form-field appearance="outline" class="inputForms">
-                                        <mat-label>Nombre</mat-label>
-                                        <input matInput placeholder="ej: Shakira">
-                                        <mat-error *ngIf="Albums.invalid">{{getErrorMessage()}}</mat-error>
-                                    </mat-form-field>
+<mat-tab-group mat-align-tabs="center">
+    <mat-tab label="Agregar">
+        <div class="form-container">
+            <div class="form-content">
+                <mat-card class="example-card">
+                    <mat-card-header style="justify-content: center;">
+                        <mat-card-title class="title">Agregar album</mat-card-title>
+                        <!--<mat-card-subtitle>Dog Breed</mat-card-subtitle>-->
+                    </mat-card-header>
+                    <br>
+                    <mat-divider></mat-divider>
+                    <mat-card-content style="padding: 5%;">
+                        <div class="container-general">
+                            <div>
+                                <div class="profile-image" style="display: flex; flex-direction: column;">
+                                    <!--<img src="assets/images/P2.jpg" width="150px" height="150px" style="border-radius: 150px;">-->
+                                    <img [src]="imgURL" width="450px" height="450px" style="border-radius: 5px;"
+                                        *ngIf="imgURL" fallimg>
+                                </div>
+                                <br>
+                                <div class="file-select" color="primary">
+                                    <input #file type="file" accept='image/*' (change)="preview($event)" />
                                 </div>
                             </div>
-                            <div class="topics">Fecha de lanzamiento</div>
-                            <div class="example-container">
-                                <div class="container-date">
-                                    <div > 
-                                        <mat-form-field appearance="outline" class="inputForms2"> 
-                                            <mat-label>Dia</mat-label>
-                                            <input matInput placeholder="2">
-                                            <mat-error *ngIf="Albums.invalid">{{getErrorMessage()}}</mat-error>
-                                        </mat-form-field>
+                            <div class="container-info">
+                                <form [formGroup]="formularioAlbum" (ngSubmit)="onFormSubmit()">
+                                    <div class="example-container">
+                                        <div class="topics">Nombre del album</div>
+                                        <div>
+                                            <mat-form-field appearance="outline" class="inputForms">
+                                                <mat-label>Nombre</mat-label>
+                                                <input matInput placeholder="ej: Nombre album" formControlName="nombre">
+                                                <mat-error *ngIf="Albums.invalid">{{getErrorMessage()}}</mat-error>
+                                            </mat-form-field>
+                                        </div>
                                     </div>
-            
-                                    <div>
-                                        <mat-form-field appearance="outline" class="inputForms2">
-                                            <mat-label>Mes</mat-label>
-                                            <mat-select [formControl]="monthControl" name="month" panelClass="panel">
-                                                <mat-option *ngFor="let month of months" [value]="month.value" class="panel">
-                                                    {{month.value}}
-                                                </mat-option>
-                                            </mat-select>
-                                        </mat-form-field>
-                                    </div>
-            
-                                    <div>
-                                        <mat-form-field appearance="outline" class="inputForms2">
-                                            <mat-label>Año</mat-label>
-                                            <input matInput placeholder="2000">
-                                            <mat-error *ngIf="Albums.invalid">{{getErrorMessage()}}</mat-error>
-                                        </mat-form-field>
-                                    </div>
-                                </div>
-                            </div>
 
-                            <div class="example-container">
-                                <div class="topics">Descripción</div>
-                                <div>
-                                    <mat-form-field appearance="outline" class="inputForms">
-                                        <mat-label>Descripción</mat-label>
-                                        <input matInput placeholder="ej: Colombia">
-                                        <mat-error *ngIf="Albums.invalid">{{getErrorMessage()}}</mat-error>
-                                    </mat-form-field>
-                                </div>
-                            </div>
+                                    <div class="topics">Fecha de lanzamiento</div>
+                                    <div class="example-container">
+                                        <div class="container-date">
+                                            <div>
+                                                <mat-form-field appearance="outline" class="inputForms2">
+                                                    <mat-label>Dia</mat-label>
+                                                    <input matInput placeholder="2" [(ngModel)]="dia"
+                                                        formControlName="dia">
+                                                    <mat-error *ngIf="Albums.invalid">{{getErrorMessage()}}</mat-error>
+                                                </mat-form-field>
+                                            </div>
 
-                            <div class="example-container">
-                                <div class="topics">Precio</div>
-                                <div>
-                                    <mat-form-field appearance="outline" class="inputForms">
-                                        <mat-label>Precio</mat-label>
-                                        <input matInput placeholder="ej: Colombia">
-                                        <mat-error *ngIf="Albums.invalid">{{getErrorMessage()}}</mat-error>
-                                    </mat-form-field>
-                                </div>
+                                            <div>
+                                                <mat-form-field appearance="outline" class="inputForms2">
+                                                    <mat-label>Mes</mat-label>
+                                                    <mat-select [formControl]="monthControl" name="month"
+                                                        panelClass="panel" [(ngModel)]="mes">
+                                                        <mat-option *ngFor="let month of months" [value]="month.value"
+                                                            class="panel">
+                                                            {{month.value}}
+                                                        </mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+                                            </div>
+
+                                            <div>
+                                                <mat-form-field appearance="outline" class="inputForms2">
+                                                    <mat-label>Año</mat-label>
+                                                    <input matInput placeholder="2000" [(ngModel)]="anio"
+                                                        formControlName="anio">
+                                                    <mat-error *ngIf="Albums.invalid">{{getErrorMessage()}}</mat-error>
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="example-container">
+                                        <div class="topics">Precio</div>
+                                        <div>
+                                            <mat-form-field appearance="outline" class="inputForms">
+                                                <mat-label>Precio</mat-label>
+                                                <input matInput placeholder="ej: 30000" formControlName="precio">
+                                                <mat-error *ngIf="Albums.invalid">{{getErrorMessage()}}</mat-error>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div style="text-align: center; ">
+                                        <button mat-flat-button color="warn" style="width: 45%; margin-right:15px ;"
+                                            type="button">Cancelar</button>
+                                        <button mat-flat-button color="primary" style="width: 45%;"
+                                            type="submit">Guardar</button>
+                                    </div>
+                                </form>
                             </div>
-                        </form>
-                        <br>
-                        <div style="text-align: center; ">
-                            <button mat-flat-button color="warn"
-                                style="width: 45%; margin-right:15px ;">Cancelar</button>
-                            <button mat-flat-button color="primary" type="submit"style="width: 45%;">Guardar</button>
                         </div>
-                    </div>
-                </div>
-            </mat-card-content>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </div>
+    </mat-tab>
+    <mat-tab label="Editar">
+        <div class="form-container" *ngIf="mostrarEdit != mostrarEdit2">
+            <div class="form-content">
 
-        </mat-card>
-    </div>
+                <table mat-table [dataSource]="albumsArray" class="mat-elevation-z8 demo-table">
 
-</div>
+                    <ng-container matColumnDef="position">
+                        <th mat-header-cell *matHeaderCellDef>Imagen</th>
+                        <td mat-cell *matCellDef="let element">
+                            <img src="data:image/jpg;base64,{{element.imagen}}" width="35px" height="35px"
+                                style="border-radius: 150px; object-fit: cover;">
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="name">
+                        <th mat-header-cell *matHeaderCellDef>Duración</th>
+                        <td mat-cell *matCellDef="let element">
+                            <span (keyup)="changeValue(element.id, 'position', $event)"
+                                (blur)="updateList(element.id, 'position', $event)"
+                                contenteditable="true">{{element.duracion}}</span>
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="weight">
+                        <th mat-header-cell *matHeaderCellDef>Nombre de la canción</th>
+                        <td mat-cell *matCellDef="let element">
+                            <span (keyup)="changeValue(element.id, 'symbol', $event)"
+                                (blur)="updateList(element.id, 'symbol', $event)"
+                                contenteditable="true">{{element.nombre}}</span>
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="symbol">
+                        <th mat-header-cell *matHeaderCellDef>Precio</th>
+                        <td mat-cell *matCellDef="let element"> <span
+                                (keyup)="changeValue(element.id, 'weight', $event)"
+                                (blur)="updateList(element.id, 'weight', $event)"
+                                contenteditable="true">{{element.precio}}</span></td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="edit">
+                        <th mat-header-cell *matHeaderCellDef>Editar</th>
+                        <td mat-cell *matCellDef="let element">
+                            <div>
+                                <button mat-fab color="primary" (click)="editarAlbum(element)" type="button">
+                                    <mat-icon>edit</mat-icon>
+                                </button>
+                            </div>
+                        </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+
+            </div>
+        </div>
+        <!-- CUADRO PARA EDITAR EL ALBUM-->
+        <div class="form-container" *ngIf="mostrarEdit == mostrarEdit2">
+            <div class="form-content">
+                <mat-card class="example-card">
+                    <mat-card-header style="justify-content: center;">
+                        <mat-card-title class="title">Editar album</mat-card-title>
+                        <!--<mat-card-subtitle>Dog Breed</mat-card-subtitle>-->
+                    </mat-card-header>
+                    <br>
+                    <mat-divider></mat-divider>
+                    <mat-card-content style="padding: 5%;">
+                        <div class="container-general">
+                            <div>
+                                <div class="profile-image" style="display: flex; flex-direction: column;">
+                                    <!--<img src="assets/images/P2.jpg" width="150px" height="150px" style="border-radius: 150px;">-->
+                                    <img [src]="imgURL" width="450px" height="450px" style="border-radius: 5px;"
+                                        *ngIf="imgURL" fallimg>
+                                </div>
+                                <br>
+                                <div class="file-select" color="primary">
+                                    <input #file type="file" accept='image/*' (change)="preview($event)" />
+                                </div>
+                            </div>
+                            <div class="container-info">
+                                <form [formGroup]="formularioAlbumEdit" (ngSubmit)="onFormSubmit2()">
+                                    <div class="example-container">
+                                        <div class="topics">Nombre del album</div>
+                                        <div>
+                                            <mat-form-field appearance="outline" class="inputForms">
+                                                <mat-label>Nombre</mat-label>
+                                                <input matInput placeholder="ej: Nombre album" formControlName="nombre">
+                                                <mat-error *ngIf="Albums.invalid">{{getErrorMessage()}}</mat-error>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                    <div class="topics">Fecha de lanzamiento</div>
+                                    <div class="example-container">
+                                        <div class="container-date">
+                                            <div>
+                                                <mat-form-field appearance="outline" class="inputForms2">
+                                                    <mat-label>Dia</mat-label>
+                                                    <input matInput placeholder="2" [(ngModel)]="dia"
+                                                        formControlName="dia">
+                                                    <mat-error *ngIf="Albums.invalid">{{getErrorMessage()}}</mat-error>
+                                                </mat-form-field>
+                                            </div>
+
+                                            <div>
+                                                <mat-form-field appearance="outline" class="inputForms2">
+                                                    <mat-label>Mes</mat-label>
+                                                    <mat-select [formControl]="monthControl" name="month"
+                                                        panelClass="panel" [(ngModel)]="mes">
+                                                        <mat-option *ngFor="let month of months" [value]="month.value"
+                                                            class="panel">
+                                                            {{month.value}}
+                                                        </mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+                                            </div>
+
+                                            <div>
+                                                <mat-form-field appearance="outline" class="inputForms2">
+                                                    <mat-label>Año</mat-label>
+                                                    <input matInput placeholder="2000" [(ngModel)]="anio"
+                                                        formControlName="anio">
+                                                    <mat-error *ngIf="Albums.invalid">{{getErrorMessage()}}</mat-error>
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="example-container">
+                                        <div class="topics">Precio</div>
+                                        <div>
+                                            <mat-form-field appearance="outline" class="inputForms">
+                                                <mat-label>Precio</mat-label>
+                                                <input matInput placeholder="ej: 30000" formControlName="precio">
+                                                <mat-error *ngIf="Albums.invalid">{{getErrorMessage()}}</mat-error>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+
+                                    <div class="example-container">
+                                        <div class="topics">Numero de canciones</div>
+                                        <div>
+                                            <mat-form-field appearance="outline" class="inputForms">
+                                                <mat-label>Numero de canciones</mat-label>
+                                                <input matInput placeholder="ej: 30000" formControlName="numeroCanciones">
+                                                <mat-error *ngIf="Albums.invalid">{{getErrorMessage()}}</mat-error>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div style="text-align: center; ">
+                                        <button mat-flat-button color="warn" style="width: 45%; margin-right:15px ;"
+                                            type="button">Cancelar</button>
+                                        <button mat-flat-button color="primary" style="width: 45%;"
+                                            type="submit">Guardar</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </div>
+    </mat-tab>
+    <mat-tab label="Eliminar">
+        <div class="form-container" *ngIf="mostrar != mostrar2">
+            <div class="form-content">
+
+                <table mat-table [dataSource]="albumsArray" class="mat-elevation-z8 demo-table">
+
+                    <ng-container matColumnDef="position">
+                        <th mat-header-cell *matHeaderCellDef>Imagen</th>
+                        <td mat-cell *matCellDef="let element">
+                            <img src="data:image/jpg;base64,{{element.imagen}}" width="35px" height="35px"
+                                style="border-radius: 150px; object-fit: cover;">
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="name">
+                        <th mat-header-cell *matHeaderCellDef>Duración</th>
+                        <td mat-cell *matCellDef="let element">
+                            <span (keyup)="changeValue(element.id, 'position', $event)"
+                                (blur)="updateList(element.id, 'position', $event)"
+                                contenteditable="true">{{element.duracion}}</span>
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="weight">
+                        <th mat-header-cell *matHeaderCellDef>Nombre del album</th>
+                        <td mat-cell *matCellDef="let element">
+                            <span (keyup)="changeValue(element.id, 'symbol', $event)"
+                                (blur)="updateList(element.id, 'symbol', $event)"
+                                contenteditable="true">{{element.nombre}}</span>
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="symbol">
+                        <th mat-header-cell *matHeaderCellDef>Precio</th>
+                        <td mat-cell *matCellDef="let element"> <span
+                                (keyup)="changeValue(element.id, 'weight', $event)"
+                                (blur)="updateList(element.id, 'weight', $event)"
+                                contenteditable="true">{{element.precio}}</span></td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="edit">
+                        <th mat-header-cell *matHeaderCellDef>Eliminar</th>
+                        <td mat-cell *matCellDef="let element">
+                            <div>
+                                <button mat-fab color="primary" (click)="eliminarAlbum(element)" type="button">
+                                    <mat-icon>delete</mat-icon>
+                                </button>
+                            </div>
+                        </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+
+            </div>
+        </div>
+    </mat-tab>
+</mat-tab-group>

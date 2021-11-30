@@ -33,7 +33,6 @@ export class ArtistasComponent implements OnInit {
 
   ArtistForm = new FormControl('', [Validators.required, Validators.email]);
 
-
   dia: string;
   mes: string;
   anio: string;
@@ -122,7 +121,7 @@ export class ArtistasComponent implements OnInit {
   }
 
   monthControl = new FormControl(this.months[0].value);
-  selectedValue: string;
+  selectedValue: any;
 
   constructor(private router: Router,
     private _snackBar: MatSnackBar,
@@ -140,7 +139,7 @@ export class ArtistasComponent implements OnInit {
     })
 
     this.formularioEditarArtista = new FormGroup({
-      id: new FormControl('1'),
+      id: new FormControl(this.selectedValue),
       imagen: new FormControl(''),
       generoMusical: new FormControl(''),
       fechaNacimiento: new FormControl(this.anio + "-" + this.mes + "-" + this.dia),
@@ -197,6 +196,7 @@ export class ArtistasComponent implements OnInit {
     let date: Date = new Date(this.anio + "-" + this.mes + "-" + this.dia);
     //let date: Date = new Date(date);  
     artista.fechaNacimiento = date;
+    
     this.musicaService.postGuardarArtista(artista).subscribe(data => {
       console.log(data);
       this.openSnackBar("¡Artista registrado!", "Aceptar");
@@ -216,6 +216,8 @@ export class ArtistasComponent implements OnInit {
     let date: Date = new Date(this.anio + "-" + this.mes + "-" + this.dia);
     //let date: Date = new Date(date);  
     artista.fechaNacimiento = date;
+    artista.id = this.selectedValue;
+    console.log(artista);
     this.listasService.putArtistas(artista).subscribe(data => {
       console.log(data);
       this.openSnackBar("¡Artista Modificado!", "Aceptar");

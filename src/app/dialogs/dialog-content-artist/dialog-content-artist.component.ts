@@ -52,7 +52,8 @@ export class DialogContentArtistComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  dirigirAlmbum(){
+  dirigirArtista(id: any){
+    localStorage.setItem("idArtista", id);
     this.router.navigate(['album']);
   }
 

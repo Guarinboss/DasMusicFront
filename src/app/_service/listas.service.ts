@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ArtistasComponent } from '../pages/artistas/artistas.component';
+import { Artista } from '../_model/Artista';
 import { Artistas } from '../_model/Artistas';
 import { Login } from '../_model/Login';
 import { Registro } from '../_model/Registro';
@@ -29,6 +30,10 @@ export class ListasService {
 
   getArtistas(){
     return this.http.get<Artistas[]>(this.url + 'obtener');
+  }
+
+  getArtistasPorId(id: number) {
+    return this.http.get<Artista>(this.url + 'obtenerPorId/' + id + '');
   }
 
   getUsuarios(id: number){
