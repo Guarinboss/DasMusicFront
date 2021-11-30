@@ -3,6 +3,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { MatTable } from '@angular/material/table';
 import { DialogContentCarritoComponent } from 'src/app/dialogs/dialog-content-carrito/dialog-content-carrito.component';
+import { Albums } from 'src/app/_model/Albums';
+import { Cancion } from 'src/app/_model/Cancion';
+import { MusicaService } from 'src/app/_service/musica.service';
 
 export interface PeriodicElement {
   name: string;
@@ -38,7 +41,7 @@ export class PerfilAlbumComponent implements OnInit {
 
   editField!: string;
 
-  public albums: Album[] = [
+  public albums: Albums[] /*= [
 
     { name: 'Shakira', image: 'assets/images/A1.jpg'},
     { name: 'Twenty one pilots', image: 'assets/images/A2.jpg'},
@@ -52,10 +55,14 @@ export class PerfilAlbumComponent implements OnInit {
     { name: 'Cuco', image: 'assets/images/A10.jpg'},
     { name: 'Julito', image: 'assets/images/A11.jpg'},
 
-];
+];*/
 
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   dataSource = [...ELEMENT_DATA];
+
+  idAlbum: any;
+  album: Albums;
+  canciones: Cancion[];
 
   @ViewChild(MatTable)
   table!: MatTable<PeriodicElement>;
@@ -63,7 +70,10 @@ export class PerfilAlbumComponent implements OnInit {
   @ViewChild('menuTrigger')
   menuTrigger!: MatMenuTrigger;
 
-  constructor(public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog,
+              private musicaService: MusicaService) {
+    this.idAlbum = localStorage.getItem("idAlbumPerfil");
+  }
 
   openDialog() {
     this.dialog.open(DialogContentCarritoComponent, {
@@ -94,5 +104,24 @@ export class PerfilAlbumComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.getAlbumPorId(this.idAlbum);
+    this.getAlbum();
+  }
+
+
+  getAlbumPorId(id: any){
+    this.musicaService.getObtenerAlbumPorId(id).subscribe(data =>{
+      console.log(data);
+      this.album = data;
+      this.canciones = this.album.cancions;
+      console.log(this.canciones);
+    })
+  }
+
+  getAlbum(){
+    this.musicaService.getObtenerAlbums().subscribe(data =>{
+      console.log(data);
+      this.albums = data;
+    })
   }
 }

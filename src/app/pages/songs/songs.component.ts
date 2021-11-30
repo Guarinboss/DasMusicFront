@@ -207,8 +207,10 @@ export class SongsComponent implements OnInit {
     })
   }
   putEditarCancion(cancion: Cancion) {
+    cancion.album=this.album;
+    cancion.artista=this.album.artista;
     console.log("editar");
-    console.log(cancion);
+    console.log(cancion);    
     this.cancionService.putEditar(cancion).subscribe(data => {
       console.log(data);  
       this.getObtenerPorAlbum(this.idAlbum);
