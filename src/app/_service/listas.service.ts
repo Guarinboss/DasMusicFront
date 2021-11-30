@@ -29,7 +29,7 @@ export class ListasService {
   constructor(private http: HttpClient) { }
 
   getArtistas(){
-    return this.http.get<Artistas[]>(this.url + 'obtener');
+    return this.http.get<Artista[]>(this.url + 'obtener');
   }
 
   getArtistasPorId(id: number) {

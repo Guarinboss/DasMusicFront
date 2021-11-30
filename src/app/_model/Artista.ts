@@ -1,4 +1,5 @@
 import { Byte } from "@angular/compiler/src/util";
+import { Cancion } from "./Cancion";
 import { Album } from "./Album";
 
 /**
@@ -12,5 +13,6 @@ export class Artista{
     fechaNacimiento: Date;
     nacionalidad: string;
     descripcion: string;
+    cancion: Cancion;
     album: Album[];
 }

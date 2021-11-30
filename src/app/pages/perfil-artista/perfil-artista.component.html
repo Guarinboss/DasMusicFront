@@ -1,6 +1,6 @@
 <div class="background">
     <div class="imagen">
-        <img src="assets/images/A4.jpg" height="180px" width="180px" style="object-fit: cover; border-radius: 150px;">
+        <img src= "data:image/jpg;base64,{{datosArtistas.imagen}}" height="180px" width="180px" style="object-fit: cover; border-radius: 150px;">
     </div>
     <div class="name" >
         <p>
@@ -33,28 +33,28 @@
         </p>
         <div class="form-content">
 
-            <table mat-table [dataSource]="dataSourceCan" class="mat-elevation-z8 demo-table">
+            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table">
 
-                <ng-container matColumnDef="position">
+                <ng-container matColumnDef="cancion">
                     <th mat-header-cell *matHeaderCellDef>Canción</th>
                     <td mat-cell *matCellDef="let element">
-                        {{element.precio}}
+                        {{element.nombre}}
                     </td>
                 </ng-container>
 
-                <ng-container matColumnDef="name">
+                <ng-container matColumnDef="duracion">
                     <th mat-header-cell *matHeaderCellDef>Duración</th>
                     <td mat-cell *matCellDef="let element"> {{element.duracion}}</td>
                 </ng-container>
 
-                <ng-container matColumnDef="weight">
+                <ng-container matColumnDef="precio">
                     <th mat-header-cell *matHeaderCellDef>Precio</th>
                     <td mat-cell *matCellDef="let element">
                         {{element.precio}}
                     </td>
                 </ng-container>
 
-                <ng-container matColumnDef="symbol">
+                <ng-container matColumnDef="comprar">
                     <th mat-header-cell *matHeaderCellDef></th>
                     <td mat-cell *matCellDef="let element"> <button mat-icon-button color="primary"
                             aria-label="Example icon button with a menu icon">

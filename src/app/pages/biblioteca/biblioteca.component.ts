@@ -4,6 +4,7 @@ import { ListasService } from 'src/app/_service/listas.service';
 import { Cancion } from 'src/app/_model/Cancion';
 import { CancionService } from 'src/app/_service/cancion.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Artista } from 'src/app/_model/Artista';
 import { Router } from '@angular/router';
 import { Albums } from 'src/app/_model/Albums';
 import { MusicaService } from 'src/app/_service/musica.service';
@@ -27,6 +28,8 @@ export class BibliotecaComponent implements OnInit {
 
   public artistas: Artistas[];
 
+  public artista: Artista[];
+
   public canciones: Cancion[];
 
   public album: Albums[];
@@ -49,27 +52,28 @@ export class BibliotecaComponent implements OnInit {
 
   ];
 
-  constructor(private listasService: ListasService, 
-              private cancionService: CancionService, 
-              private router: Router,
-              private musicaService: MusicaService,
-              public dialog: MatDialog) { }
+  constructor(private listasService: ListasService,
+    private cancionService: CancionService,
+    private router: Router,
+    private musicaService: MusicaService,
+    public dialog: MatDialog) { }
 
   onLoaded(isFallback: boolean) {
     // make somthing based on 'isFallback'
   }
 
- 
+
 
   ngOnInit(): void {
-    
+
 
     setTimeout(() => {
       this.getCancion();
+      this.getArtista();
       this.getAlbum();
       this.listasService.getArtistas().subscribe(data => {
-        this.artistas = data;
-        console.log(this.artistas);
+        this.artista = data;
+        console.log(this.artista);
       });
     }, 0.000);
 
@@ -89,7 +93,18 @@ export class BibliotecaComponent implements OnInit {
       }
     });
   }
+  getArtista() {
+    this.musicaService.getObtenerArtistas().subscribe(data => {
+      console.log(data);
+      this.artista = data;
 
+      /*this.canciones.forEach(element => {
+        let objectURL = 'data:image/jpg;base64,' + element.imagen;
+        element.imagen = this.sanitizer.bypassSecurityTrustUrl(objectURL);
+      
+      console.log(this.canciones);*/
+    });
+  }
   getAlbum() {
     this.musicaService.getObtenerAlbums().subscribe(data => {
       console.log(data);
@@ -105,13 +120,13 @@ export class BibliotecaComponent implements OnInit {
     });
   }
 
-  perfilArtista(id: any){
-    localStorage.setItem("idArtistaPerfil", id)
-    this.router.navigate(['/perfilArtista'])
+  perfilArtista(id: any) {
+    localStorage.setItem("idArtistaPerfil", id);
+    this.router.navigate(['/perfilArtista']);
   }
 
-  perfilAlbum(id: any){
-    localStorage.setItem("idAlbumPerfil", id)
-    this.router.navigate(['/perfilAlbum'])
+  perfilAlbum(id: any) {
+    localStorage.setItem("idAlbumPerfil", id);
+    this.router.navigate(['/perfilAlbum']);
   }
 }

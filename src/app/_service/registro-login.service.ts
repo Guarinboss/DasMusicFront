@@ -34,4 +34,8 @@ export class RegistroLoginService {
   postRegistro(registroUsuarios: Registro): Observable<any> {
     return this.http.post<any>(this.url2 + 'guardar', registroUsuarios, httpOptions);
   }
+
+  postCerrarSesion(token: any){
+    return this.http.post<any>(this.url + 'logout', token, httpOptions);
+  }
 }

@@ -37,9 +37,15 @@ export class MusicaService {
     return this.http.get<View_Artista[]>(this.url + 'obtenerView');
   }
 
+  getObtenerArtistas(){
+    return this.http.get<Artista[]>(this.url + 'obtener');
+  }
   getObtenerCancion(id: number) : Observable<any>{
     return this.http.get<Cancion>(this.url2 + 'obtenerPorId/'+id);
   }
+  /*getObtenerCancion(id: number) : Observable<any>{
+    return this.http.get<Cancion>(this.url2 + 'obtenerPorId/'+id);
+  }*/
 
   postGuardarArtista(artista: Artista): Observable<any>{
     return this.http.post<any>(this.url + 'guardar', artista, httpOptions);
@@ -65,4 +71,6 @@ export class MusicaService {
     return this.http.get<Albums[]>(this.url3 + 'obtenerPorIdArtista/'+id);
   }
   
+  
+
 }

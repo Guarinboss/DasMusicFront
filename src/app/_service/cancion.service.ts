@@ -28,7 +28,9 @@ export class CancionService {
   getObtenerPorAlbum(id: number) {
     return this.http.get<Cancion[]>(this.url + 'obtenerPorIdAlbum/'+id);
   }
-
+  getObtenerArtista(id: number){
+    return this.http.get<Cancion[]>(this.url + 'obtenerPorIdArtista/'+id);
+  }
   putEditar(cancion: Cancion) {
     return this.http.put<Cancion[]>(this.url + 'editar', cancion);
   }
