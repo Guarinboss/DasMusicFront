@@ -266,7 +266,7 @@
                 <mat-card *ngFor="let card of listaArtistas" class="example-card2">
 
                     <div>
-                        <img mat-card-image class="tamanoImagen" src="{{card.imagen}}"
+                        <img mat-card-image class="tamanoImagen" src="data:image/jpg;base64,{{card.imagen}}"
                             src-fallback="assets/images/df.svg" (loaded)="onLoaded($event)">
                     </div>
 

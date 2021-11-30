@@ -94,6 +94,7 @@ export class AppComponent implements DoCheck{
     this.registroLoginService.postCerrarSesion(token).subscribe(async data => {
       console.log(token);
       sessionStorage.clear();
+      localStorage.clear();
       this.router.navigate(['login']);
     });
     

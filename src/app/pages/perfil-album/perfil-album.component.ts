@@ -9,6 +9,7 @@ import { Carrito } from 'src/app/_model/Carrito';
 import { MusicaService } from 'src/app/_service/musica.service';
 import { ListasService } from 'src/app/_service/listas.service';
 import { Usuarios } from 'src/app/_model/Usuarios';
+import { CancionService } from 'src/app/_service/cancion.service';
 
 export interface PeriodicElement {
   name: string;
@@ -77,7 +78,8 @@ export class PerfilAlbumComponent implements OnInit {
 
   constructor(public dialog: MatDialog,
               private musicaService: MusicaService,
-              private listas : ListasService) {
+              private listas : ListasService,
+              public cancionService: CancionService) {
     this.idAlbum = localStorage.getItem("idAlbumPerfil");
   }
 
@@ -143,8 +145,23 @@ export class PerfilAlbumComponent implements OnInit {
     this.musicaService.getObtenerAlbumPorId(id).subscribe(data =>{
       console.log(data);
       this.album = data;
-      this.canciones = this.album.cancions;
+     // this.canciones = this.album.cancions;
       console.log(this.canciones);
+      this.getObtenerPorAlbum(this.album.id);
+    })
+  }
+
+  getObtenerPorAlbum(id: number) {
+    this.cancionService.getObtenerPorAlbum(id).subscribe(data => {
+      console.log(data);  
+      this.canciones = data;
+    }, err => {
+      if (err.status == 400) {
+        //this.error = 'Usuario y/o cotrasena incorrecta';
+        //this.progressbarService.barraProgreso.next("2");
+      } else {
+        //this.router.navigate([`/error/${err.status}/${err.statusText}`]);
+      }
     })
   }
 
