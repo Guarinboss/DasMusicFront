@@ -4,6 +4,8 @@ import { ListasService } from 'src/app/_service/listas.service';
 import { Cancion } from 'src/app/_model/Cancion';
 import { CancionService } from 'src/app/_service/cancion.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Artista } from 'src/app/_model/Artista';
+import { MusicaService } from 'src/app/_service/musica.service';
 
 export interface Album {
   name: string;
@@ -21,6 +23,8 @@ export interface Album {
 export class BibliotecaComponent implements OnInit {
 
   public artistas: Artistas[];
+
+  public artista: Artista[];
 
   public canciones: Cancion[];
 
@@ -42,7 +46,7 @@ export class BibliotecaComponent implements OnInit {
 
   ];
 
-  constructor(private listasService: ListasService, public cancionService: CancionService) { }
+  constructor(private listasService: ListasService, public cancionService: CancionService, public musicaService: MusicaService) { }
 
   onLoaded(isFallback: boolean) {
     // make somthing based on 'isFallback'
@@ -52,9 +56,10 @@ export class BibliotecaComponent implements OnInit {
 
     setTimeout(() => {
       this.getCancion();
+      this.getArtista();
       this.listasService.getArtistas().subscribe(data => {
-        this.artistas = data;
-        console.log(this.artistas);
+        this.artista = data;
+        console.log(this.artista);
       });
     }, 0.000);
 
@@ -64,6 +69,26 @@ export class BibliotecaComponent implements OnInit {
     this.cancionService.getObtener().subscribe(data => {
       console.log(data);
       this.canciones = data;
+      /*this.canciones.forEach(element => {
+        let objectURL = 'data:image/jpg;base64,' + element.imagen;
+        element.imagen = this.sanitizer.bypassSecurityTrustUrl(objectURL);
+      });
+      console.log(this.canciones);*/
+    }, err => {
+      //console.log(err);
+      if (err.status == 400) {
+        //this.error = 'Usuario y/o cotrasena incorrecta';
+        //this.progressbarService.barraProgreso.next("2");
+      } else {
+        //this.router.navigate([`/error/${err.status}/${err.statusText}`]);
+      }
+    });
+  }
+  getArtista() {
+    this.musicaService.getObtenerArtistas().subscribe(data => {
+      console.log(data);
+      this.artista = data;
+      
       /*this.canciones.forEach(element => {
         let objectURL = 'data:image/jpg;base64,' + element.imagen;
         element.imagen = this.sanitizer.bypassSecurityTrustUrl(objectURL);

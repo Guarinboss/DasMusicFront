@@ -3,13 +3,14 @@ import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Artista } from 'src/app/_model/Artista';
 import { Cancion } from 'src/app/_model/Cancion';
+import { CancionService } from 'src/app/_service/cancion.service';
 import { MusicaService } from 'src/app/_service/musica.service';
 
 export interface PeriodicElement {
-  name: string;
+  /*name: string;
   position: string;
   weight: number;
-  symbol: string;
+  symbol: string;*/
 }
 
 export interface Album {
@@ -17,7 +18,7 @@ export interface Album {
   image: string;
 }
 
-const ELEMENT_DATA: PeriodicElement[] = [
+/*const ELEMENT_DATA: PeriodicElement[] = [
   {position: '2:30', name: 'Joji', weight: 1.007, symbol: 'Run'},
   {position: '2:34', name: 'Cuco', weight: 4.002, symbol: 'Hydrocodone'},
   {position: '2:56', name: 'Xtentacion', weight: 6.941, symbol: 'The remedy for a broken heart'},
@@ -28,7 +29,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
   {position: '2:39', name: 'Lil tecca', weight: 15.994, symbol: 'Ransom'},
   {position: '1:56', name: 'Selena gomez', weight: 18.984, symbol: 'Love you like love a song'},
   {position: '3:02', name: 'Dua lipa', weight: 20.179, symbol: 'Break my heart'},
-];
+];*/
 
 @Component({
   selector: 'app-perfil-artista',
@@ -38,9 +39,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
 export class PerfilArtistaComponent implements OnInit {
 
   editField!: string;
-  dataSourceCan = new MatTableDataSource<Cancion>();
-  dataSourceCan2 : any = [];
-  dataSource1: any[] = [];
+  dataSource : any[] = [];
 
   public datosArtistas: Artista;
   public cancionesArtista: Cancion[];
@@ -63,15 +62,17 @@ export class PerfilArtistaComponent implements OnInit {
 
 
 
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = [...ELEMENT_DATA];
+  //displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
+  displayedColumns  :  string[] = ['cancion', 'duracion', 'precio', 'comprar'];
+  //dataSource = [...ELEMENT_DATA];
 
 
 
   constructor(private musicaService: MusicaService,
-              private sanitizer: DomSanitizer) { }
+              private sanitizer: DomSanitizer,
+              private cancionService: CancionService) { }
 
-  addData() {
+  /*addData() {
     const randomElementIndex = Math.floor(Math.random() * ELEMENT_DATA.length);
     this.dataSource.push(ELEMENT_DATA[randomElementIndex]);
   }
@@ -87,18 +88,18 @@ export class PerfilArtistaComponent implements OnInit {
   updateList(id: number, property: string, event: any) {
     const editField = event.target.textContent;
     //this.personList[id][property] = editField;
-  }
+  }*/
 
 
   ngOnInit(): void {
-    sessionStorage.setItem("idArtista", "1");
-    sessionStorage.setItem("idCancion", "1");
-    this.getObtenerCanciones(sessionStorage.getItem("idCancion"));
+    sessionStorage.setItem("idArtista", "4");
+    sessionStorage.setItem("idCancion", "4");
+    
     setTimeout(() => {
       this.getObtenerArtista(sessionStorage.getItem("idArtista"));
+      this.getObtenerCanciones(1);
       
-      
-    }, 3000);
+    }, 1000);
   }
 
   /*onFormSubmit() {
@@ -125,8 +126,8 @@ export class PerfilArtistaComponent implements OnInit {
 
   getObtenerCanciones(id: any){
     console.log(id);
-    this.musicaService.getObtenerCancion(id).subscribe(data => {
-      this.dataSource1 = data;
+    this.cancionService.getObtenerArtista(id).subscribe(data => {
+      this.dataSource = data;
       //this.dataSourceCan = new MatTableDataSource(data);
       //console.log(this.dataSourceCan.filteredData);
 

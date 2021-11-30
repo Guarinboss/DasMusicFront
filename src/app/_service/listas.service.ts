@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ArtistasComponent } from '../pages/artistas/artistas.component';
+import { Artista } from '../_model/Artista';
 import { Artistas } from '../_model/Artistas';
 import { Login } from '../_model/Login';
 import { Registro } from '../_model/Registro';
@@ -28,7 +29,7 @@ export class ListasService {
   constructor(private http: HttpClient) { }
 
   getArtistas(){
-    return this.http.get<Artistas[]>(this.url + 'obtener');
+    return this.http.get<Artista[]>(this.url + 'obtener');
   }
 
   getUsuarios(id: number){

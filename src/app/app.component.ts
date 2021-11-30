@@ -4,7 +4,13 @@ import { DialogContentAlbumComponent } from './dialogs/dialog-content-album/dial
 import { DialogContentArtistComponent } from './dialogs/dialog-content-artist/dialog-content-artist.component';
 import { ListasService } from 'src/app/_service/listas.service';
 import { Usuarios } from './_model/Usuarios';
+import { Router } from '@angular/router';
+import { RegistroLoginService } from './_service/registro-login.service';
 
+const token ={
+  id: 1,
+  token: ""
+};
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -18,7 +24,9 @@ export class AppComponent implements DoCheck{
   public loginContent : Usuarios;
 
   constructor(public dialog: MatDialog,
-              public listaservice: ListasService ){
+              public listaservice: ListasService,
+              private router: Router,
+              private registroLoginService: RegistroLoginService, ){
     this.prueba = 1;
   } 
   ngDoCheck(): void {
@@ -71,6 +79,18 @@ export class AppComponent implements DoCheck{
       this.loginContent = data;
       console.log(this.loginContent);
     });
+  }
+
+  cerrarSesion(){
+    let currentUser = Number(sessionStorage.getItem('id'));
+    let tokenUser = String(sessionStorage.getItem('access_token'));
+    token.token = tokenUser;
+    this.registroLoginService.postCerrarSesion(token).subscribe(async data => {
+      console.log(token);
+      sessionStorage.clear();
+      this.router.navigate(['login']);
+    });
+    
   }
 
   
