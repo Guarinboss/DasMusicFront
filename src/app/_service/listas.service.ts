@@ -47,4 +47,6 @@ export class ListasService {
   deleteArtistas(id: number){
     return this.http.delete<any>(this.url + 'eliminarPorId/'+id+'');
   }
+
+  
 }

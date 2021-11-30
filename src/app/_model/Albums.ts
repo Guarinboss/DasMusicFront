@@ -1,4 +1,5 @@
 import { Artista } from "./Artista";
+import { Cancion } from "./Cancion";
 
 /**
  * Clase que mapea el servicio de artista 
@@ -11,4 +12,5 @@ export class Albums {
     precio: number;
     numeroCanciones: string;
     artista: Artista;
+    cancions: Cancion[];
 }

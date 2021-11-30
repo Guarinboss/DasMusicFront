@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
 import { Album } from 'src/app/_model/Album';
+import { Albums } from 'src/app/_model/Albums';
 import { Artista } from 'src/app/_model/Artista';
 import { Artistas } from 'src/app/_model/Artistas';
 import { ListasService } from 'src/app/_service/listas.service';
@@ -42,7 +43,7 @@ export class AlbumComponent implements OnInit {
 
   artista: Artista;
 
-  albumsArray: Album[];
+  albumsArray: Albums[];
 
   public message: string;
 
@@ -120,6 +121,7 @@ export class AlbumComponent implements OnInit {
       fechaLanzamiento: new FormControl(this.anio+"-"+this.mes+"-"+this.dia),
       precio: new FormControl('', [Validators.required, Validators.maxLength(20)]),
       imagen: new FormControl('', Validators.required),
+      numeroCanciones: new FormControl('', Validators.required),
     });
 
     this.idArtista = localStorage.getItem("idArtista");
@@ -127,6 +129,7 @@ export class AlbumComponent implements OnInit {
 
   ngOnInit(): void {
     this.mostrar2 = false;
+    this.getObtenerPorArtista(this.idArtista);
     this.getObtenerArtista(this.idArtista);
   }
 
@@ -141,13 +144,11 @@ export class AlbumComponent implements OnInit {
   }
 
   onFormSubmit2() {
-    this.getObtenerArtista(this.idArtista);
+    this.formularioAlbumEdit.controls['id'].setValue(this.editAlbum.id);
     let formularioAlbumEdit = this.formularioAlbumEdit.value;
-    this.putEditarAlbum(formularioAlbumEdit);
-    console.log(this.formularioAlbumEdit);
     setTimeout(() => {
       this.putEditarAlbum(formularioAlbumEdit);
-    }, 1000);
+    }, 100);
   }
 
   postGuardarAlbum(album: Album) {
@@ -171,11 +172,27 @@ export class AlbumComponent implements OnInit {
     this.listaUsuario.getArtistas
   }
 
-  putEditarAlbum(album: Album) {
+  putEditarAlbum(album: Album) {    
+    album.artista = this.artista;
+    console.log(album);
     this.musicaService.putEditarAlbum(album).subscribe(data => {
       console.log(data);
-      this.getObtenerArtista(this.idArtista);
+      this.getObtenerPorArtista(this.idArtista);
       this.mostrar2 = false;
+    }, err => {
+      if (err.status == 400) {
+        //this.error = 'Usuario y/o cotrasena incorrecta';
+        //this.progressbarService.barraProgreso.next("2");
+      } else {
+        //this.router.navigate([`/error/${err.status}/${err.statusText}`]);
+      }
+    })
+  }
+
+  getObtenerPorArtista(id: any){    
+    this.musicaService.getObtenerAlbumPorIdArtista(id).subscribe(data => {
+      console.log(data);
+      this.albumsArray = data;
     }, err => {
       if (err.status == 400) {
         //this.error = 'Usuario y/o cotrasena incorrecta';
@@ -196,6 +213,12 @@ export class AlbumComponent implements OnInit {
   }
 
   editarAlbum(album: Album) {
+    this.mostrarEdit2 = true;
+    this.editAlbum = album;
+    this.putEditarAlbum(album);
+  }
+
+  eliminarAlbum(album: Album) {
     this.mostrarEdit2 = true;
     this.editAlbum = album;
     //this.putEditarCancion(cancion);
@@ -259,6 +282,7 @@ export class AlbumComponent implements OnInit {
 
   log() {
     this.formularioAlbum.controls['imagen'].setValue(this.sellersPermitString);
+    this.formularioAlbumEdit.controls['imagen'].setValue(this.sellersPermitString);
   }
 
 }

@@ -1,0 +1,17 @@
+<div class="subtitles2"> Lo mas comprado</div>
+<div class="containerCard" >
+    <mat-card *ngFor="let card of artistas" class="example-card">
+        <img mat-card-image class="tamanoImagen" src="data:image/jpg;base64,{{card.imagen}}" src-fallback="assets/images/df.svg">
+        <mat-card-content>
+            <div class="hoteltitle"> {{card.nombre}} </div>
+            <br>
+            <div class="linea"></div>
+            <div class="textoInterno">
+                <div>Genero: {{card.generoMusical}} </div>
+                <div>Albums: {{card.cantidad_albumes}} </div>
+                <div>Canciones: {{card.cantidad_canciones}} </div>
+            </div>
+
+        </mat-card-content>
+    </mat-card>
+</div>

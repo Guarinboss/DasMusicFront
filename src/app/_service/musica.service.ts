@@ -6,6 +6,8 @@ import { Album } from '../_model/Album';
 import { Albums } from '../_model/Albums';
 import { Artista } from '../_model/Artista';
 import { Cancion } from '../_model/Cancion';
+import { Carrito } from '../_model/Carrito';
+import { View_Artista } from '../_model/View_Artista';
 
 /**
  * Variable constante que especifica el tipo de archivo que se quiere enviar.
@@ -27,11 +29,17 @@ export class MusicaService {
 
   private url3: string = `${environment.HOST}/album/`;
 
+  private url4: string = `${environment.HOST}/carrito/`;
+
   constructor(private http: HttpClient) { }
 
   getObtenerArtista(id: number){
     return this.http.get<Artista>(this.url + 'obtenerPorId/'+id);
   }
+  getObtenerViewArtista(){
+    return this.http.get<View_Artista[]>(this.url + 'obtenerView');
+  }
+
   getObtenerArtistas(){
     return this.http.get<Artista[]>(this.url + 'obtener');
   }
@@ -60,8 +68,20 @@ export class MusicaService {
 
   getObtenerAlbumPorId(id: number){
     return this.http.get<Albums>(this.url3 + 'obtenerPorId/'+id);
+  }  
+
+  getObtenerAlbumPorIdArtista(id: number){
+    return this.http.get<Albums[]>(this.url3 + 'obtenerPorIdArtista/'+id);
   }
 
+  postGuardarCarrito(carrito: Carrito){
+    return this.http.post<any>(this.url4 + 'guardar', carrito);
+  }
+  
+
+  getCarritoPorIdUser(id: any){
+    return this.http.get<any>(this.url4 + 'obtenerPorIdUsuario/'+id);
+  }
   
 
 }
