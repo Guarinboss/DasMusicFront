@@ -34,6 +34,7 @@
                                             </mat-form-field>
                                         </div>
                                     </div>
+                                    
                                     <div class="topics">Fecha de lanzamiento</div>
                                     <div class="example-container">
                                         <div class="container-date">
@@ -93,28 +94,26 @@
     <mat-tab label="Editar">
         <div class="form-container" *ngIf="mostrarEdit != mostrarEdit2">
             <div class="form-content">
-                <table mat-table [dataSource]="albumsArray" class="mat-elevation-z8 demo-table">
+                <table mat-table [dataSource]="months" class="mat-elevation-z8 demo-table">
                     <ng-container matColumnDef="position">
                         <th mat-header-cell *matHeaderCellDef>Imagen</th>
                         <td mat-cell *matCellDef="let element">
-                            <img src="data:image/jpg;base64,{{element.imagen}}" width="35px" height="35px"
+                            <img src="data:image/jpg;base64,{{element.value}}" width="35px" height="35px"
                                 style="border-radius: 150px; object-fit: cover;">
                         </td>
                     </ng-container>
                     <ng-container matColumnDef="weight">
                         <th mat-header-cell *matHeaderCellDef>Nombre del album</th>
                         <td mat-cell *matCellDef="let element">
-                            <span (keyup)="changeValue(element.id, 'symbol', $event)"
-                                (blur)="updateList(element.id, 'symbol', $event)"
-                                contenteditable="true">{{element.nombre}}</span>
+                            
+                                contenteditable="true">{{element.value}}
                         </td>
                     </ng-container>
                     <ng-container matColumnDef="symbol">
                         <th mat-header-cell *matHeaderCellDef>Precio</th>
-                        <td mat-cell *matCellDef="let element"> <span
-                                (keyup)="changeValue(element.id, 'weight', $event)"
-                                (blur)="updateList(element.id, 'weight', $event)"
-                                contenteditable="true">{{element.precio}}</span></td>
+                        <td mat-cell *matCellDef="let element"> 
+                                contenteditable="true">{{element.value}}
+                        </td>
                     </ng-container>
                     <ng-container matColumnDef="edit">
                         <th mat-header-cell *matHeaderCellDef>Editar</th>

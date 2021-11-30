@@ -133,7 +133,7 @@ export class AlbumComponent implements OnInit {
   onFormSubmit() {
     this.getObtenerArtista(this.idArtista);
     let formularioAlbum = this.formularioAlbum.value;
-    this.postGuardarAlbum(formularioAlbum);
+    this.formularioAlbum.controls['fechaLanzamiento'].setValue(new Date(this.dia + "-" + this.mes + "-" + this.anio));
     console.log(formularioAlbum);
     setTimeout(() => {
       this.postGuardarAlbum(formularioAlbum);
