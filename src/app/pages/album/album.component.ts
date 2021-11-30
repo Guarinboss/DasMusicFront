@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { Album } from 'src/app/_model/Album';
 import { Albums } from 'src/app/_model/Albums';
 import { Artista } from 'src/app/_model/Artista';
@@ -101,7 +102,8 @@ export class AlbumComponent implements OnInit {
 
   constructor(private _snackBar: MatSnackBar,
               private musicaService: MusicaService,
-              private listaUsuario: ListasService) {
+              private listaUsuario: ListasService,
+              private router: Router,) {
 
     this.formularioAlbum = new FormGroup({
       dia: new FormControl(''),
@@ -159,6 +161,7 @@ export class AlbumComponent implements OnInit {
     this.musicaService.postGuardarAlbum(album).subscribe(data => {
       console.log(data);
       this.openSnackBar("Album registrado!", "Aceptar");
+      this.router.navigate(['biblioteca']);
     })
   }
 
