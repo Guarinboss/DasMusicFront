@@ -5,7 +5,11 @@ import { Cancion } from 'src/app/_model/Cancion';
 import { CancionService } from 'src/app/_service/cancion.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Artista } from 'src/app/_model/Artista';
+import { Router } from '@angular/router';
+import { Albums } from 'src/app/_model/Albums';
 import { MusicaService } from 'src/app/_service/musica.service';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogContentArtistComponent } from 'src/app/dialogs/dialog-content-artist/dialog-content-artist.component';
 
 export interface Album {
   name: string;
@@ -28,6 +32,8 @@ export class BibliotecaComponent implements OnInit {
 
   public canciones: Cancion[];
 
+  public album: Albums[];
+
   placeholder = 'assets/images/P1.jpg';
 
   public albums: Album[] = [
@@ -46,17 +52,25 @@ export class BibliotecaComponent implements OnInit {
 
   ];
 
-  constructor(private listasService: ListasService, public cancionService: CancionService, public musicaService: MusicaService) { }
+  constructor(private listasService: ListasService,
+    private cancionService: CancionService,
+    private router: Router,
+    private musicaService: MusicaService,
+    public dialog: MatDialog) { }
 
   onLoaded(isFallback: boolean) {
     // make somthing based on 'isFallback'
   }
 
+
+
   ngOnInit(): void {
+
 
     setTimeout(() => {
       this.getCancion();
       this.getArtista();
+      this.getAlbum();
       this.listasService.getArtistas().subscribe(data => {
         this.artista = data;
         console.log(this.artista);
@@ -69,11 +83,6 @@ export class BibliotecaComponent implements OnInit {
     this.cancionService.getObtener().subscribe(data => {
       console.log(data);
       this.canciones = data;
-      /*this.canciones.forEach(element => {
-        let objectURL = 'data:image/jpg;base64,' + element.imagen;
-        element.imagen = this.sanitizer.bypassSecurityTrustUrl(objectURL);
-      });
-      console.log(this.canciones);*/
     }, err => {
       //console.log(err);
       if (err.status == 400) {
@@ -88,12 +97,18 @@ export class BibliotecaComponent implements OnInit {
     this.musicaService.getObtenerArtistas().subscribe(data => {
       console.log(data);
       this.artista = data;
-      
+
       /*this.canciones.forEach(element => {
         let objectURL = 'data:image/jpg;base64,' + element.imagen;
         element.imagen = this.sanitizer.bypassSecurityTrustUrl(objectURL);
-      });
+      
       console.log(this.canciones);*/
+    });
+  }
+  getAlbum() {
+    this.musicaService.getObtenerAlbums().subscribe(data => {
+      console.log(data);
+      this.album = data;
     }, err => {
       //console.log(err);
       if (err.status == 400) {
@@ -103,5 +118,15 @@ export class BibliotecaComponent implements OnInit {
         //this.router.navigate([`/error/${err.status}/${err.statusText}`]);
       }
     });
+  }
+
+  perfilArtista(id: any) {
+    localStorage.setItem("idArtistaPerfil", id);
+    this.router.navigate(['/perfilArtista']);
+  }
+
+  perfilAlbum(id: any) {
+    localStorage.setItem("idAlbumPerfil", id);
+    this.router.navigate(['/perfilAlbum']);
   }
 }

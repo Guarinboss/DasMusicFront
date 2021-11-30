@@ -1,0 +1,78 @@
+.container{
+    display: flex;
+    position: relative;
+    font-size: 150px;
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.banner{
+    height: 80px;
+    width: max-content;
+    font-weight: 600;
+}
+
+.banner2{
+    height: 50px;
+    font-size: 40px;
+    width: max-content;
+    font-weight: 600;
+}
+
+.cards{
+    display: flex;
+    align-items: center;
+}
+
+.card1 {
+    width: 400px;
+    
+  }
+  
+  .card2 {
+    width: 400px;
+  }
+  
+  .card3 {
+    width: 400px;
+  }
+
+  .example-card1{
+      text-align: center;
+      height: 450px;
+      background: rgb(197,68,213);
+      background: linear-gradient(180deg, rgba(197,68,213,0.7) 29%, rgba(111, 25, 148, 0.7) 78%);
+  }
+  
+  .example-card2{
+    text-align: center;
+    height: 500px;
+    background: rgb(107,202,255);
+    background: linear-gradient(180deg, rgba(114, 170, 253, 0.7) 29%, rgba(0, 109, 199, 0.7) 78%);
+}
+
+.example-card3{
+    text-align: center;
+    height: 450px;
+    background: rgb(255,107,165);
+    background: linear-gradient(180deg, rgba(248, 93, 165, 0.5) 29%, rgba(252, 43, 71, 0.5) 78%);
+}
+
+.boton{
+    font-size: 15px;
+    font-weight: 500;
+    background-color: rgba(26, 26, 26, 0.774);
+}
+
+.tamanoImagen{
+    width: 200px;
+    height: 200px;
+}
+
+.tamanoImagen2{
+    width: 160px;
+    height: 160px;
+}

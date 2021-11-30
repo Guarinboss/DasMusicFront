@@ -6,6 +6,12 @@ import { ListasService } from 'src/app/_service/listas.service';
 import { Usuarios } from './_model/Usuarios';
 import { Router } from '@angular/router';
 import { RegistroLoginService } from './_service/registro-login.service';
+import { environment } from 'src/environments/environment';
+import { JwtHelperService } from '@auth0/angular-jwt';
+
+const permisos ={
+  1: "Administrador"
+};
 
 const token ={
   id: 1,
@@ -30,7 +36,7 @@ export class AppComponent implements DoCheck{
     this.prueba = 1;
   } 
   ngDoCheck(): void {
-    this.usuario = sessionStorage.getItem("usuario");
+    this.usuario = sessionStorage.getItem(environment.TOKEN);
   }
 
   ngOnInit(): void{
@@ -93,6 +99,18 @@ export class AppComponent implements DoCheck{
     
   }
 
+  validarRol(){
+    const helper = new JwtHelperService();
+    const decodedToken = helper.decodeToken(this.usuario);
+    let rol = decodedToken.permisos;
+    if (this.usuario == null){
+      return false;
+    }else if (rol[1] == permisos[1] ){
+      return true;
+    }else {
+      return false;
+    }
+  }
   
 }
 

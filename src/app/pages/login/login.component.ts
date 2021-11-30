@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.error = "null"; 
-    sessionStorage.setItem("usuario", "0") 
+    sessionStorage.removeItem(environment.TOKEN);
   }
 
   onFormSubmit(){
@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
       sessionStorage.setItem(environment.TOKEN, data.token);   
       sessionStorage.setItem("id",data.usuario);
       sessionStorage.setItem("usuario","1");
-      this.router.navigateByUrl('/artistas')
+      this.router.navigateByUrl('/inicio')
     }, err => {
       if(err.status == 400){
         this.error = 'Usuario y/o cotrasena incorrecta';

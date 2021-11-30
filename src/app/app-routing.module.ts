@@ -9,11 +9,12 @@ import { PerfilArtistaComponent } from './pages/perfil-artista/perfil-artista.co
 import { LoginComponent } from './pages/login/login.component';
 import { RegistroComponent } from './pages/registro/registro.component';
 import { SongsComponent } from './pages/songs/songs.component';
+import { InicioComponent } from './pages/inicio/inicio.component';
 import { GuardianService } from './_service/guardian.service';
 
 const routes: Routes = [
-  {path : 'artistas', component:ArtistasComponent},
-  {path : 'album', component:AlbumComponent},
+  {path : 'artistas', component:ArtistasComponent, canActivate: [GuardianService]},
+  {path : 'album', component:AlbumComponent, canActivate: [GuardianService]},
   {path : 'songs', component:SongsComponent, canActivate: [GuardianService]},
   {path : 'biblioteca', component:BibliotecaComponent},
   {path : 'perfilArtista', component:PerfilArtistaComponent},
@@ -21,6 +22,7 @@ const routes: Routes = [
   {path : 'carrito', component:CarritoComponent},
   {path : 'login', component:LoginComponent},
   {path : 'registro', component:RegistroComponent},
+  {path : 'inicio', component:InicioComponent},
 ];
 
 @NgModule({

@@ -32,7 +32,19 @@ export class ListasService {
     return this.http.get<Artista[]>(this.url + 'obtener');
   }
 
+  getArtistasPorId(id: number) {
+    return this.http.get<Artista>(this.url + 'obtenerPorId/' + id + '');
+  }
+
   getUsuarios(id: number){
     return this.http.get<Usuarios>(this.url2 + 'obtenerPorId/'+id+'');
+  }
+
+  putArtistas(artistas: Artistas): Observable<any>{
+    return this.http.put<any>(this.url + 'editar', artistas);
+  }
+
+  deleteArtistas(id: number){
+    return this.http.delete<any>(this.url + 'eliminarPorId/'+id+'');
   }
 }

@@ -1,16 +1,12 @@
-import { Albums } from "./Albums";
 import { Artista } from "./Artista";
 
-/**
- * Clase que mapea el servicio PostRegistroLogin
- */
-export class Cancion {
+export class Album{
     id: number;
     nombre: string;
     fechaLanzamiento: Date;
+    numeroCanciones: number;
     precio: number;
-    duracion: number;
     imagen: any;
-    album: Albums;
+    id_artista: number;
     artista: Artista;
 }
