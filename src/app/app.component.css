@@ -8,6 +8,10 @@
   background: rgba(0, 0, 0, 0.473);
 
  }
+
+ .sidenav-item{
+     align-self: flex-end;
+ }
  
  .logo{
     font-size: 45px;

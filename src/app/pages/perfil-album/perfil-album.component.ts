@@ -65,7 +65,14 @@ export class PerfilAlbumComponent implements OnInit {
 
   constructor(public dialog: MatDialog) {}
 
-  openDialog() {
+  openDialogCancion() {
+    this.dialog.open(DialogContentCarritoComponent, {
+      height: '300px',
+      width: '450px',
+    });
+  }
+
+  openDialogAlbum() {
     this.dialog.open(DialogContentCarritoComponent, {
       height: '300px',
       width: '450px',
@@ -95,4 +102,6 @@ export class PerfilAlbumComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+
 }

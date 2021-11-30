@@ -92,8 +92,8 @@ export class PerfilArtistaComponent implements OnInit {
 
 
   ngOnInit(): void {
-    sessionStorage.setItem("idArtista", "4");
-    sessionStorage.setItem("idCancion", "4");
+    sessionStorage.setItem("idArtista", "14");
+    sessionStorage.setItem("idCancion", "13");
     
     setTimeout(() => {
       this.getObtenerArtista(sessionStorage.getItem("idArtista"));
