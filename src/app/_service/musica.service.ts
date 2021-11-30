@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { Albums } from '../_model/Albums';
 import { Artista } from '../_model/Artista';
 import { Cancion } from '../_model/Cancion';
+import { View_Artista } from '../_model/View_Artista';
 
 /**
  * Variable constante que especifica el tipo de archivo que se quiere enviar.
@@ -34,6 +35,9 @@ export class MusicaService {
   getObtenerArtista(id: number){
     return this.http.get<Artista>(this.url + 'obtenerPorId/'+id);
   }
+  getObtenerViewArtista(){
+    return this.http.get<View_Artista[]>(this.url + 'obtenerView');
+  }
   getObtenerCancion(id: number) : Observable<any>{
     return this.http.get<Cancion>(this.url2 + 'obtenerPorId/'+id);
   }
@@ -45,5 +49,5 @@ export class MusicaService {
   getObtenerAlbumPorId(id: number){
     return this.http.get<Albums>(this.url3 + 'obtenerPorId/'+id);
   }
-
+  
 }
